@@ -1,22 +1,38 @@
 ---
+import type { SkillCategory } from '../../lib/portfolio-data';
+
 interface Props {
-  skills: string[];
+  skills: SkillCategory[];
 }
 
 const { skills } = Astro.props as Props;
 ---
 
-<section class="content-section" id="skills" aria-labelledby="skills-heading">
+<section class="content-section" id="skills" aria-labelledby="skills-heading" data-animate-in>
   <p class="section-kicker">Skills</p>
-  <h2 id="skills-heading" class="section-heading">Systems, Product, and Execution</h2>
+  <h2 id="skills-heading" class="section-heading gradient-text">Systems, Product, and Execution</h2>
   <p class="section-copy">
     I work end-to-end from architecture and data flow decisions to interaction details and
     production hardening.
   </p>
-  <div class="pill-list">
+  <div class="skills-grid">
     {
-      skills.map((skill) => (
-        <span>{skill}</span>
+      skills.map((category, i) => (
+        <div class="skill-category-card" style={`--card-delay: ${i * 80}ms;`} data-animate-in>
+          <div class="skill-category-header">
+            <div class="skill-category-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d={category.icon} />
+              </svg>
+            </div>
+            <h3 class="skill-category-title">{category.title}</h3>
+          </div>
+          <div class="skill-pills">
+            {category.items.map((item) => (
+              <span class="skill-pill">{item}</span>
+            ))}
+          </div>
+        </div>
       ))
     }
   </div>
