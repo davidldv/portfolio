@@ -1,0 +1,31 @@
+---
+import type { ProjectItem } from '../../lib/portfolio-data';
+
+interface Props {
+  projects: ProjectItem[];
+}
+
+const { projects } = Astro.props as Props;
+---
+
+<section class="content-section" id="projects" aria-labelledby="projects-heading">
+  <p class="section-kicker">Projects</p>
+  <h2 id="projects-heading" class="section-heading">Selected Work</h2>
+  <div class="project-grid">
+    {
+      projects.map((project) => (
+        <article class="project-card">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+          <div class="project-stack">
+            {
+              project.stack.map((item) => (
+                <span>{item}</span>
+              ))
+            }
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

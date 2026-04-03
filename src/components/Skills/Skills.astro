@@ -1,0 +1,23 @@
+---
+interface Props {
+  skills: string[];
+}
+
+const { skills } = Astro.props as Props;
+---
+
+<section class="content-section" id="skills" aria-labelledby="skills-heading">
+  <p class="section-kicker">Skills</p>
+  <h2 id="skills-heading" class="section-heading">Systems, Product, and Execution</h2>
+  <p class="section-copy">
+    I work end-to-end from architecture and data flow decisions to interaction details and
+    production hardening.
+  </p>
+  <div class="pill-list">
+    {
+      skills.map((skill) => (
+        <span>{skill}</span>
+      ))
+    }
+  </div>
+</section>
