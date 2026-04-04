@@ -44,7 +44,7 @@ import HeroScene from './HeroScene';
       </a>
 
       <a
-        href="https://github.com/adriancho91s"
+        href="https://github.com/davidldv"
         target="_blank"
         rel="noopener noreferrer"
         class="hero-secondary-link"
@@ -68,13 +68,24 @@ import HeroScene from './HeroScene';
 <style>
   .hero {
     position: relative;
+    width: 100%;
     min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 64px 1.5rem 0;
+    padding: 64px clamp(1rem, 2.6vw, 2rem) 0;
     overflow: hidden;
-    z-index: 2;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(3 7 18 / 0.28) 0%, rgba(3 7 18 / 0.12) 52%, rgba(3 7 18 / 0) 100%),
+      radial-gradient(66% 44% at 50% 12%, rgba(22 40 108 / 0.2), transparent 72%);
   }
 
   .hero-orb {

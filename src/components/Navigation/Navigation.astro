@@ -1,107 +1,261 @@
 ---
 import ThemeToggle from '../ThemeToggle/ThemeToggle.astro';
+
+const navLinks = [
+  { href: '#about', label: 'About' },
+  { href: '#timeline', label: 'Timeline' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#contact', label: 'Contact' },
+];
 ---
 
-<header class="site-header" aria-label="Site header">
-  <a href="#hero" class="site-brand">
-    <span class="site-avatar" aria-hidden="true">D</span>
-    <strong>adriancho91s</strong>
-  </a>
+<header class="navbar" role="banner">
+  <nav class="navbar-inner" aria-label="Main navigation">
+    <a href="/" class="navbar-logo" aria-label="David London home">
+      <img
+        src="/david.jpg"
+        alt="David London"
+        width="36"
+        height="36"
+        class="logo-img"
+        loading="eager"
+      />
+      <span class="logo-name">davidldv</span>
+    </a>
 
-  <nav class="site-nav" id="site-nav" aria-label="Primary">
-    <a href="#about" data-nav-link="about">About</a>
-    <a href="#timeline" data-nav-link="timeline">Timeline</a>
-    <a href="#skills" data-nav-link="skills">Skills</a>
-    <a href="#projects" data-nav-link="projects">Projects</a>
-    <a href="#contact" data-nav-link="contact">Contact</a>
+    <ul class="nav-links" role="list">
+      {navLinks.map(({ href, label }) => (
+        <li>
+          <a href={href} class="nav-link">{label}</a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="navbar-actions">
+      <ThemeToggle />
+      <button
+        id="mobile-menu-btn"
+        class="mobile-menu-btn"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </div>
   </nav>
 
-  <div class="site-controls">
-    <ThemeToggle />
-    <button
-      type="button"
-      class="mobile-menu-btn"
-      id="mobile-menu-btn"
-      aria-label="Toggle navigation menu"
-      aria-expanded="false"
-      aria-controls="site-nav"
-    >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-        <line class="menu-line menu-line-1" x1="3" y1="6" x2="21" y2="6" />
-        <line class="menu-line menu-line-2" x1="3" y1="12" x2="21" y2="12" />
-        <line class="menu-line menu-line-3" x1="3" y1="18" x2="21" y2="18" />
-      </svg>
-    </button>
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <ul role="list">
+      {navLinks.map(({ href, label }) => (
+        <li>
+          <a href={href} class="mobile-nav-link">{label}</a>
+        </li>
+      ))}
+    </ul>
   </div>
 </header>
 
-<script is:inline>
-  (() => {
-    const initNav = () => {
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      const nav = document.getElementById('site-nav');
-      if (!menuBtn || !nav) return;
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 1.5rem;
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    background: color-mix(in srgb, var(--bg-deep) 75%, transparent);
+    border-bottom: 1px solid var(--border);
+    transition: background 300ms ease, border-color 300ms ease;
+  }
 
-      if (menuBtn.dataset.navBound === 'true') return;
-      menuBtn.dataset.navBound = 'true';
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 64px;
+    gap: 2rem;
+  }
 
-      menuBtn.addEventListener('click', () => {
-        const isOpen = nav.classList.toggle('is-open');
-        menuBtn.setAttribute('aria-expanded', String(isOpen));
-        menuBtn.classList.toggle('is-active', isOpen);
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--foreground);
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+
+  .logo-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 10%;
+    display: block;
+    flex-shrink: 0;
+    mix-blend-mode: lighten;
+    background: #050506;
+    border: 1px solid var(--border);
+  }
+
+  [data-theme="light"] .logo-img {
+    mix-blend-mode: normal;
+    background: #ffffff;
+    border-color: rgba(0 0 0 / 0.1);
+    filter: contrast(1.05) brightness(1.02);
+  }
+
+  .logo-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.875rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--foreground-muted);
+    text-decoration: none;
+    transition: color 150ms ease, background 150ms ease;
+  }
+
+  .nav-link:hover {
+    color: var(--foreground);
+    background: var(--bg-surface);
+  }
+
+  .nav-link.active {
+    color: var(--accent);
+  }
+
+  .nav-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    color: var(--foreground-muted);
+    cursor: pointer;
+  }
+
+  .mobile-menu {
+    display: none;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .mobile-menu[aria-hidden="false"] {
+    display: block;
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--foreground-muted);
+    text-decoration: none;
+    transition: color 150ms ease, background 150ms ease;
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--foreground);
+    background: var(--bg-surface);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: flex; }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = menu?.getAttribute('aria-hidden') === 'false';
+    menu?.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+    btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu.setAttribute('aria-hidden', 'true');
+      btn?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinksEls = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinksEls.forEach((link) => {
+            const href = link.getAttribute('href');
+            const isActive = href === `#${entry.target.id}`;
+            link.classList.toggle('active', isActive);
+          });
+        }
       });
+    },
+    { rootMargin: '-40% 0px -50% 0px' }
+  );
 
-      // Close menu on link click
-      for (const link of nav.querySelectorAll('a')) {
-        link.addEventListener('click', () => {
-          nav.classList.remove('is-open');
-          menuBtn.setAttribute('aria-expanded', 'false');
-          menuBtn.classList.remove('is-active');
-        });
-      }
-
-      // Scroll-spy: highlight active section
-      const sections = ['about', 'timeline', 'skills', 'projects', 'contact'];
-      const links = {};
-      for (const id of sections) {
-        const el = document.querySelector(`[data-nav-link="${id}"]`);
-        if (el) links[id] = el;
-      }
-
-      let ticking = false;
-      const updateActive = () => {
-        const scrollY = window.scrollY + window.innerHeight * 0.35;
-        let active = '';
-
-        for (const id of sections) {
-          const section = document.getElementById(id);
-          if (section && section.offsetTop <= scrollY) {
-            active = id;
-          }
-        }
-
-        for (const [id, link] of Object.entries(links)) {
-          if (id === active) {
-            link.classList.add('nav-link-active');
-          } else {
-            link.classList.remove('nav-link-active');
-          }
-        }
-
-        ticking = false;
-      };
-
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(updateActive);
-        }
-      }, { passive: true });
-
-      updateActive();
-    };
-
-    document.addEventListener('astro:page-load', initNav);
-    initNav();
-  })();
+  sections.forEach((section) => observer.observe(section));
 </script>

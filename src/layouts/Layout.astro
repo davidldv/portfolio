@@ -5,9 +5,52 @@ import '../styles/theme.css';
 
 interface Props {
 	title?: string;
+	description?: string;
+	image?: string;
+	canonicalPath?: string;
 }
 
-const { title = 'David | FullStack Engineer' } = Astro.props as Props;
+const {
+	title = 'David Londoño — Full Stack Engineer & AI Systems',
+	description = 'Full Stack Engineer specialized in AI agent systems, multi-agent orchestration, and scalable microservices. Building AI-native products from Pereira, Colombia.',
+	image = '/images/og-image.jpg',
+	canonicalPath,
+} = Astro.props as Props;
+
+const siteUrl = Astro.site ?? 'https://dlondon.tech';
+const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, siteUrl);
+const ogImageURL = new URL(image, siteUrl);
+
+const jsonLd = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'David Londoño',
+	url: siteUrl.toString(),
+	image: ogImageURL.toString(),
+	jobTitle: 'Full Stack Engineer',
+	description,
+	sameAs: [
+		'https://github.com/davidldv',
+		'https://www.linkedin.com/in/davidldv',
+		'https://x.com/yuvdxv',
+	],
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Pereira',
+		addressCountry: 'CO',
+	},
+	knowsAbout: [
+		'AI Agent Systems',
+		'Multi-agent Orchestration',
+		'Full Stack Engineering',
+		'TypeScript',
+		'Node.js',
+		'React',
+		'NestJS',
+		'Microservices',
+		'Blockchain',
+	],
+});
 ---
 
 <!doctype html>
@@ -15,10 +58,47 @@ const { title = 'David | FullStack Engineer' } = Astro.props as Props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="description" content="David — Full Stack Engineer specializing in AI-native systems, event-driven backends, and production LLM orchestration. Based in Pereira, Colombia." />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+		<meta name="author" content="David Londoño" />
+		<meta name="robots" content="index, follow" />
+		<meta name="keywords" content="David Londoño, Full Stack Engineer, AI Systems, AI Agents, Multi-agent, NestJS, React, TypeScript, Colombia, Pereira, Software Engineer" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:site_name" content="David Londoño" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="David Londoño — Full Stack Engineer & AI Systems — Pereira, Colombia — dlondon.tech" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="profile:first_name" content="David" />
+		<meta property="profile:last_name" content="Londoño" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@yuvdxv" />
+		<meta name="twitter:creator" content="@yuvdxv" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageURL} />
+		<meta name="twitter:image:alt" content="David Londoño — Full Stack Engineer & AI Systems — Pereira, Colombia" />
+
+		<meta name="theme-color" content="#050506" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#f8f9fc" media="(prefers-color-scheme: light)" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+		<script is:inline type="application/ld+json" set:html={jsonLd} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -26,7 +106,9 @@ const { title = 'David | FullStack Engineer' } = Astro.props as Props;
 			(() => {
 				const storageKey = 'portfolio-theme';
 				const root = document.documentElement;
-				let theme = 'dark';
+				const colors = { dark: '#050506', light: '#f8f9fc' };
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+				let theme = prefersDark.matches ? 'dark' : 'light';
 
 				try {
 					const saved = localStorage.getItem(storageKey);
@@ -37,27 +119,70 @@ const { title = 'David | FullStack Engineer' } = Astro.props as Props;
 					// Ignore storage errors and continue with a computed default.
 				}
 
+				const syncThemeColor = (nextTheme) => {
+					const color = colors[nextTheme] ?? colors.dark;
+					document
+						.querySelectorAll('meta[name="theme-color"]')
+						.forEach((meta) => {
+							meta.setAttribute('content', color);
+						});
+				};
+
 				root.dataset.theme = theme;
 				root.style.colorScheme = theme;
+				syncThemeColor(theme);
+
+				prefersDark.addEventListener('change', (event) => {
+					let hasManualTheme = false;
+					try {
+						hasManualTheme = localStorage.getItem(storageKey) !== null;
+					} catch {
+						hasManualTheme = false;
+					}
+
+					if (hasManualTheme) {
+						return;
+					}
+
+					const systemTheme = event.matches ? 'dark' : 'light';
+					root.dataset.theme = systemTheme;
+					root.style.colorScheme = systemTheme;
+					syncThemeColor(systemTheme);
+				});
 			})();
 		</script>
 		<ClientRouter />
-		<title>{title}</title>
 	</head>
 	<body>
+		<a href="#main-content" class="skip-link">Skip to main content</a>
+		<div class="blob blob-1" aria-hidden="true"></div>
+		<div class="blob blob-2" aria-hidden="true"></div>
 		<div id="app-root" class="app-shell">
 			<Navigation />
-			<slot />
+			<div id="main-content" class="layout-content">
+				<slot />
+			</div>
 		</div>
 
 		<script is:inline>
 			(() => {
 				const storageKey = 'portfolio-theme';
 				const root = document.documentElement;
+				const colors = { dark: '#050506', light: '#f8f9fc' };
+
+				const syncThemeColor = (theme) => {
+					const color = colors[theme] ?? colors.dark;
+					document
+						.querySelectorAll('meta[name="theme-color"]')
+						.forEach((meta) => {
+							meta.setAttribute('content', color);
+						});
+				};
 
 				const applyTheme = (nextTheme, shouldPersist) => {
 					root.dataset.theme = nextTheme;
 					root.style.colorScheme = nextTheme;
+					syncThemeColor(nextTheme);
 
 					if (shouldPersist) {
 						try {
@@ -81,7 +206,16 @@ const { title = 'David | FullStack Engineer' } = Astro.props as Props;
 					}
 				};
 
-				const handleToggle = () => {
+				const handleToggle = (event) => {
+					const trigger = event?.currentTarget;
+					if (trigger instanceof HTMLElement) {
+						const rect = trigger.getBoundingClientRect();
+						const x = rect.left + rect.width / 2;
+						const y = rect.top + rect.height / 2;
+						root.style.setProperty('--vt-x', `${x}px`);
+						root.style.setProperty('--vt-y', `${y}px`);
+					}
+
 					const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
 					const next = current === 'dark' ? 'light' : 'dark';
 					const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -149,6 +283,53 @@ const { title = 'David | FullStack Engineer' } = Astro.props as Props;
 				});
 				setup();
 				initAnimations();
+			})();
+		</script>
+		<script is:inline>
+			(() => {
+				const initInteractiveCards = () => {
+					const cards = document.querySelectorAll('[data-spotlight-card]');
+
+					for (const card of cards) {
+						if (!(card instanceof HTMLElement)) {
+							continue;
+						}
+
+						if (card.dataset.interactiveBound === 'true') {
+							continue;
+						}
+
+						card.dataset.interactiveBound = 'true';
+
+						const reset = () => {
+							card.style.setProperty('--mx', '50%');
+							card.style.setProperty('--my', '50%');
+							card.style.setProperty('--lift-x', '0px');
+							card.style.setProperty('--lift-y', '0px');
+						};
+
+						const update = (event) => {
+							const bounds = card.getBoundingClientRect();
+							const x = event.clientX - bounds.left;
+							const y = event.clientY - bounds.top;
+							const ratioX = x / Math.max(bounds.width, 1) - 0.5;
+							const ratioY = y / Math.max(bounds.height, 1) - 0.5;
+
+							card.style.setProperty('--mx', `${x}px`);
+							card.style.setProperty('--my', `${y}px`);
+							card.style.setProperty('--lift-x', `${(ratioX * 6).toFixed(2)}px`);
+							card.style.setProperty('--lift-y', `${(ratioY * 6).toFixed(2)}px`);
+						};
+
+						card.addEventListener('pointermove', update, { passive: true });
+						card.addEventListener('pointerleave', reset);
+						card.addEventListener('blur', reset);
+						reset();
+					}
+				};
+
+				document.addEventListener('astro:page-load', initInteractiveCards);
+				initInteractiveCards();
 			})();
 		</script>
 	</body>

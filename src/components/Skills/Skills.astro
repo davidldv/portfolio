@@ -1,39 +1,47 @@
 ---
-import type { SkillCategory } from '../../lib/portfolio-data';
-
-interface Props {
-  skills: SkillCategory[];
-}
-
-const { skills } = Astro.props as Props;
+import { SkillsInteractive } from './SkillsInteractive';
 ---
 
-<section class="content-section" id="skills" aria-labelledby="skills-heading" data-animate-in>
-  <p class="section-kicker">Skills</p>
-  <h2 id="skills-heading" class="section-heading gradient-text">Systems, Product, and Execution</h2>
-  <p class="section-copy">
-    I work end-to-end from architecture and data flow decisions to interaction details and
-    production hardening.
-  </p>
-  <div class="skills-grid">
-    {
-      skills.map((category, i) => (
-        <div class="skill-category-card" style={`--card-delay: ${i * 80}ms;`} data-animate-in>
-          <div class="skill-category-header">
-            <div class="skill-category-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d={category.icon} />
-              </svg>
-            </div>
-            <h3 class="skill-category-title">{category.title}</h3>
-          </div>
-          <div class="skill-pills">
-            {category.items.map((item) => (
-              <span class="skill-pill">{item}</span>
-            ))}
-          </div>
-        </div>
-      ))
-    }
+<section id="skills" class="skills-section">
+  <div class="skills-inner">
+    <div class="skills-header reveal">
+      <p class="skills-eyebrow">Expertise</p>
+      <h2 class="skills-heading">Skills</h2>
+    </div>
+
+    <SkillsInteractive client:visible />
   </div>
 </section>
+
+<style>
+  .skills-section {
+    position: relative;
+    z-index: 2;
+    padding: 7rem 1.5rem;
+  }
+
+  .skills-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .skills-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .skills-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .skills-heading {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--foreground);
+  }
+</style>

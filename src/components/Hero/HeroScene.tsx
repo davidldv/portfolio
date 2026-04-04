@@ -281,17 +281,19 @@ function NeuralScene({ phases, connections, theme, isMobile, nodeCount, visibleR
 
     nodeMat.opacity = isLight ? 0.28 : 1;
 
-    const dockTrigger = isMobile ? 0.1 : 0.12;
-    const dockSpeed = isMobile ? 0.2 : 0.18;
+    const dockTrigger = 0.12;
+    const dockSpeed = 0.18;
 
-    const dockT =
-      t < dockTrigger
+    // Keep mobile centered; preserve desktop dock-to-right behavior.
+    const dockT = isMobile
+      ? 0
+      : t < dockTrigger
         ? 0
         : THREE.MathUtils.smoothstep(Math.min((t - dockTrigger) / dockSpeed, 1), 0, 1);
 
-    const targetX = THREE.MathUtils.lerp(0, isMobile ? 0.9 : 3.2, dockT);
-    const targetY = THREE.MathUtils.lerp(0, isMobile ? 0.05 : 0.1, dockT);
-    const targetSc = THREE.MathUtils.lerp(1, isMobile ? 0.38 : 0.72, dockT);
+    const targetX = THREE.MathUtils.lerp(0, 3.2, dockT);
+    const targetY = THREE.MathUtils.lerp(0, 0.1, dockT);
+    const targetSc = THREE.MathUtils.lerp(1, 0.72, dockT);
 
     groupRef.current.position.x +=
       (targetX - groupRef.current.position.x) * Math.min(delta * 5, 1);
@@ -358,10 +360,12 @@ export function HeroScene() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    if (!window.matchMedia('(min-width: 1024px)').matches) return;
+    const updateViewportMode = () => {
+      setMobile(window.innerWidth < 1024);
+      setReady(true);
+    };
 
-    setMobile(false);
-    setReady(true);
+    updateViewportMode();
 
     const getTheme = () =>
       (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark';
@@ -383,9 +387,12 @@ export function HeroScene() {
 
     if (canvasRef.current) visObs.observe(canvasRef.current);
 
+    window.addEventListener('resize', updateViewportMode, { passive: true });
+
     return () => {
       themeObs.disconnect();
       visObs.disconnect();
+      window.removeEventListener('resize', updateViewportMode);
     };
   }, []);
 

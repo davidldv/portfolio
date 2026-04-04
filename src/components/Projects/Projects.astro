@@ -1,69 +1,288 @@
 ---
-import type { ProjectItem } from '../../lib/portfolio-data';
-
-interface Props {
-  projects: ProjectItem[];
+interface Project {
+  name: string;
+  tagline: string;
+  description: string;
+  highlights?: string[];
+  tags: string[];
+  href: string | null;
+  accent: 'indigo' | 'cyan';
 }
 
-const { projects } = Astro.props as Props;
+const projects: Project[] = [
+  {
+    name: 'Mi Cita',
+    tagline: 'AI-driven scheduling for Colombia',
+    description:
+      'Building a platform that helps Colombian people and businesses fully automate and auto-pilot their agendas, so scheduling runs itself without manual coordination.',
+    tags: ['NestJS', 'Next.js', 'PostgreSQL'],
+    href: null,
+    accent: 'indigo',
+  },
+  {
+    name: 'SwiftControl',
+    tagline: 'Software company, swiftcontrol.co',
+    description:
+      'Founding and building SwiftControl, a software company creating developer tools and scalable product infrastructure for modern teams.',
+    tags: ['TypeScript', 'Next.js', 'NestJS'],
+    href: 'https://swiftcontrol.co',
+    accent: 'cyan',
+  },
+  {
+    name: 'Agent Memory Layer',
+    tagline: 'Tree-structured distributed memory for AI agents',
+    description:
+      'A framework built on distributed database concepts and tree data structures, giving AI coding agents persistent structured memory across sessions and environments.',
+    tags: ['TypeScript', 'AI Agents', 'Tree Structures', 'Distributed DB'],
+    href: null,
+    accent: 'indigo',
+  },
+  {
+    name: 'EliteStack Bootcamp',
+    tagline: 'Full Stack bootcamp, Pereira, Colombia',
+    description:
+      'Co-directed a 6-week intensive Full Stack Web Development Bootcamp with faculty from Universidad Tecnologica de Pereira.',
+    highlights: [
+      'Designed full curriculum with TypeScript, React, Next.js, NestJS, PostgreSQL, Docker, and more',
+      'Integrated AI developer tooling into the learning path from day one',
+      'Coordinated supervisors and mentored students with continuous feedback sessions',
+      'Extended scope with security, best practices, soft skills, and interview prep',
+    ],
+    tags: ['React', 'Next.js', 'NestJS', 'TypeScript', 'GitHub Copilot'],
+    href: 'https://elitestack-bootcamp.vercel.app',
+    accent: 'cyan',
+  },
+];
 ---
 
-<section class="content-section" id="projects" aria-labelledby="projects-heading" data-animate-in>
-  <p class="section-kicker">Projects</p>
-  <h2 id="projects-heading" class="section-heading gradient-text">Selected Work</h2>
-  <div class="project-grid">
-    {
-      projects.map((project, i) => (
-        <article
-          class="project-card"
-          style={`--project-accent: ${project.accent}; --card-delay: ${i * 100}ms;`}
-          data-animate-in
-          data-tilt-card
-        >
-          <div class="project-accent-bar" aria-hidden="true" />
-          <div class="project-icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d={project.icon} />
-            </svg>
-          </div>
-          <h3>{project.title}</h3>
-          <p>{project.description}</p>
-          <div class="project-stack">
-            {project.stack.map((item) => (
-              <span>{item}</span>
-            ))}
+<section id="projects" class="projects-section">
+  <div class="projects-inner">
+    <div class="projects-header reveal">
+      <p class="projects-eyebrow">Work</p>
+      <h2 class="projects-heading">Projects</h2>
+    </div>
+
+    <div class="projects-grid">
+      {projects.map(({ name, tagline, description, highlights, tags, href, accent }) => (
+        <article class={`project-card reveal accent-${accent}`}>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 class="project-name">{name}</h3>
+              {href && (
+                <a href={href} target="_blank" rel="noopener noreferrer" class="project-link" aria-label={`Visit ${name}`}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  </svg>
+                </a>
+              )}
+            </div>
+            <p class="project-tagline">{tagline}</p>
+            <p class="project-description">{description}</p>
+            {highlights && highlights.length > 0 && (
+              <ul class="project-highlights">
+                {highlights.map((item) => (
+                  <li class="project-highlight-item">
+                    <span class="highlight-arrow" aria-hidden="true">→</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <div class="project-tags">
+              {tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
           </div>
         </article>
-      ))
-    }
+      ))}
+    </div>
   </div>
 </section>
 
-<script is:inline>
-  (() => {
-    const initTilt = () => {
-      const cards = document.querySelectorAll('[data-tilt-card]');
-      for (const card of cards) {
-        if (!(card instanceof HTMLElement)) continue;
-        if (card.dataset.tiltBound === 'true') continue;
-        card.dataset.tiltBound = 'true';
+<style>
+  .projects-section {
+    position: relative;
+    z-index: 2;
+    padding: 7rem 1.5rem;
+  }
 
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width - 0.5;
-          const y = (e.clientY - rect.top) / rect.height - 0.5;
-          card.style.setProperty('--tilt-x', `${(-y * 6).toFixed(2)}deg`);
-          card.style.setProperty('--tilt-y', `${(x * 6).toFixed(2)}deg`);
-        }, { passive: true });
+  .projects-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
 
-        card.addEventListener('mouseleave', () => {
-          card.style.setProperty('--tilt-x', '0deg');
-          card.style.setProperty('--tilt-y', '0deg');
-        });
-      }
-    };
+  .projects-header {
+    margin-bottom: 3.5rem;
+  }
 
-    document.addEventListener('astro:page-load', initTilt);
-    initTilt();
-  })();
-</script>
+  .projects-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .projects-heading {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--foreground);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .project-card {
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    overflow: hidden;
+    transition: border-color 250ms ease, transform 250ms ease;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .project-card.accent-cyan::before {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--accent-glow), transparent);
+  }
+
+  .project-card.accent-indigo::before {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(94 106 210 / 0.12), transparent);
+  }
+
+  .project-card:hover {
+    border-color: var(--accent-border-mix);
+    transform: translateY(-2px);
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  .project-body {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    height: 100%;
+  }
+
+  .project-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .project-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin: 0;
+  }
+
+  .project-link {
+    color: var(--foreground-muted);
+    transition: color 150ms ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .project-link:hover {
+    color: var(--accent-secondary);
+  }
+
+  .project-tagline {
+    font-size: 0.82rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .project-description {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--foreground-muted);
+    flex: 1;
+    margin: 0;
+  }
+
+  .project-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding-left: 0.875rem;
+    border-left: 1.5px solid var(--border);
+  }
+
+  .accent-cyan .project-highlights {
+    border-left-color: rgba(0, 212, 255, 0.3);
+  }
+
+  .accent-indigo .project-highlights {
+    border-left-color: rgba(94, 106, 210, 0.4);
+  }
+
+  .project-highlight-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--foreground-muted);
+  }
+
+  .highlight-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent-secondary);
+    flex-shrink: 0;
+  }
+
+  .accent-indigo .highlight-arrow {
+    color: var(--accent);
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    color: var(--foreground-muted);
+  }
+</style>
