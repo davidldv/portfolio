@@ -12,7 +12,7 @@ const navLinks = [
 
 <header class="navbar" role="banner">
   <nav class="navbar-inner" aria-label="Main navigation">
-    <a href="/" class="navbar-logo" aria-label="David London home">
+    <a href="/" class="navbar-logo" aria-label="David London home" data-astro-reload>
       <img
         src="/david.jpg"
         alt="David London"
@@ -87,6 +87,8 @@ const navLinks = [
   }
 
   .navbar-logo {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     gap: 0.5rem;
