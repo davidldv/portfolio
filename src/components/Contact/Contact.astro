@@ -23,36 +23,36 @@ const socials = [
 ];
 ---
 
-<section id="contact" class="contact-section">
-  <div class="contact-inner">
-    <div class="contact-header reveal">
-      <p class="contact-eyebrow">Get in touch</p>
-      <h2 class="contact-heading">Let's build something</h2>
-      <p class="contact-subtext">
+<section id="contact" class="relative z-2 px-6 pb-16 pt-28">
+  <div class="mx-auto max-w-7xl">
+    <div class="reveal mb-14 max-w-140">
+      <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">Get in touch</p>
+      <h2 class="mb-4 text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">Let's build something</h2>
+      <p class="text-base leading-[1.7] text-fg-muted">
         Open to full-time roles, freelance, and interesting side projects.
         If you have a problem worth solving, let's talk.
       </p>
     </div>
 
-    <div class="contact-grid">
-      <form class="contact-form reveal" action="mailto:dlondon.dev@gmail.com" method="GET" enctype="text/plain" novalidate data-contact-form>
-        <div class="field-row">
-          <div class="field">
-            <label for="name" class="field-label">Name</label>
-            <input id="name" name="name" type="text" class="field-input" placeholder="Your name" required autocomplete="name" />
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-[3fr_2fr] md:items-start md:gap-20">
+      <form class="reveal flex flex-col gap-5" action="mailto:dlondon.dev@gmail.com" method="GET" enctype="text/plain" novalidate data-contact-form>
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div class="flex flex-col gap-1.5">
+            <label for="name" class="text-[0.82rem] font-medium text-fg-muted">Name</label>
+            <input id="name" name="name" type="text" class="w-full rounded-[10px] border border-border bg-surface-elevated px-4 py-3 text-[0.95rem] text-fg outline-none transition-colors duration-150 placeholder:text-fg-muted/50 focus:border-accent" placeholder="Your name" required autocomplete="name" />
           </div>
-          <div class="field">
-            <label for="email" class="field-label">Email</label>
-            <input id="email" name="email" type="email" class="field-input" placeholder="you@example.com" required autocomplete="email" />
+          <div class="flex flex-col gap-1.5">
+            <label for="email" class="text-[0.82rem] font-medium text-fg-muted">Email</label>
+            <input id="email" name="email" type="email" class="w-full rounded-[10px] border border-border bg-surface-elevated px-4 py-3 text-[0.95rem] text-fg outline-none transition-colors duration-150 placeholder:text-fg-muted/50 focus:border-accent" placeholder="you@example.com" required autocomplete="email" />
           </div>
         </div>
 
-        <div class="field">
-          <label for="message" class="field-label">Message</label>
-          <textarea id="message" name="message" class="field-input field-textarea" placeholder="Tell me about your project or idea..." rows="5" required></textarea>
+        <div class="flex flex-col gap-1.5">
+          <label for="message" class="text-[0.82rem] font-medium text-fg-muted">Message</label>
+          <textarea id="message" name="message" class="min-h-32.5 w-full resize-y rounded-[10px] border border-border bg-surface-elevated px-4 py-3 text-[0.95rem] text-fg outline-none transition-colors duration-150 placeholder:text-fg-muted/50 focus:border-accent" placeholder="Tell me about your project or idea..." rows="5" required></textarea>
         </div>
 
-        <button type="submit" class="submit-btn">
+        <button type="submit" class="inline-flex w-fit items-center gap-2 self-start rounded-(--radius) bg-accent px-8 py-3.5 text-[0.95rem] font-semibold text-white shadow-[0_0_30px_var(--accent-glow)] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent">
           Send message
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z"/>
@@ -60,23 +60,23 @@ const socials = [
         </button>
       </form>
 
-      <div class="contact-socials reveal">
-        <p class="socials-label">Or reach me directly</p>
-        <ul class="social-list" role="list">
+      <div class="reveal flex flex-col gap-6">
+        <p class="font-mono text-[0.82rem] font-medium uppercase tracking-[0.08em] text-fg-muted">Or reach me directly</p>
+        <ul class="m-0 flex list-none flex-col gap-2 p-0" role="list">
           {socials.map(({ label, href, icon }) => (
             <li>
               <a
                 href={href}
-                class="social-row"
+                class="group flex items-center gap-3.5 rounded-xl border border-border bg-surface-elevated px-5 py-4 text-fg-muted no-underline transition-colors duration-150 hover:border-accent-border hover:bg-surface hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 aria-label={label}
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
-                <span class="social-icon">
+                <span class="text-accent">
                   <Fragment set:html={icon} />
                 </span>
-                <span class="social-name">{label}</span>
-                <svg class="social-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <span class="flex-1 text-[0.95rem] font-medium">{label}</span>
+                <svg class="-translate-x-1 opacity-0 transition-all duration-150 group-hover:translate-x-0 group-hover:opacity-100" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </a>
@@ -87,214 +87,6 @@ const socials = [
     </div>
   </div>
 </section>
-
-<style>
-  .contact-section {
-    position: relative;
-    z-index: 2;
-    padding: 7rem 1.5rem 4rem;
-  }
-
-  .contact-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-
-  .contact-header {
-    margin-bottom: 3.5rem;
-    max-width: 560px;
-  }
-
-  .contact-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent-secondary);
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-heading {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    color: var(--foreground);
-    margin-bottom: 1rem;
-  }
-
-  .contact-subtext {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--foreground-muted);
-  }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  @media (min-width: 768px) {
-    .contact-grid {
-      grid-template-columns: 3fr 2fr;
-      gap: 5rem;
-      align-items: start;
-    }
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
-
-  @media (max-width: 480px) {
-    .field-row { grid-template-columns: 1fr; }
-  }
-
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .field-label {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--foreground-muted);
-  }
-
-  .field-input {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
-    color: var(--foreground);
-    font-family: inherit;
-    outline: none;
-    transition: border-color 150ms ease;
-    width: 100%;
-  }
-
-  .field-input::placeholder {
-    color: var(--foreground-muted);
-    opacity: 0.5;
-  }
-
-  .field-input:focus {
-    border-color: var(--accent);
-  }
-
-  .field-textarea {
-    resize: vertical;
-    min-height: 130px;
-  }
-
-  .submit-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    align-self: flex-start;
-    padding: 0.875rem 2rem;
-    border-radius: var(--radius);
-    background: var(--accent);
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 30px var(--accent-glow);
-    transition: opacity 200ms ease, transform 200ms ease;
-  }
-
-  .submit-btn:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
-  }
-
-  .submit-btn:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-  }
-
-  .contact-socials {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .socials-label {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--foreground-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .social-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 0;
-    padding: 0;
-  }
-
-  .social-row {
-    display: flex;
-    align-items: center;
-    gap: 0.875rem;
-    padding: 1rem 1.25rem;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--bg-elevated);
-    text-decoration: none;
-    color: var(--foreground-muted);
-    transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
-  }
-
-  .social-row:hover {
-    color: var(--foreground);
-    border-color: var(--accent-border-mix);
-    background: var(--bg-surface);
-  }
-
-  .social-icon {
-    display: flex;
-    align-items: center;
-    color: var(--accent);
-  }
-
-  .social-name {
-    flex: 1;
-    font-weight: 500;
-    font-size: 0.95rem;
-  }
-
-  .social-arrow {
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: opacity 150ms ease, transform 150ms ease;
-  }
-
-  .social-row:hover .social-arrow {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .social-row:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-</style>
 
 <script>
   const form = document.querySelector('[data-contact-form]');

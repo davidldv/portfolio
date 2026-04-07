@@ -2,46 +2,13 @@
 import { SkillsInteractive } from './SkillsInteractive';
 ---
 
-<section id="skills" class="skills-section">
-  <div class="skills-inner">
-    <div class="skills-header reveal">
-      <p class="skills-eyebrow">Expertise</p>
-      <h2 class="skills-heading">Skills</h2>
+<section id="skills" class="relative z-2 px-6 py-28">
+  <div class="mx-auto max-w-7xl">
+    <div class="reveal mb-14">
+      <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">Expertise</p>
+      <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">Skills</h2>
     </div>
 
     <SkillsInteractive client:visible />
   </div>
 </section>
-
-<style>
-  .skills-section {
-    position: relative;
-    z-index: 2;
-    padding: 7rem 1.5rem;
-  }
-
-  .skills-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-
-  .skills-header {
-    margin-bottom: 3.5rem;
-  }
-
-  .skills-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent-secondary);
-    margin-bottom: 0.5rem;
-  }
-
-  .skills-heading {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    color: var(--foreground);
-  }
-</style>

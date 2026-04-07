@@ -2,42 +2,11 @@
 import { TimelineInteractive } from './TimelineInteractive';
 ---
 
-<section id="timeline" class="timeline-section">
-  <div class="timeline-header reveal">
-    <p class="timeline-eyebrow">Career</p>
-    <h2 class="timeline-heading">Experience</h2>
+<section id="timeline" class="relative z-2 pt-24">
+  <div class="reveal mx-auto mb-4 max-w-7xl px-6 pl-10">
+    <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">Career</p>
+    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">Experience</h2>
   </div>
 
   <TimelineInteractive client:visible />
 </section>
-
-<style>
-  .timeline-section {
-    position: relative;
-    z-index: 2;
-    padding-top: 6rem;
-  }
-
-  .timeline-header {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1.5rem 0 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .timeline-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent-secondary);
-    margin-bottom: 0.5rem;
-  }
-
-  .timeline-heading {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    color: var(--foreground);
-  }
-</style>

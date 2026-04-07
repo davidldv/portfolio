@@ -157,9 +157,9 @@ const jsonLd = JSON.stringify({
 		<a href="#main-content" class="skip-link">Skip to main content</a>
 		<div class="blob blob-1" aria-hidden="true"></div>
 		<div class="blob blob-2" aria-hidden="true"></div>
-		<div id="app-root" class="app-shell">
+		<div id="app-root" class="relative min-h-screen">
 			<Navigation />
-			<div id="main-content" class="layout-content">
+			<div id="main-content" class="relative z-10 pt-16">
 				<slot />
 			</div>
 		</div>

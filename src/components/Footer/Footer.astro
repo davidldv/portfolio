@@ -25,18 +25,18 @@ const socials = [
 ];
 ---
 
-<footer class="footer">
-  <div class="footer-inner">
-    <p class="footer-copy">
-      © {year} <span class="accent">David Londoño</span>
+<footer class="relative z-10 mt-24 border-t border-border px-6 py-8">
+  <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6">
+    <p class="m-0 text-sm text-fg-muted">
+      © {year} <span class="font-semibold text-accent">David Londoño</span>
     </p>
 
-    <ul class="footer-socials" role="list">
+    <ul class="m-0 flex list-none items-center gap-2 p-0" role="list">
       {socials.map(({ label, href, icon }) => (
         <li>
           <a
             href={href}
-            class="social-link"
+            class="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-fg-muted no-underline transition-colors duration-150 hover:border-accent hover:bg-accent-glow hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             aria-label={label}
             target={href.startsWith('http') ? '_blank' : undefined}
             rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -48,67 +48,3 @@ const socials = [
     </ul>
   </div>
 </footer>
-
-<style>
-  .footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 1.5rem;
-    margin-top: 6rem;
-    position: relative;
-    z-index: 10;
-  }
-
-  .footer-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .footer-copy {
-    font-size: 0.875rem;
-    color: var(--foreground-muted);
-    margin: 0;
-  }
-
-  .accent {
-    color: var(--accent);
-    font-weight: 600;
-  }
-
-  .footer-socials {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    color: var(--foreground-muted);
-    text-decoration: none;
-    transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
-  }
-
-  .social-link:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: var(--accent-glow);
-  }
-
-  .social-link:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-</style>
