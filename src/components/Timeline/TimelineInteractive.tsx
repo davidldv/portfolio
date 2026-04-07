@@ -10,6 +10,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '../../lib/utils';
 import { ShimmerCard } from '../ui/ShimmerCard';
+import { Type } from 'lucide-react';
 
 interface Experience {
   company: string;
@@ -24,52 +25,43 @@ interface Experience {
 
 const EXPERIENCES: Experience[] = [
   {
-    company: 'KitchenSync',
+    company: 'Materiales La Bodega',
     role: 'Full Stack Engineer',
+    period: '2026',
+    dateRange: 'Mar 2026 - Apr 2026',
+    description:
+      'Owned and scaled a production retail platform for a hardware business, processing ~$1.5M COP/day in transactions across e-commerce and physical store operations.',
+    tags: ['NextJS', 'PostgreSQL', 'Prisma', 'Supabase', 'Tailwind', 'Zustand']
+  },
+  {
+    company: 'Tambora',
+    role: 'Front End Developer',
     period: '2025',
-    dateRange: '2025 - Present',
+    dateRange: 'Jul 2025 - Sep 2025',
     description:
-      'Developing AI-powered tooling for the restaurant industry, exploring new patterns for integrating large language models into production workflows.',
-    tags: ['Claude API', 'OpenAI', 'React', 'React Native', 'Express', 'PostgreSQL', 'LiveKit', 'Socket.io'],
-    current: true,
+      'Migrated business critical legacy modules from jQuery to React, achieving a 40% reduction in bundle size and decreasing technical debt by consolidating logic into a modular, Atomic Design component library.',
+    tags: ['React', 'Azure', 'TypeScript', 'Tailwind'],
+    parallelTrack: true
   },
   {
-    company: 'Invermax',
-    role: 'Full Stack Consultant',
+    company: 'Started my engineering journey',
+    role: 'Web Developer',
     period: '2024',
-    dateRange: 'Dec 2024 - May 2025',
+    dateRange: 'Feb 2024',
     description:
-      'Code audit for a Colombian real estate platform, identified critical architectural flaws blocking production. Implemented key fixes, redesigned front-end components, and deployed to Firebase.',
-    tags: ['Firebase', 'React'],
-    parallelTrack: true,
-  },
-  {
-    company: 'Inmuebli',
-    role: 'Full Stack Engineer',
-    period: '2024',
-    dateRange: 'Jan 2024 - Jun 2024',
-    description:
-      'Built a dual-application real estate platform, property browsing and management dashboard. Engineered reusable components adopted across 3 projects and re-engineered critical modules for major performance gains.',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
-    parallelTrack: true,
-  },
-  {
-    company: 'Reach My Leads',
-    role: 'Full Stack Developer',
-    period: '2023-25',
-    dateRange: 'Aug 2023 - Nov 2025',
-    description:
-      'Migrated a NestJS monolith to a microservices architecture with horizontal scaling and rolling deployments on AWS. Built event-driven systems with BullMQ, Redis, and WebSockets including a high-throughput call engine and queue-based mass messaging platform.',
-    tags: ['NestJS', 'Python', 'BullMQ', 'Redis', 'Twilio', 'AWS'],
-    parallelTrack: true,
-  },
+      'Begun my journey in web development pursuing a degree in Computer Science, learning fundamental concepts and technologies to build modern applications.',
+    tags: ['JavaScript', 'React', 'SQL'],
+    parallelTrack: true
+  }
 ];
 
 type TagVariant = 'backend' | 'infra' | 'default';
 
 const TAG_MAP: Record<string, TagVariant> = {
+  NextJS: 'backend',
   NestJS: 'backend',
   'Node.js': 'backend',
+  TypeScript: 'backend',
   Express: 'backend',
   Laravel: 'backend',
   Python: 'backend',
@@ -83,14 +75,19 @@ const TAG_MAP: Record<string, TagVariant> = {
   OpenAI: 'backend',
   Redis: 'infra',
   AWS: 'infra',
+  Azure: 'infra',
   Firebase: 'infra',
   Twilio: 'infra',
   PostgreSQL: 'infra',
   Docker: 'infra',
   GCP: 'infra',
+  SQL: 'infra',
   MySQL: 'infra',
   React: 'default',
   'React Native': 'default',
+  Tailwind: 'default',
+  Zustand: 'default',
+  'Supabase': 'default',
 };
 
 function getTagVariant(tag: string): TagVariant {

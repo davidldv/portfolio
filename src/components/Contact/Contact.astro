@@ -35,7 +35,7 @@ const socials = [
     </div>
 
     <div class="contact-grid">
-      <form class="contact-form reveal" action="/api/contact" method="POST" novalidate>
+      <form class="contact-form reveal" action="mailto:dlondon.dev@gmail.com" method="GET" enctype="text/plain" novalidate data-contact-form>
         <div class="field-row">
           <div class="field">
             <label for="name" class="field-label">Name</label>
@@ -295,3 +295,33 @@ const socials = [
     outline-offset: 2px;
   }
 </style>
+
+<script>
+  const form = document.querySelector('[data-contact-form]');
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (!(form instanceof HTMLFormElement)) {
+      return;
+    }
+
+    const formData = new FormData(form);
+    const name = String(formData.get('name') ?? '').trim();
+    const email = String(formData.get('email') ?? '').trim();
+    const message = String(formData.get('message') ?? '').trim();
+    const subject = encodeURIComponent(`Portfolio inquiry${name ? ` from ${name}` : ''}`);
+    const body = encodeURIComponent(
+      [
+        name ? `Name: ${name}` : null,
+        email ? `Email: ${email}` : null,
+        '',
+        message,
+      ]
+        .filter((line) => line !== null)
+        .join('\n'),
+    );
+
+    window.location.href = `mailto:dlondon.dev@gmail.com?subject=${subject}&body=${body}`;
+  });
+</script>

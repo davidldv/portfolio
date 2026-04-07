@@ -5,7 +5,6 @@ import {
   Server,
   Monitor,
   Database,
-  Link2,
   Cloud,
   Code2,
   Wrench,
@@ -31,7 +30,7 @@ const CATEGORIES: Category[] = [
     name: 'Backend',
     Icon: Server,
     accent: 'primary',
-    skills: ['Node.js', 'NestJS', 'Laravel', 'BullMQ', 'TypeORM', 'Event-Driven Architecture', 'Microservices', 'RESTful APIs', 'WebSocket'],
+    skills: ['Node.js', 'NestJS', 'TypeORM', 'Event-Driven Architecture', 'Microservices', 'RESTful APIs', 'WebSocket'],
   },
   {
     name: 'Frontend',
@@ -46,29 +45,23 @@ const CATEGORIES: Category[] = [
     skills: ['PostgreSQL', 'MySQL', 'Redis'],
   },
   {
-    name: 'Blockchain',
-    Icon: Link2,
-    accent: 'secondary',
-    skills: ['Solidity', 'Avalanche', 'Ethereum', 'ERC721', 'EIP-2981', 'Hardhat', 'IPFS', 'Custodial Wallets'],
-  },
-  {
     name: 'DevOps & Cloud',
     Icon: Cloud,
     accent: 'primary',
-    skills: ['Docker', 'AWS', 'Firebase', 'CI/CD', 'Nginx', 'GCP', 'DigitalOcean', 'Vercel'],
+    skills: ['Docker', 'Azure', 'AWS', 'CI/CD', 'Nginx', 'DigitalOcean', 'Vercel'],
   },
   {
     name: 'Languages',
     Icon: Code2,
     accent: 'primary',
-    skills: ['TypeScript', 'JavaScript', 'Python', 'Dart', 'PHP', 'Solidity', 'SQL', 'C'],
+    skills: ['TypeScript', 'Python', 'SQL', 'C#', 'C++'],
   },
   {
     name: 'APIs & Tools',
     Icon: Wrench,
     accent: 'secondary',
-    skills: ['Twilio', 'Stripe', 'Git', 'GitHub', 'Puppeteer', 'Prisma', 'Drizzle'],
-  },
+    skills: ['Stripe', 'Git', 'GitHub', 'Prisma', 'n8n', 'Postman', 'Swagger', 'Linux'],
+  }
 ];
 
 function SkillCard({ category }: { category: Category }) {
