@@ -10,7 +10,6 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '../../lib/utils';
 import { ShimmerCard } from '../ui/ShimmerCard';
-import { Type } from 'lucide-react';
 
 interface Experience {
   company: string;
@@ -19,6 +18,7 @@ interface Experience {
   dateRange: string;
   description: string;
   tags: string[];
+  href?: string;
   current?: boolean;
   parallelTrack?: boolean;
 }
@@ -31,7 +31,8 @@ const EXPERIENCES: Experience[] = [
     dateRange: 'Mar 2026 - Apr 2026',
     description:
       'Owned and scaled a production retail platform for a hardware business, processing ~$1.5M COP/day in transactions across e-commerce and physical store operations.',
-    tags: ['NextJS', 'PostgreSQL', 'Prisma', 'Supabase', 'Tailwind', 'Zustand']
+    tags: ['NextJS', 'PostgreSQL', 'Prisma', 'Supabase', 'Tailwind', 'Zustand'],
+    href: 'https://materialeslabodega.com.co'
   },
   {
     company: 'Tambora',
@@ -110,7 +111,7 @@ const DOT_CLASSES: Record<TagVariant, string> = {
 };
 
 function ExperienceCard({ experience, active }: { experience: Experience; active: boolean }) {
-  const { company, role, dateRange, description, tags, current } = experience;
+  const { company, role, dateRange, description, tags, current, href } = experience;
 
   return (
     <ShimmerCard
@@ -126,6 +127,19 @@ function ExperienceCard({ experience, active }: { experience: Experience; active
       )}>
         <div className="flex items-center gap-3 flex-wrap">
           <h3 className="text-xl font-bold tracking-tight text-fg">{company}</h3>
+          {href && (
+            <a 
+              href={href} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="mt-0.5 shrink-0 text-fg-muted transition-colors duration-150 hover:text-accent-secondary" 
+              aria-label={`Visit ${company}`}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              </svg>
+            </a>
+          )}
           {current && (
             <span className="text-xs px-2.5 py-0.5 rounded-full border font-mono text-accent-secondary border-accent-secondary bg-accent-sub">
               Current
