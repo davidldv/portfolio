@@ -11,8 +11,8 @@ interface Props {
 }
 
 const {
-	title = 'David Londoño — Full Stack Engineer & AI Systems',
-	description = 'Full Stack Engineer specialized in AI agent systems, multi-agent orchestration, and scalable microservices. Building AI-native products from Pereira, Colombia.',
+	title = 'David Londoño — Software Engineer · Application Security',
+	description = 'Full-Stack Engineer moving into Application Security. Building and hardening web systems with TypeScript, React, Node.js and PostgreSQL. Based in Colombia, open to relocation to Germany or the US.',
 	image = '/images/og-image.jpg',
 	canonicalPath,
 } = Astro.props as Props;
@@ -27,7 +27,7 @@ const jsonLd = JSON.stringify({
 	name: 'David Londoño',
 	url: siteUrl.toString(),
 	image: ogImageURL.toString(),
-	jobTitle: 'Full Stack Engineer',
+	jobTitle: 'Software Engineer',
 	description,
 	sameAs: [
 		'https://github.com/davidldv',
@@ -40,15 +40,16 @@ const jsonLd = JSON.stringify({
 		addressCountry: 'CO',
 	},
 	knowsAbout: [
-		'AI Agent Systems',
-		'Multi-agent Orchestration',
+		'Application Security',
+		'Web Application Security',
+		'OWASP Top 10',
+		'Threat Modeling',
+		'Authentication and Authorization',
 		'Full Stack Engineering',
 		'TypeScript',
 		'Node.js',
 		'React',
-		'NestJS',
-		'Microservices',
-		'Blockchain',
+		'PostgreSQL',
 	],
 });
 ---
@@ -65,7 +66,7 @@ const jsonLd = JSON.stringify({
 		<link rel="canonical" href={canonicalURL} />
 		<meta name="author" content="David Londoño" />
 		<meta name="robots" content="index, follow" />
-		<meta name="keywords" content="David Londoño, Full Stack Engineer, AI Systems, AI Agents, Multi-agent, NestJS, React, TypeScript, Colombia, Pereira, Software Engineer" />
+		<meta name="keywords" content="David Londoño, Software Engineer, Application Security, AppSec, Security Engineer, Full Stack Engineer, OWASP, Web Security, Threat Modeling, TypeScript, React, Node.js, Pereira, Colombia, Germany, Remote" />
 
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalURL} />
@@ -170,6 +171,24 @@ const jsonLd = JSON.stringify({
 				const root = document.documentElement;
 				const colors = { dark: '#050506', light: '#f8f9fc' };
 
+				const getStoredTheme = () => {
+					try {
+						const saved = localStorage.getItem(storageKey);
+						if (saved === 'dark' || saved === 'light') {
+							return saved;
+						}
+					} catch {
+						// Ignore storage errors.
+					}
+
+					return null;
+				};
+
+				const getSystemTheme = () =>
+					window.matchMedia('(prefers-color-scheme: dark)').matches
+						? 'dark'
+						: 'light';
+
 				const syncThemeColor = (theme) => {
 					const color = colors[theme] ?? colors.dark;
 					document
@@ -230,7 +249,11 @@ const jsonLd = JSON.stringify({
 				};
 
 				const setup = () => {
-					const initial = root.dataset.theme === 'dark' ? 'dark' : 'light';
+					const currentTheme =
+						root.dataset.theme === 'dark' || root.dataset.theme === 'light'
+							? root.dataset.theme
+							: null;
+					const initial = currentTheme ?? getStoredTheme() ?? getSystemTheme();
 					applyTheme(initial, false);
 
 					const buttons = document.querySelectorAll('[data-theme-toggle]');

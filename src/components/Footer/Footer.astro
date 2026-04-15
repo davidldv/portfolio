@@ -1,6 +1,11 @@
 ---
 const year = new Date().getFullYear();
 
+const pathname = Astro.url.pathname;
+const isGerman = pathname.startsWith('/de');
+const langSwitchHref = isGerman ? '/' : '/de/';
+const langSwitchLabel = isGerman ? 'EN' : 'DE';
+
 const socials = [
   {
     label: 'GitHub',
@@ -30,6 +35,16 @@ const socials = [
     <p class="m-0 text-sm text-fg-muted">
       © {year} <span class="font-semibold text-accent">David Londoño</span>
     </p>
+
+    <div class="flex items-center gap-4 text-sm text-fg-muted">
+      <a
+        href={langSwitchHref}
+        class="font-mono uppercase tracking-[0.12em] no-underline transition-colors duration-150 hover:text-accent"
+        aria-label={isGerman ? 'Switch to English' : 'Zur deutschen Version wechseln'}
+      >
+        {langSwitchLabel}
+      </a>
+    </div>
 
     <ul class="m-0 flex list-none items-center gap-2 p-0" role="list">
       {socials.map(({ label, href, icon }) => (

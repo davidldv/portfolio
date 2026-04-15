@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer/Footer.astro';
+
+const title = 'David Londoño — Software Engineer · Application Security';
+const description =
+  'Full-Stack-Entwickler aus Kolumbien, auf dem Weg in die Application Security. Offen für Umzug nach Deutschland.';
+
+const stats = [
+  { value: '2023', label: 'Entwickler seit' },
+  { value: 'AppSec', label: 'Fokusbereich' },
+  { value: 'EN / DE', label: 'C1 / A1' },
+  { value: 'EU · US', label: 'Umzug möglich' },
+];
+
+const socials = [
+  { label: 'GitHub', href: 'https://github.com/davidldv' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/davidldv' },
+  { label: 'E-Mail', href: 'mailto:dlondon.dev@gmail.com' },
+];
+---
+
+<Layout title={title} description={description} canonicalPath="/de/">
+  <main class="flex min-h-screen flex-col">
+    <section class="relative z-2 px-6 pt-24 pb-16">
+      <div class="mx-auto max-w-4xl">
+        <p class="mb-3 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">
+          DE · <a href="/" class="underline hover:text-accent">EN</a>
+        </p>
+        <h1 class="mb-6 text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[0.95] tracking-[-0.04em] text-fg">
+          Hallo, ich bin David.<br />
+          <span class="bg-linear-to-br from-accent to-accent-secondary bg-clip-text text-transparent">
+            Software Engineer.
+          </span>
+        </h1>
+        <p class="mb-10 max-w-2xl text-[1.05rem] leading-[1.75] text-fg-muted">
+          Full-Stack-Entwickler aus Pereira, Kolumbien. Aktuell orientiere ich mich
+          in Richtung Application Security und bin offen für einen Umzug nach
+          Deutschland.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="#ueber-mich"
+            class="inline-flex items-center gap-2 rounded-(--radius) bg-accent px-6 py-3 text-[0.95rem] font-semibold text-white no-underline shadow-[0_0_30px_var(--accent-glow)] transition-all duration-200 hover:-translate-y-0.5"
+          >
+            Mehr über mich
+          </a>
+          <a
+            href="/"
+            class="inline-flex items-center gap-2 rounded-(--radius) border border-border bg-surface px-6 py-3 text-[0.95rem] font-medium text-fg-muted no-underline transition-colors duration-150 hover:border-accent hover:text-fg"
+          >
+            English version
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="ueber-mich" class="relative z-2 px-6 py-20">
+      <div class="mx-auto max-w-4xl">
+        <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">
+          Über mich
+        </p>
+        <h2 class="mb-10 text-[clamp(2rem,5vw,3rem)] font-bold tracking-[-0.04em] text-fg">
+          Wer ich bin
+        </h2>
+
+        <div class="flex flex-col gap-6 text-[1.05rem] leading-[1.8] text-fg-muted">
+          <p>
+            Ich baue Web-Systeme von vorne bis hinten, React und Next.js im
+            Frontend, Node, TypeScript und PostgreSQL im Backend, und interessiere
+            mich besonders für die Schicht, in der aus funktionierendem Code
+            Sicherheitsvorfälle werden.
+          </p>
+          <p>
+            Mein aktueller Fokus: die Lücke zwischen „schnell liefern" und „sicher
+            liefern" schließen. Das bedeutet Threat Modeling für Features, die ich
+            entwickle, OWASP Top 10 als praktische Checkliste, und Angriffstechniken
+            lernen über TryHackMe und die PortSwigger Web Security Academy, damit
+            ich Angriffe verstehe, bevor ich mich verteidige.
+          </p>
+          <p>
+            Offen für Software-Engineer und Junior-AppSec-Stellen, remote oder
+            mit Umzug nach Deutschland oder in die USA. Englisch C1, Deutsch A1 und
+            lernt weiter.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {stats.map(({ value, label }) => (
+            <div class="flex flex-col gap-1.5 rounded-2xl border border-border bg-surface-elevated px-6 py-5">
+              <span class="bg-linear-to-br from-accent to-accent-secondary bg-clip-text font-mono text-[1.5rem] font-bold tracking-[-0.04em] text-transparent">
+                {value}
+              </span>
+              <span class="text-[0.78rem] font-medium text-fg-muted">{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="relative z-2 px-6 py-20">
+      <div class="mx-auto max-w-4xl">
+        <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">
+          Kontakt
+        </p>
+        <h2 class="mb-6 text-[clamp(2rem,5vw,3rem)] font-bold tracking-[-0.04em] text-fg">
+          Lass uns sprechen
+        </h2>
+        <p class="mb-8 max-w-2xl text-[1.05rem] leading-[1.7] text-fg-muted">
+          Wenn Sie für sicherheitsbewusste Entwickler einstellen oder ein Projekt
+          haben, das sich lohnt, schreiben Sie mir gerne.
+        </p>
+        <ul class="m-0 flex flex-wrap gap-3 p-0" role="list">
+          {socials.map(({ label, href }) => (
+            <li>
+              <a
+                href={href}
+                class="inline-flex items-center gap-2 rounded-xl border border-border bg-surface-elevated px-5 py-3 text-fg-muted no-underline transition-colors duration-150 hover:border-accent-border hover:text-fg"
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
