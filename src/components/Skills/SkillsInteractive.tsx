@@ -8,6 +8,8 @@ import {
   Cloud,
   Code2,
   Wrench,
+  ShieldCheck,
+  Bug,
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { ShimmerCard } from '../ui/ShimmerCard';
@@ -21,47 +23,90 @@ interface Category {
 
 const CATEGORIES: Category[] = [
   {
-    name: 'AI & Agents',
-    Icon: BrainCircuit,
+    name: 'Application Security',
+    Icon: ShieldCheck,
     accent: 'secondary',
-    skills: ['Claude API', 'OpenAI', 'Gemini', 'AI Agents', 'Multi-agent Orchestration', 'Agentic Systems', 'MCP Servers', 'RAG', 'LLM Integration', 'SSE Streaming', 'Tool-use Patterns', 'Hugging Face', 'Vector Embeddings', 'Prompt Engineering', 'Fine-tuning'],
+    skills: [
+      'OWASP Top 10',
+      'Threat Modeling (STRIDE)',
+      'OAuth 2.0 / OIDC',
+      'JWT (EdDSA)',
+      'RBAC',
+      'Session Hardening',
+      'Argon2id',
+      'CSRF / XSS / SQLi defenses',
+      'Secure Code Review',
+      'Secrets Management',
+      'Input Validation',
+    ],
+  },
+  {
+    name: 'Offensive & AppSec Tooling',
+    Icon: Bug,
+    accent: 'secondary',
+    skills: [
+      'Burp Suite',
+      'OWASP ZAP',
+      'nmap',
+      'Wireshark',
+      'sqlmap',
+      'ffuf',
+      'Nuclei',
+      'Gobuster',
+      'Hydra',
+      'Hashcat',
+      'Metasploit',
+      'Nikto',
+      'Semgrep',
+      'Trivy',
+      'Kali Linux',
+      'HackTheBox',
+      'TryHackMe',
+      'PortSwigger Academy',
+    ],
   },
   {
     name: 'Backend',
     Icon: Server,
     accent: 'primary',
-    skills: ['Node.js', 'NestJS', 'TypeORM', 'Event-Driven Architecture', 'Microservices', 'RESTful APIs', 'WebSocket'],
+    skills: ['Node.js', 'Next.js', 'Express', 'REST APIs', 'WebSockets', 'Jest', 'Zod'],
   },
   {
     name: 'Frontend',
     Icon: Monitor,
     accent: 'primary',
-    skills: ['React', 'Next.js', 'Astro', 'Redux', 'Redux Toolkit', 'RTK Query', 'TailwindCSS', 'Framer Motion', 'Three.js', 'Flutter'],
+    skills: ['React', 'Next.js', 'Astro', 'TailwindCSS', 'Framer Motion', 'Three.js'],
   },
   {
     name: 'Databases',
     Icon: Database,
     accent: 'primary',
-    skills: ['PostgreSQL', 'MySQL', 'Redis'],
+    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Prisma', 'Redis'],
   },
   {
     name: 'DevOps & Cloud',
     Icon: Cloud,
     accent: 'primary',
-    skills: ['Docker', 'Azure', 'AWS', 'CI/CD', 'Nginx', 'DigitalOcean', 'Vercel'],
+    skills: ['AWS', 'Azure', 'Docker', 'CI/CD', 'Digital Ocean', 'Linux hardening', 'Vercel'],
   },
   {
     name: 'Languages',
     Icon: Code2,
     accent: 'primary',
-    skills: ['TypeScript', 'Python', 'SQL', 'C#', 'C++'],
+    skills: ['TypeScript', 'JavaScript', 'Python', 'C', 'SQL', 'Bash', 'HTML/CSS'],
   },
   {
-    name: 'APIs & Tools',
-    Icon: Wrench,
+    name: 'AI & LLM',
+    Icon: BrainCircuit,
     accent: 'secondary',
-    skills: ['Stripe', 'Git', 'GitHub', 'Prisma', 'n8n', 'Postman', 'Swagger', 'Linux'],
-  }
+    skills: ['Claude API', 'OpenAI', 'SSE Streaming', 'MCP Servers', 'LLM Integration', 'Prompt Injection defense', 'LLM Guardrails', 'RAG', 'Prompt Engineering'],
+  },
+  {
+    name: 'Tooling',
+    Icon: Wrench,
+    accent: 'primary',
+    skills: ['Git', 'GitHub', 'Postman', 'Jira', 'Swagger', 'Linux'],
+  },
 ];
 
 function SkillCard({ category }: { category: Category }) {
