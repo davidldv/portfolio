@@ -11,32 +11,37 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: 'PairCode AI',
-    tagline: 'AI-driven collaborative coding workspace',
+    name: 'PairCode',
+    tagline: 'Secure real-time collaborative workspace',
     description:
-      'Secure real-time collaborative system with verified identity, access control, and hardened communication layer',
-    tags: ['Next.js', 'PostgreSQL', 'Prisma', 'Websockets'],
+      'Secure collaborative system with verified identity, hardened authentication, and a purpose-built realtime layer.',
+    highlights: [
+      'In-house auth stack: EdDSA JWTs, rotating refresh tokens with reuse detection, Argon2id hashing, CSRF protection.',
+      'Custom WebSocket server with single-use ticket handshake, per-event authorization, and RBAC enforced server-side.',
+      'Realtime room layer: presence, typing, shared threaded context, and persistent history that survives reconnects.',
+    ],
+    tags: ['Next.js', 'PostgreSQL', 'EdDSA', 'Argon2id', 'RBAC', 'WebSockets'],
     href: 'https://paircode-lime.vercel.app/',
     accent: 'indigo',
+  },
+  {
+    name: 'Kanby',
+    tagline: 'Kanban app with auth and access control',
+    description:
+      'Collaborative Kanban: boards, lists, drag-and-drop cards, secure session handling and per-board authorization over SSE.',
+    tags: ['TypeScript', 'Next.js', 'PostgreSQL', 'Prisma', 'SSE'],
+    href: 'https://kanbyldv.vercel.app/',
+    accent: 'cyan',
   },
   {
     name: 'MacOS Portfolio',
     tagline: 'Portfolio site as a MacOS app',
     description:
-      'Built an interactive portfolio that mimics a real OS experience: macOS-style desktop windows on desktop and iPhone-style full-screen apps on mobile',
+      'Interactive portfolio mimicking a real OS experience: macOS-style desktop windows on desktop and iPhone-style full-screen apps on mobile.',
     tags: ['TypeScript', 'React', 'Zustand', 'GSAP'],
     href: 'https://portfolio-macldv.vercel.app/',
-    accent: 'cyan'
-  },
-  {
-    name: 'Kanby',
-    tagline: 'Kanban app for collaborative work',
-    description:
-      'Collaborative Kanban app where teams can organize work with boards, lists, and drag-and-drop cards.',
-    tags: ['TypeScript', 'Next.js', 'PostgreSQL', 'Prisma', 'SSE'],
-    href: 'https://kanbyldv.vercel.app/',
     accent: 'indigo',
-  }
+  },
 ];
 ---
 

@@ -28,32 +28,33 @@ const EXPERIENCES: Experience[] = [
     company: 'Materiales La Bodega',
     role: 'Full Stack Engineer',
     period: '2026',
-    dateRange: 'Mar 2026 - Apr 2026',
+    dateRange: 'Mar 2026 - Present',
     description:
-      'Owned and scaled a production retail platform for a hardware business, processing ~$1.5M COP/day in transactions across e-commerce and physical store operations.',
-    tags: ['NextJS', 'PostgreSQL', 'Prisma', 'Supabase', 'Tailwind', 'Zustand'],
-    href: 'https://materialeslabodega.com.co'
+      'Own and scale a production retail platform (~$1.5M COP/day across e-commerce and in-store). Responsible for authentication, session security and role-based access across staff and customer surfaces. Hardened the app layer against OWASP Top 10: parameterized queries, server-side input validation, CSRF on state-changing endpoints, least-privilege DB roles.',
+    tags: ['NextJS', 'PostgreSQL', 'Prisma', 'Supabase', 'OWASP', 'RBAC', 'CSRF'],
+    href: 'https://materialeslabodega.com.co',
+    current: true,
   },
   {
     company: 'Tambora',
-    role: 'Front End Developer',
+    role: 'Frontend Developer',
     period: '2025',
     dateRange: 'Jul 2025 - Sep 2025',
     description:
-      'Migrated business critical legacy modules from jQuery to React, achieving a 40% reduction in bundle size and decreasing technical debt by consolidating logic into a modular, Atomic Design component library.',
-    tags: ['React', 'Azure', 'TypeScript', 'Tailwind'],
-    parallelTrack: true
+      'Migrated business-critical legacy modules from jQuery to React: 40% bundle-size reduction and shrunk the client-side attack surface by consolidating logic into a modular Atomic Design library. Engineered Azure CI/CD to replace manual SSH deploys, cutting deploy time from 2+ hours to <15 min and enabling automated test gates — foundation for SAST and dependency scanning.',
+    tags: ['React', 'Azure', 'TypeScript', 'CI/CD', 'SAST-ready'],
+    parallelTrack: true,
   },
   {
-    company: 'Started my engineering journey',
-    role: 'Web Developer',
+    company: 'EliteStack Bootcamp',
+    role: 'Full-Stack Development',
     period: '2024',
-    dateRange: 'Feb 2024',
+    dateRange: 'Jun 2024 - Jul 2024',
     description:
-      'Begun my journey in web development pursuing a degree in Computer Science, learning fundamental concepts and technologies to build modern applications.',
-    tags: ['JavaScript', 'React', 'SQL'],
-    parallelTrack: true
-  }
+      'Hands-on bootcamp: Linux/CLI, TypeScript, Node.js, Docker, REST APIs, WebSockets, Next.js, AWS. Foundation of how modern production systems fit together.',
+    tags: ['Linux', 'TypeScript', 'Docker', 'AWS'],
+    parallelTrack: true,
+  },
 ];
 
 type TagVariant = 'backend' | 'infra' | 'default';
