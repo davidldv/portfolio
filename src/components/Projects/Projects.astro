@@ -25,6 +25,20 @@ const projects: Project[] = [
     accent: 'indigo',
   },
   {
+    name: 'JWT Security Lab',
+    tagline: 'Offense-and-defense JWT vulnerability lab',
+    description:
+      'Offense-and-defense lab exercising real-world JWT vulnerabilities against a hardened mirror, proving each fix rather than claiming it.',
+    highlights: [
+      'From-scratch JWT sign/verify in TypeScript (no libraries) reproducing five production-grade flaws: alg=none bypass, HS256/RS256 key confusion, weak-secret brute-force, kid header injection, and missing iss/aud/exp validation.',
+      'Reproducible exploit scripts (Bash + OpenSSL) and a harness that proves each payload succeeds against the vulnerable API and is rejected by the secure one.',
+      'Hardened service eliminates entire bug classes: single-algorithm RS256 allowlist, fixed in-memory kid registry with rotation, generic errors, and scrypt password hashing.',
+    ],
+    tags: ['TypeScript', 'Node.js', 'Docker', 'JWT', 'OpenSSL', 'Bash'],
+    href: 'https://github.com/davidldv/jwtsecuritylab',
+    accent: 'cyan',
+  },
+  {
     name: 'Kanby',
     tagline: 'Kanban app with auth and access control',
     description:
