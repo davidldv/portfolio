@@ -1,69 +1,63 @@
 ---
+import { ui, type Lang } from '../../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props as Props;
+const t = ui[lang].projects;
+
 interface Project {
+  id: keyof typeof t.items;
   name: string;
-  tagline: string;
-  description: string;
-  highlights?: string[];
   tags: string[];
   href: string | null;
   accent: 'indigo' | 'cyan';
 }
 
-const projects: Project[] = [
+const baseProjects: Project[] = [
   {
+    id: 'paircode',
     name: 'PairCode',
-    tagline: 'Secure real-time collaborative workspace',
-    description:
-      'Secure collaborative system with verified identity, hardened authentication, and a purpose-built realtime layer.',
-    highlights: [
-      'In-house auth stack: EdDSA JWTs, rotating refresh tokens with reuse detection, Argon2id hashing, CSRF protection.',
-      'Custom WebSocket server with single-use ticket handshake, per-event authorization, and RBAC enforced server-side.',
-      'Realtime room layer: presence, typing, shared threaded context, and persistent history that survives reconnects.',
-    ],
     tags: ['Next.js', 'PostgreSQL', 'EdDSA', 'Argon2id', 'RBAC', 'WebSockets'],
     href: 'https://paircode-lime.vercel.app/',
     accent: 'indigo',
   },
   {
+    id: 'jwt-lab',
     name: 'JWT Security Lab',
-    tagline: 'Offense-and-defense JWT vulnerability lab',
-    description:
-      'Offense-and-defense lab exercising real-world JWT vulnerabilities against a hardened mirror, proving each fix rather than claiming it.',
-    highlights: [
-      'From-scratch JWT sign/verify in TypeScript (no libraries) reproducing five production-grade flaws: alg=none bypass, HS256/RS256 key confusion, weak-secret brute-force, kid header injection, and missing iss/aud/exp validation.',
-      'Reproducible exploit scripts (Bash + OpenSSL) and a harness that proves each payload succeeds against the vulnerable API and is rejected by the secure one.',
-      'Hardened service eliminates entire bug classes: single-algorithm RS256 allowlist, fixed in-memory kid registry with rotation, generic errors, and scrypt password hashing.',
-    ],
     tags: ['TypeScript', 'Node.js', 'Docker', 'JWT', 'OpenSSL', 'Bash'],
     href: 'https://github.com/davidldv/jwtsecuritylab',
     accent: 'cyan',
   },
   {
+    id: 'kanby',
     name: 'Kanby',
-    tagline: 'Kanban app with auth and access control',
-    description:
-      'Collaborative Kanban: boards, lists, drag-and-drop cards, secure session handling and per-board authorization over SSE.',
     tags: ['TypeScript', 'Next.js', 'PostgreSQL', 'Prisma', 'SSE'],
     href: 'https://kanbyldv.vercel.app/',
     accent: 'cyan',
   },
   {
+    id: 'macos',
     name: 'MacOS Portfolio',
-    tagline: 'Portfolio site as a MacOS app',
-    description:
-      'Interactive portfolio mimicking a real OS experience: macOS-style desktop windows on desktop and iPhone-style full-screen apps on mobile.',
     tags: ['TypeScript', 'React', 'Zustand', 'GSAP'],
     href: 'https://portfolio-macldv.vercel.app/',
     accent: 'indigo',
   },
 ];
+
+const projects = baseProjects.map((p) => {
+  const content = t.items[p.id];
+  return { ...p, ...content };
+});
 ---
 
 <section id="projects" class="relative z-2 px-6 py-28">
   <div class="mx-auto max-w-7xl">
     <div class="reveal mb-14">
-      <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">Work</p>
-      <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">Projects</h2>
+      <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">{t.eyebrow}</p>
+      <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
     </div>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -74,7 +68,7 @@ const projects: Project[] = [
             <div class="flex items-start justify-between gap-4">
               <h3 class="m-0 text-[1.15rem] font-bold tracking-[-0.02em] text-fg">{name}</h3>
               {href && (
-                <a href={href} target="_blank" rel="noopener noreferrer" class="mt-0.5 shrink-0 text-fg-muted transition-colors duration-150 hover:text-accent-secondary" aria-label={`Visit ${name}`}>
+                <a href={href} target="_blank" rel="noopener noreferrer" class="mt-0.5 shrink-0 text-fg-muted transition-colors duration-150 hover:text-accent-secondary" aria-label={`${t.visit} ${name}`}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                   </svg>

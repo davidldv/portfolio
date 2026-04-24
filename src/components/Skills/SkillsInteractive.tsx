@@ -15,7 +15,7 @@ import { cn } from '../../lib/utils';
 import { ShimmerCard } from '../ui/ShimmerCard';
 
 interface Category {
-  name: string;
+  id: string;
   Icon: React.ComponentType<{ className?: string }>;
   accent: 'primary' | 'secondary';
   skills: string[];
@@ -23,7 +23,7 @@ interface Category {
 
 const CATEGORIES: Category[] = [
   {
-    name: 'Application Security',
+    id: 'appsec',
     Icon: ShieldCheck,
     accent: 'secondary',
     skills: [
@@ -41,7 +41,7 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
-    name: 'Offensive & AppSec Tooling',
+    id: 'offensive',
     Icon: Bug,
     accent: 'secondary',
     skills: [
@@ -66,51 +66,51 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
-    name: 'Backend',
+    id: 'backend',
     Icon: Server,
     accent: 'primary',
     skills: ['Node.js', 'Next.js', 'Express', 'REST APIs', 'WebSockets', 'Jest', 'Zod'],
   },
   {
-    name: 'Frontend',
+    id: 'frontend',
     Icon: Monitor,
     accent: 'primary',
     skills: ['React', 'Next.js', 'Astro', 'TailwindCSS', 'Framer Motion', 'Three.js'],
   },
   {
-    name: 'Databases',
+    id: 'databases',
     Icon: Database,
     accent: 'primary',
     skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Prisma', 'Redis'],
   },
   {
-    name: 'DevOps & Cloud',
+    id: 'devops',
     Icon: Cloud,
     accent: 'primary',
     skills: ['AWS', 'Azure', 'Docker', 'CI/CD', 'Digital Ocean', 'Linux hardening', 'Vercel'],
   },
   {
-    name: 'Languages',
+    id: 'languages',
     Icon: Code2,
     accent: 'primary',
     skills: ['TypeScript', 'JavaScript', 'Python', 'C', 'SQL', 'Bash', 'HTML/CSS'],
   },
   {
-    name: 'AI & LLM',
+    id: 'ai',
     Icon: BrainCircuit,
     accent: 'secondary',
     skills: ['Claude API', 'OpenAI', 'SSE Streaming', 'MCP Servers', 'LLM Integration', 'Prompt Injection defense', 'LLM Guardrails', 'RAG', 'Prompt Engineering'],
   },
   {
-    name: 'Tooling',
+    id: 'tooling',
     Icon: Wrench,
     accent: 'primary',
     skills: ['Git', 'GitHub', 'Postman', 'Jira', 'Swagger', 'Linux'],
   },
 ];
 
-function SkillCard({ category }: { category: Category }) {
-  const { name, Icon, accent, skills } = category;
+function SkillCard({ category, name }: { category: Category; name: string }) {
+  const { Icon, accent, skills } = category;
   const isSecondary = accent === 'secondary';
 
   return (
@@ -154,11 +154,11 @@ function SkillCard({ category }: { category: Category }) {
   );
 }
 
-export function SkillsInteractive() {
+export function SkillsInteractive({ categoryNames }: { categoryNames: Record<string, string> }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {CATEGORIES.map((cat) => (
-        <SkillCard key={cat.name} category={cat} />
+        <SkillCard key={cat.id} category={cat} name={categoryNames[cat.id] ?? cat.id} />
       ))}
     </div>
   );

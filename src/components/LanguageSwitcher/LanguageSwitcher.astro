@@ -1,0 +1,125 @@
+---
+const locales = [
+  { code: 'en', label: 'English', short: 'EN', href: '/' },
+  { code: 'es', label: 'Español', short: 'ES', href: '/es/' },
+  { code: 'de', label: 'Deutsch', short: 'DE', href: '/de/' },
+] as const;
+
+const pathname = Astro.url.pathname;
+const current =
+  pathname.startsWith('/es') ? 'es' : pathname.startsWith('/de') ? 'de' : 'en';
+const currentLocale = locales.find((l) => l.code === current) ?? locales[0];
+---
+
+<div class="lang-switcher relative" data-lang-switcher>
+  <button
+    type="button"
+    class="lang-trigger group flex h-10 items-center gap-1.5 rounded-full border border-border bg-surface px-3 text-[0.78rem] font-medium text-fg-muted transition-colors duration-150 hover:border-accent hover:bg-accent-glow hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-label={`Change language — current: ${currentLocale.label}`}
+    data-lang-trigger
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+    <span class="font-mono tracking-[0.08em]">{currentLocale.short}</span>
+    <svg
+      class="transition-transform duration-150 group-aria-expanded:rotate-180"
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+
+  <ul
+    class="lang-menu invisible absolute right-0 top-[calc(100%+0.5rem)] z-50 m-0 flex w-44 translate-y-1 list-none flex-col gap-0.5 rounded-xl border border-border bg-[color-mix(in_srgb,var(--bg-deep)_92%,transparent)] p-1.5 opacity-0 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.4)] backdrop-blur-[20px] backdrop-saturate-160 transition-all duration-150 data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100"
+    role="listbox"
+    aria-label="Select language"
+    data-lang-menu
+  >
+    {locales.map((locale) => (
+      <li role="none">
+        <a
+          href={locale.href}
+          role="option"
+          aria-selected={locale.code === current}
+          data-astro-reload
+          class="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-[0.85rem] font-medium text-fg-muted no-underline transition-colors duration-100 hover:bg-surface hover:text-fg aria-selected:bg-accent-glow aria-selected:text-fg"
+        >
+          <span>{locale.label}</span>
+          <span class="font-mono text-[0.7rem] tracking-[0.1em] text-fg-muted aria-[selected=true]:text-accent">
+            {locale.short}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  const bind = () => {
+    const switchers = document.querySelectorAll<HTMLElement>('[data-lang-switcher]');
+
+    switchers.forEach((root) => {
+      if (root.dataset.bound === 'true') return;
+      root.dataset.bound = 'true';
+
+      const trigger = root.querySelector<HTMLButtonElement>('[data-lang-trigger]');
+      const menu = root.querySelector<HTMLElement>('[data-lang-menu]');
+      if (!trigger || !menu) return;
+
+      const close = () => {
+        menu.dataset.open = 'false';
+        trigger.setAttribute('aria-expanded', 'false');
+      };
+
+      const open = () => {
+        menu.dataset.open = 'true';
+        trigger.setAttribute('aria-expanded', 'true');
+      };
+
+      trigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (menu.dataset.open === 'true') close();
+        else open();
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!root.contains(event.target as Node)) close();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menu.dataset.open === 'true') {
+          close();
+          trigger.focus();
+        }
+      });
+    });
+  };
+
+  document.addEventListener('astro:page-load', bind);
+  bind();
+</script>

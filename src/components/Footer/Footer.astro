@@ -3,8 +3,11 @@ const year = new Date().getFullYear();
 
 const pathname = Astro.url.pathname;
 const isGerman = pathname.startsWith('/de');
-const langSwitchHref = isGerman ? '/' : '/de/';
-const langSwitchLabel = isGerman ? 'EN' : 'DE';
+const isSpanish = pathname.startsWith('/es');
+const langSwitchHref = isGerman || isSpanish ? '/' : '/es/';
+const langSwitchLabel = isGerman ? 'EN' : isSpanish ? 'EN' : 'ES';
+const langSwitchAria =
+  isGerman ? 'Switch to English' : isSpanish ? 'Cambiar a inglés' : 'Cambiar a español';
 
 const socials = [
   {
@@ -40,7 +43,8 @@ const socials = [
       <a
         href={langSwitchHref}
         class="font-mono uppercase tracking-[0.12em] no-underline transition-colors duration-150 hover:text-accent"
-        aria-label={isGerman ? 'Switch to English' : 'Zur deutschen Version wechseln'}
+        aria-label={langSwitchAria}
+        data-astro-reload
       >
         {langSwitchLabel}
       </a>

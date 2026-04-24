@@ -1,12 +1,54 @@
 ---
+import { ui, type Lang } from '../../i18n/ui';
 import { TimelineInteractive } from './TimelineInteractive';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props as Props;
+const t = ui[lang].timeline;
+
+const experiences = [
+  {
+    id: 'la-bodega',
+    company: 'Materiales La Bodega',
+    period: '2026',
+    tags: ['NextJS', 'PostgreSQL', 'Prisma', 'Supabase', 'OWASP', 'RBAC', 'CSRF'],
+    href: 'https://materialeslabodega.com.co',
+    current: true,
+    role: t.experiences['la-bodega'].role,
+    dateRange: t.experiences['la-bodega'].dateRange,
+    description: t.experiences['la-bodega'].description,
+  },
+  {
+    id: 'tambora',
+    company: 'Tambora',
+    period: '2025',
+    tags: ['React', 'Azure', 'TypeScript', 'CI/CD', 'SAST-ready'],
+    parallelTrack: true,
+    role: t.experiences.tambora.role,
+    dateRange: t.experiences.tambora.dateRange,
+    description: t.experiences.tambora.description,
+  },
+  {
+    id: 'elitestack',
+    company: 'EliteStack Bootcamp',
+    period: '2024',
+    tags: ['Linux', 'TypeScript', 'Docker', 'AWS'],
+    parallelTrack: true,
+    role: t.experiences.elitestack.role,
+    dateRange: t.experiences.elitestack.dateRange,
+    description: t.experiences.elitestack.description,
+  },
+];
 ---
 
 <section id="timeline" class="relative z-2 pt-24">
   <div class="reveal mx-auto mb-4 max-w-7xl px-6 pl-10">
-    <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">Career</p>
-    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">Experience</h2>
+    <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">{t.eyebrow}</p>
+    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
   </div>
 
-  <TimelineInteractive client:visible />
+  <TimelineInteractive client:visible experiences={experiences} currentLabel={t.current} visitLabel={t.visit} />
 </section>

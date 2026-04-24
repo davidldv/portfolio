@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import Navigation from '../components/Navigation/Navigation.astro';
+import { detectLang, ui } from '../i18n/ui';
 import '../styles/theme.css';
 
 interface Props {
@@ -17,6 +18,8 @@ const {
 	canonicalPath,
 } = Astro.props as Props;
 
+const lang = detectLang(Astro.url.pathname);
+const t = ui[lang];
 const siteUrl = Astro.site ?? 'https://dlondon.tech';
 const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, siteUrl);
 const ogImageURL = new URL(image, siteUrl);
@@ -55,7 +58,7 @@ const jsonLd = JSON.stringify({
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={t.htmlLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -155,7 +158,7 @@ const jsonLd = JSON.stringify({
 		<ClientRouter />
 	</head>
 	<body>
-		<a href="#main-content" class="skip-link">Skip to main content</a>
+		<a href="#main-content" class="skip-link">{t.nav.skipToMain}</a>
 		<div class="blob blob-1" aria-hidden="true"></div>
 		<div class="blob blob-2" aria-hidden="true"></div>
 		<div id="app-root" class="relative min-h-screen">

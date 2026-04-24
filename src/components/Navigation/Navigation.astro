@@ -1,18 +1,24 @@
 ---
+import { detectLang, ui } from '../../i18n/ui';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher.astro';
 import ThemeToggle from '../ThemeToggle/ThemeToggle.astro';
 
+const lang = detectLang(Astro.url.pathname);
+const t = ui[lang].nav;
+const homeHref = lang === 'es' ? '/es/' : '/';
+
 const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#timeline', label: 'Timeline' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#about', label: t.about },
+  { href: '#timeline', label: t.timeline },
+  { href: '#skills', label: t.skills },
+  { href: '#projects', label: t.projects },
+  { href: '#contact', label: t.contact },
 ];
 ---
 
 <header class="navbar fixed inset-x-0 top-0 z-100 border-b border-border bg-[color-mix(in_srgb,var(--bg-deep)_75%,transparent)] px-6 backdrop-blur-[20px] backdrop-saturate-160" role="banner">
-  <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-8" aria-label="Main navigation">
-    <a href="/" class="navbar-logo relative z-1 flex shrink-0 items-center gap-2 text-[1.1rem] font-bold tracking-[-0.02em] text-fg no-underline" aria-label="David London home" data-astro-reload>
+  <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-8" aria-label={t.mainAriaLabel}>
+    <a href={homeHref} class="navbar-logo relative z-1 flex shrink-0 items-center gap-2 text-[1.1rem] font-bold tracking-[-0.02em] text-fg no-underline" aria-label={t.homeAriaLabel} data-astro-reload>
       <img
         src="/david.jpg"
         alt="David London"
@@ -32,12 +38,13 @@ const navLinks = [
       ))}
     </ul>
 
-    <div class="navbar-actions flex items-center gap-3">
+    <div class="navbar-actions flex items-center gap-2">
+      <LanguageSwitcher />
       <ThemeToggle />
       <button
         id="mobile-menu-btn"
         class="mobile-menu-btn flex cursor-pointer h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-fg-muted md:hidden"
-        aria-label="Open navigation menu"
+        aria-label={t.openMenu}
         aria-expanded="false"
         aria-controls="mobile-menu"
       >

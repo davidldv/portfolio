@@ -1,0 +1,26 @@
+---
+import About from '../../components/About/About.astro';
+import Contact from '../../components/Contact/Contact.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import Hero from '../../components/Hero/Hero.astro';
+import Layout from '../../layouts/Layout.astro';
+import Projects from '../../components/Projects/Projects.astro';
+import Skills from '../../components/Skills/Skills.astro';
+import Timeline from '../../components/Timeline/Timeline.astro';
+---
+
+<Layout
+  title="David Londoño — Ingeniero de Software · Seguridad de Aplicaciones"
+  description="Ingeniero Full-Stack de Colombia enfocado en Seguridad de Aplicaciones. Abierto a roles remotos y reubicación en Alemania o Estados Unidos."
+  canonicalPath="/es/"
+>
+  <main class="flex min-h-screen flex-col">
+    <Hero lang="es" />
+    <Timeline lang="es" />
+    <About lang="es" />
+    <Skills lang="es" />
+    <Projects lang="es" />
+    <Contact lang="es" />
+    <Footer />
+  </main>
+</Layout>

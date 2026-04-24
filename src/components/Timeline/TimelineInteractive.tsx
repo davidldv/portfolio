@@ -11,7 +11,8 @@ import { useEffect, useRef, useState } from 'react';
 import { cn } from '../../lib/utils';
 import { ShimmerCard } from '../ui/ShimmerCard';
 
-interface Experience {
+export interface Experience {
+  id: string;
   company: string;
   role: string;
   period: string;
@@ -22,40 +23,6 @@ interface Experience {
   current?: boolean;
   parallelTrack?: boolean;
 }
-
-const EXPERIENCES: Experience[] = [
-  {
-    company: 'Materiales La Bodega',
-    role: 'Full Stack Engineer',
-    period: '2026',
-    dateRange: 'Mar 2026 - Present',
-    description:
-      'Own and scale a production retail platform (~$1.5M COP/day across e-commerce and in-store). Responsible for authentication, session security and role-based access across staff and customer surfaces. Hardened the app layer against OWASP Top 10: parameterized queries, server-side input validation, CSRF on state-changing endpoints, least-privilege DB roles.',
-    tags: ['NextJS', 'PostgreSQL', 'Prisma', 'Supabase', 'OWASP', 'RBAC', 'CSRF'],
-    href: 'https://materialeslabodega.com.co',
-    current: true,
-  },
-  {
-    company: 'Tambora',
-    role: 'Frontend Developer',
-    period: '2025',
-    dateRange: 'Jul 2025 - Sep 2025',
-    description:
-      'Migrated business-critical legacy modules from jQuery to React: 40% bundle-size reduction and shrunk the client-side attack surface by consolidating logic into a modular Atomic Design library. Engineered Azure CI/CD to replace manual SSH deploys, cutting deploy time from 2+ hours to <15 min and enabling automated test gates — foundation for SAST and dependency scanning.',
-    tags: ['React', 'Azure', 'TypeScript', 'CI/CD', 'SAST-ready'],
-    parallelTrack: true,
-  },
-  {
-    company: 'EliteStack Bootcamp',
-    role: 'Full-Stack Development',
-    period: '2024',
-    dateRange: 'Jun 2024 - Jul 2024',
-    description:
-      'Hands-on bootcamp: Linux/CLI, TypeScript, Node.js, Docker, REST APIs, WebSockets, Next.js, AWS. Foundation of how modern production systems fit together.',
-    tags: ['Linux', 'TypeScript', 'Docker', 'AWS'],
-    parallelTrack: true,
-  },
-];
 
 type TagVariant = 'backend' | 'infra' | 'default';
 
@@ -111,7 +78,17 @@ const DOT_CLASSES: Record<TagVariant, string> = {
   default: 'bg-fg-dim',
 };
 
-function ExperienceCard({ experience, active }: { experience: Experience; active: boolean }) {
+function ExperienceCard({
+  experience,
+  active,
+  currentLabel,
+  visitLabel,
+}: {
+  experience: Experience;
+  active: boolean;
+  currentLabel: string;
+  visitLabel: string;
+}) {
   const { company, role, dateRange, description, tags, current, href } = experience;
 
   return (
@@ -134,7 +111,7 @@ function ExperienceCard({ experience, active }: { experience: Experience; active
               target="_blank" 
               rel="noopener noreferrer" 
               className="mt-0.5 shrink-0 text-fg-muted transition-colors duration-150 hover:text-accent-secondary" 
-              aria-label={`Visit ${company}`}
+              aria-label={`${visitLabel} ${company}`}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -143,7 +120,7 @@ function ExperienceCard({ experience, active }: { experience: Experience; active
           )}
           {current && (
             <span className="text-xs px-2.5 py-0.5 rounded-full border font-mono text-accent-secondary border-accent-secondary bg-accent-sub">
-              Current
+              {currentLabel}
             </span>
           )}
         </div>
@@ -180,7 +157,16 @@ function ExperienceCard({ experience, active }: { experience: Experience; active
   );
 }
 
-export function TimelineInteractive() {
+export function TimelineInteractive({
+  experiences,
+  currentLabel,
+  visitLabel,
+}: {
+  experiences: Experience[];
+  currentLabel: string;
+  visitLabel: string;
+}) {
+  const EXPERIENCES = experiences;
   const containerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -302,7 +288,7 @@ export function TimelineInteractive() {
                   {exp.period}
                 </p>
 
-                <ExperienceCard experience={exp} active={reached} />
+                <ExperienceCard experience={exp} active={reached} currentLabel={currentLabel} visitLabel={visitLabel} />
               </div>
             </div>
           );
