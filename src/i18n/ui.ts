@@ -51,6 +51,8 @@ type UI = {
     p4: string;
     location: string;
     stats: { value: string; label: string }[];
+    certificationsLabel: string;
+    certifications: string[];
     portraitAlt: string;
   };
   timeline: {
@@ -129,9 +131,11 @@ export const ui: Record<Lang, UI> = {
       stats: [
         { value: '2024', label: 'Building since' },
         { value: 'AppSec', label: 'Focus area' },
-        { value: 'EN / DE', label: 'C1 / B1' },
+        { value: 'EN / ES / DE', label: 'C1 / Native / B1' },
         { value: 'Visa', label: 'EU / US sponsor' },
       ],
+      certificationsLabel: 'In progress',
+      certifications: ['CompTIA Security+ (2026 Q3)', 'PortSwigger Web Security Academy'],
       portraitAlt: 'David portrait',
     },
     timeline: {
@@ -270,9 +274,11 @@ export const ui: Record<Lang, UI> = {
       stats: [
         { value: '2024', label: 'Programando desde' },
         { value: 'AppSec', label: 'Área de enfoque' },
-        { value: 'EN / DE', label: 'C1 / B1' },
+        { value: 'EN / ES / DE', label: 'C1 / Nativo / B1' },
         { value: 'Visa', label: 'Patrocinio EU / US' },
       ],
+      certificationsLabel: 'En curso',
+      certifications: ['CompTIA Security+ (2026 Q3)', 'PortSwigger Web Security Academy'],
       portraitAlt: 'Retrato de David',
     },
     timeline: {
