@@ -24,7 +24,7 @@ pnpm-debug.log*
 .idea/
 
 # resume 
-.Resume2.pdf
-.Resume.tex
+Resume.pdf
 
 /.claude
+.vscode/
