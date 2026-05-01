@@ -25,6 +25,7 @@ pnpm-debug.log*
 
 # resume 
 Resume.pdf
+Resume.pdf
 
-/.claude
+.claude/
 .vscode/

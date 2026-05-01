@@ -39,12 +39,24 @@ const t = ui[lang].about;
           <p class="mb-7 text-[1.05rem] leading-[1.8] text-fg-muted">{t.p3}</p>
           <p class="mb-7 text-[1.05rem] leading-[1.8] text-fg-muted">{t.p4}</p>
 
-          <div class="bio-location inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-[0.85rem] text-fg-muted">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 10c0 6-8 13-8 13s-8-7-8-13a8 8 0 0 1 16 0Z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            {t.location}
+          <div class="bio-meta flex flex-wrap items-center gap-2">
+            <div class="bio-location inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-[0.85rem] text-fg-muted">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 10c0 6-8 13-8 13s-8-7-8-13a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              {t.location}
+            </div>
+            {t.certifications.map((cert) => (
+              <div class="bio-cert inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-[0.85rem] text-fg-muted">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+                <span class="text-accent-secondary">{t.certificationsLabel}:</span>
+                <span>{cert}</span>
+              </div>
+            ))}
           </div>
         </div>
 
