@@ -6,13 +6,15 @@ import ThemeToggle from '../ThemeToggle/ThemeToggle.astro';
 const lang = detectLang(Astro.url.pathname);
 const t = ui[lang].nav;
 const homeHref = lang === 'es' ? '/es/' : '/';
+const homePrefix = lang === 'es' ? '/es' : '';
 
 const navLinks = [
-  { href: '#about', label: t.about },
-  { href: '#timeline', label: t.timeline },
-  { href: '#skills', label: t.skills },
-  { href: '#projects', label: t.projects },
-  { href: '#contact', label: t.contact },
+  { href: `${homePrefix}/#about`, label: t.about },
+  { href: `${homePrefix}/#timeline`, label: t.timeline },
+  { href: `${homePrefix}/#skills`, label: t.skills },
+  { href: `${homePrefix}/#projects`, label: t.projects },
+  { href: '/writeups/', label: t.writeups },
+  { href: `${homePrefix}/#contact`, label: t.contact },
 ];
 ---
 
@@ -94,8 +96,10 @@ const navLinks = [
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           navLinksEls.forEach((link) => {
-            const href = link.getAttribute('href');
-            const isActive = href === `#${entry.target.id}`;
+            const href = link.getAttribute('href') || '';
+            const hashIdx = href.indexOf('#');
+            const hash = hashIdx >= 0 ? href.slice(hashIdx) : '';
+            const isActive = hash === `#${entry.target.id}`;
             link.classList.toggle('active', isActive);
             link.classList.toggle('text-accent', isActive);
           });

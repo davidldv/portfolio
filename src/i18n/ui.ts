@@ -27,6 +27,7 @@ type UI = {
     timeline: string;
     skills: string;
     projects: string;
+    writeups: string;
     contact: string;
     homeAriaLabel: string;
     mainAriaLabel: string;
@@ -105,6 +106,7 @@ export const ui: Record<Lang, UI> = {
       timeline: 'Timeline',
       skills: 'Skills',
       projects: 'Projects',
+      writeups: 'Writeups',
       contact: 'Contact',
       homeAriaLabel: 'David London home',
       mainAriaLabel: 'Main navigation',
@@ -247,6 +249,7 @@ export const ui: Record<Lang, UI> = {
       timeline: 'Trayectoria',
       skills: 'Habilidades',
       projects: 'Proyectos',
+      writeups: 'Writeups',
       contact: 'Contacto',
       homeAriaLabel: 'Inicio — David London',
       mainAriaLabel: 'Navegación principal',

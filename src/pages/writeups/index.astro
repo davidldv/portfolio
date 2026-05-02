@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('writeups', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+const allCategories = [...new Set(posts.map((p) => p.data.category))].sort();
+
+const dateFmt = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit',
+});
+
+const categoryLabel: Record<string, string> = {
+  htb: 'HTB',
+  thm: 'THM',
+  bugbounty: 'Bug Bounty',
+  appsec: 'AppSec',
+  ctf: 'CTF',
+  research: 'Research',
+};
+
+const difficultyColor: Record<string, string> = {
+  easy: 'text-emerald-400',
+  medium: 'text-amber-400',
+  hard: 'text-orange-400',
+  insane: 'text-red-400',
+};
+
+const title = 'Writeups — David Londoño';
+const description =
+  'Security writeups: web application vulnerabilities, JWT attacks, HTB/THM walkthroughs, and AppSec research.';
+---
+
+<Layout title={title} description={description} canonicalPath="/writeups/">
+  <main class="flex min-h-screen flex-col">
+    <section class="relative z-2 px-6 pt-24 pb-12">
+      <div class="mx-auto max-w-4xl">
+        <p class="mb-3 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">
+          Writeups
+        </p>
+        <h1 class="mb-6 text-[clamp(2.5rem,6vw,4rem)] font-bold leading-[1] tracking-[-0.04em] text-fg">
+          Notes from <span class="bg-linear-to-br from-accent to-accent-secondary bg-clip-text text-transparent">breaking & fixing</span>
+        </h1>
+        <p class="mb-10 max-w-2xl text-[1.05rem] leading-[1.7] text-fg-muted">
+          Vulnerability research, exploit walkthroughs, retired-box reports, and
+          AppSec patterns I learn the hard way so you don't have to.
+        </p>
+
+        {posts.length === 0 ? (
+          <p class="text-fg-muted">No posts yet. Coming soon.</p>
+        ) : (
+          <ul class="m-0 flex list-none flex-col gap-4 p-0" role="list">
+            {posts.map((post) => (
+              <li>
+                <a
+                  href={`/writeups/${post.id}/`}
+                  class="group block rounded-2xl border border-border bg-surface-elevated px-6 py-6 no-underline transition-colors duration-150 hover:border-accent-border"
+                >
+                  <div class="mb-2 flex flex-wrap items-center gap-3 font-mono text-[0.72rem] uppercase tracking-[0.12em] text-fg-muted">
+                    <span class="text-accent-secondary">
+                      {categoryLabel[post.data.category] ?? post.data.category}
+                    </span>
+                    <span aria-hidden="true">·</span>
+                    <time datetime={post.data.date.toISOString()}>
+                      {dateFmt.format(post.data.date)}
+                    </time>
+                    {post.data.difficulty && (
+                      <>
+                        <span aria-hidden="true">·</span>
+                        <span class={difficultyColor[post.data.difficulty] ?? ''}>
+                          {post.data.difficulty}
+                        </span>
+                      </>
+                    )}
+                    {post.data.cve && (
+                      <>
+                        <span aria-hidden="true">·</span>
+                        <span class="text-red-400">{post.data.cve}</span>
+                      </>
+                    )}
+                  </div>
+                  <h2 class="mb-2 text-[1.4rem] font-bold tracking-[-0.02em] text-fg group-hover:text-accent">
+                    {post.data.title}
+                  </h2>
+                  <p class="mb-4 text-[0.95rem] leading-[1.6] text-fg-muted">
+                    {post.data.description}
+                  </p>
+                  {post.data.tags.length > 0 && (
+                    <ul class="m-0 flex list-none flex-wrap gap-2 p-0" role="list">
+                      {post.data.tags.map((tag) => (
+                        <li class="rounded-full border border-border px-2.5 py-0.5 font-mono text-[0.7rem] text-fg-muted">
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {(allTags.length > 0 || allCategories.length > 0) && (
+          <div class="mt-12 flex flex-col gap-4 text-[0.85rem] text-fg-muted">
+            {allCategories.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                <span class="font-mono text-[0.72rem] uppercase tracking-[0.12em] text-accent-secondary">
+                  Categories:
+                </span>
+                {allCategories.map((c) => (
+                  <span class="font-mono text-[0.78rem]">
+                    {categoryLabel[c] ?? c}
+                  </span>
+                ))}
+              </div>
+            )}
+            {allTags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                <span class="font-mono text-[0.72rem] uppercase tracking-[0.12em] text-accent-secondary">
+                  Tags:
+                </span>
+                {allTags.map((t) => (
+                  <span class="font-mono text-[0.78rem]">#{t}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>

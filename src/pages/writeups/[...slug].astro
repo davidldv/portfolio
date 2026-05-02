@@ -1,0 +1,223 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writeups', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'writeups'>;
+}
+
+const { post } = Astro.props;
+const { Content, headings, remarkPluginFrontmatter } = await render(post);
+
+const dateFmt = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'long',
+  day: '2-digit',
+});
+
+const readingTime = remarkPluginFrontmatter?.minutesRead as string | undefined;
+
+const categoryLabel: Record<string, string> = {
+  htb: 'HTB',
+  thm: 'THM',
+  bugbounty: 'Bug Bounty',
+  appsec: 'AppSec',
+  ctf: 'CTF',
+  research: 'Research',
+};
+---
+
+<Layout
+  title={`${post.data.title} — David Londoño`}
+  description={post.data.description}
+  canonicalPath={`/writeups/${post.id}/`}
+>
+  <main class="flex min-h-screen flex-col">
+    <article class="relative z-2 px-6 pt-24 pb-16">
+      <div class="mx-auto max-w-3xl">
+        <a
+          href="/writeups/"
+          class="mb-8 inline-flex items-center gap-2 font-mono text-[0.78rem] uppercase tracking-[0.12em] text-fg-muted no-underline hover:text-accent"
+        >
+          ← All writeups
+        </a>
+
+        <header class="mb-10">
+          <div class="mb-4 flex flex-wrap items-center gap-3 font-mono text-[0.72rem] uppercase tracking-[0.12em] text-fg-muted">
+            <span class="text-accent-secondary">
+              {categoryLabel[post.data.category] ?? post.data.category}
+            </span>
+            <span aria-hidden="true">·</span>
+            <time datetime={post.data.date.toISOString()}>
+              {dateFmt.format(post.data.date)}
+            </time>
+            {readingTime && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>{readingTime}</span>
+              </>
+            )}
+            {post.data.difficulty && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>{post.data.difficulty}</span>
+              </>
+            )}
+            {post.data.cve && (
+              <>
+                <span aria-hidden="true">·</span>
+                <span class="text-red-400">{post.data.cve}</span>
+              </>
+            )}
+          </div>
+
+          <h1 class="mb-4 text-[clamp(2rem,5vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.03em] text-fg">
+            {post.data.title}
+          </h1>
+
+          <p class="text-[1.05rem] leading-[1.6] text-fg-muted">
+            {post.data.description}
+          </p>
+
+          {post.data.tags.length > 0 && (
+            <ul class="mt-6 m-0 flex list-none flex-wrap gap-2 p-0" role="list">
+              {post.data.tags.map((tag) => (
+                <li class="rounded-full border border-border px-2.5 py-0.5 font-mono text-[0.7rem] text-fg-muted">
+                  #{tag}
+                </li>
+              ))}
+            </ul>
+          )}
+        </header>
+
+        <div class="writeup-prose">
+          <Content />
+        </div>
+
+        <footer class="mt-16 border-t border-border pt-8 text-[0.9rem] text-fg-muted">
+          <p>
+            Found a mistake or want to discuss?{' '}
+            <a
+              href="mailto:dlondon.dev@gmail.com"
+              class="text-accent hover:underline"
+            >
+              dlondon.dev@gmail.com
+            </a>
+          </p>
+        </footer>
+      </div>
+    </article>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style is:global>
+  .writeup-prose {
+    color: var(--fg-muted);
+    font-size: 1.025rem;
+    line-height: 1.75;
+  }
+  .writeup-prose > * + * {
+    margin-top: 1.25rem;
+  }
+  .writeup-prose h2 {
+    color: var(--fg);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+  }
+  .writeup-prose h3 {
+    color: var(--fg);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .writeup-prose p {
+    margin: 0;
+  }
+  .writeup-prose a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .writeup-prose a:hover {
+    color: var(--accent-secondary);
+  }
+  .writeup-prose strong {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .writeup-prose code:not(pre code) {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.9em;
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--fg) 8%, transparent);
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+  .writeup-prose pre {
+    padding: 1.1rem 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .writeup-prose pre code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .writeup-prose ul,
+  .writeup-prose ol {
+    padding-left: 1.5rem;
+  }
+  .writeup-prose li {
+    margin: 0.4rem 0;
+  }
+  .writeup-prose blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.25rem 0 0.25rem 1rem;
+    color: var(--fg);
+    font-style: italic;
+  }
+  .writeup-prose hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .writeup-prose img {
+    max-width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .writeup-prose table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.92rem;
+  }
+  .writeup-prose th,
+  .writeup-prose td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.8rem;
+    text-align: left;
+  }
+  .writeup-prose th {
+    background: var(--surface);
+    color: var(--fg);
+  }
+</style>
