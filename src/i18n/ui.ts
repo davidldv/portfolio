@@ -146,12 +146,6 @@ export const ui: Record<Lang, UI> = {
       current: 'Current',
       visit: 'Visit',
       experiences: {
-        'la-bodega': {
-          role: 'Full Stack Engineer',
-          dateRange: 'Mar 2026 - Present',
-          description:
-            'Own and scale a production retail platform (~$1.5M COP/day across e-commerce and in-store). Responsible for authentication, session security and role-based access across staff and customer surfaces. Hardened the app layer against OWASP Top 10: parameterized queries, server-side input validation, CSRF on state-changing endpoints, least-privilege DB roles.',
-        },
         tambora: {
           role: 'Frontend Developer',
           dateRange: 'Jul 2025 - Sep 2025',
@@ -204,6 +198,16 @@ export const ui: Record<Lang, UI> = {
             'From-scratch JWT sign/verify in TypeScript (no libraries) reproducing five production-grade flaws: alg=none bypass, HS256/RS256 key confusion, weak-secret brute-force, kid header injection, and missing iss/aud/exp validation.',
             'Reproducible exploit scripts (Bash + OpenSSL) and a harness that proves each payload succeeds against the vulnerable API and is rejected by the secure one.',
             'Hardened service eliminates entire bug classes: single-algorithm RS256 allowlist, fixed in-memory kid registry with rotation, generic errors, and scrypt password hashing.',
+          ],
+        },
+        'la-bodega': {
+          tagline: 'Solo-built, in-production e-commerce platform',
+          description:
+            'Solo-built, in-production e-commerce platform for a family-owned hardware retailer.',
+          highlights: [
+            'Sole engineer end-to-end: requirements, architecture, real-time inventory catalog, deployment, and ongoing maintenance for a live retail storefront.',
+            'Designed and shipped authentication, session security, and RBAC for staff vs. customer surfaces; integrated Mercado Pago for live online transactions.',
+            'Hardened the application layer against OWASP Top 10 risks: parameterized queries, server-side input validation, CSRF protection on state-changing endpoints, and least-privilege database roles.',
           ],
         },
         kanby: {
@@ -290,12 +294,6 @@ export const ui: Record<Lang, UI> = {
       current: 'Actual',
       visit: 'Visitar',
       experiences: {
-        'la-bodega': {
-          role: 'Ingeniero Full Stack',
-          dateRange: 'Mar 2026 - Presente',
-          description:
-            'Dirijo y escalo una plataforma retail en producción (~$1.5M COP/día entre e-commerce y tienda). Responsable de autenticación, seguridad de sesiones y control de acceso por roles para empleados y clientes. Endurecí la capa de aplicación frente al OWASP Top 10: consultas parametrizadas, validación de entrada en el servidor, CSRF en endpoints que modifican estado y roles de base de datos con mínimos privilegios.',
-        },
         tambora: {
           role: 'Desarrollador Frontend',
           dateRange: 'Jul 2025 - Sep 2025',
@@ -348,6 +346,16 @@ export const ui: Record<Lang, UI> = {
             'Firma y verificación de JWT en TypeScript desde cero (sin librerías) reproduciendo cinco fallos de nivel producción: bypass con alg=none, confusión de claves HS256/RS256, fuerza bruta de secretos débiles, inyección en el header kid y falta de validación de iss/aud/exp.',
             'Scripts de explotación reproducibles (Bash + OpenSSL) y un harness que prueba que cada payload tiene éxito contra la API vulnerable y es rechazado por la segura.',
             'Servicio endurecido que elimina clases enteras de bugs: allowlist de un único algoritmo RS256, registro fijo de kids en memoria con rotación, errores genéricos y hashing de contraseñas con scrypt.',
+          ],
+        },
+        'la-bodega': {
+          tagline: 'Plataforma e-commerce en producción construida en solitario',
+          description:
+            'Plataforma e-commerce en producción, construida de extremo a extremo en solitario para una ferretería familiar.',
+          highlights: [
+            'Único ingeniero de extremo a extremo: requisitos, arquitectura, catálogo de inventario en tiempo real, despliegue y mantenimiento continuo de una tienda retail en vivo.',
+            'Diseñé e implementé autenticación, seguridad de sesiones y RBAC para superficies de staff y clientes; integré Mercado Pago para transacciones reales en línea.',
+            'Endurecí la capa de aplicación frente al OWASP Top 10: consultas parametrizadas, validación de entrada en el servidor, protección CSRF en endpoints que modifican estado y roles de base de datos con mínimos privilegios.',
           ],
         },
         kanby: {
