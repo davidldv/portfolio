@@ -40,7 +40,11 @@ const categoryLabel: Record<string, string> = {
 <Layout
   title={`${post.data.title} — David Londoño`}
   description={post.data.description}
+  image={`/og/writeups/${post.id}.png`}
   canonicalPath={`/writeups/${post.id}/`}
+  ogType="article"
+  publishedTime={post.data.date.toISOString()}
+  modifiedTime={(post.data.updated ?? post.data.date).toISOString()}
 >
   <main class="flex min-h-screen flex-col">
     <article class="relative z-2 px-6 pt-24 pb-16">

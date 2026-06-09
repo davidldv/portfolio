@@ -9,27 +9,49 @@ interface Props {
 	description?: string;
 	image?: string;
 	canonicalPath?: string;
+	ogType?: 'website' | 'article' | 'profile';
+	publishedTime?: string;
+	modifiedTime?: string;
 }
 
 const {
 	title = 'David Londoño — Software Engineer · Application Security',
 	description = 'Full-Stack Engineer moving into Application Security. Building and hardening web systems with TypeScript, React, Node.js and PostgreSQL. Based in Colombia, open to relocation to Germany or the US.',
-	image = '/images/og-image.jpg',
+	image = '/og.png',
 	canonicalPath,
+	ogType = 'website',
+	publishedTime,
+	modifiedTime,
 } = Astro.props as Props;
 
 const lang = detectLang(Astro.url.pathname);
 const t = ui[lang];
 const siteUrl = Astro.site ?? 'https://davidlondon.dev';
-const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, siteUrl);
+const pathname = Astro.url.pathname;
+const canonicalURL = new URL(canonicalPath ?? pathname, siteUrl);
 const ogImageURL = new URL(image, siteUrl);
 
-const jsonLd = JSON.stringify({
+// Resolve <html lang> and og:locale, including German pages that ui.ts doesn't model.
+const htmlLang = pathname.startsWith('/de') ? 'de' : t.htmlLang;
+const ogLocale =
+	htmlLang === 'es' ? 'es_CO' : htmlLang === 'de' ? 'de_DE' : 'en_US';
+
+// hreflang alternates only on the localized home pages (writeups exist in EN only).
+const homePaths = new Set(['/', '/es', '/es/', '/de', '/de/']);
+const isLocalizedHome = homePaths.has(pathname);
+const localeAlternates = [
+	{ hreflang: 'en', href: new URL('/', siteUrl).toString() },
+	{ hreflang: 'es', href: new URL('/es/', siteUrl).toString() },
+	{ hreflang: 'de', href: new URL('/de/', siteUrl).toString() },
+	{ hreflang: 'x-default', href: new URL('/', siteUrl).toString() },
+];
+
+const personLd = {
 	'@context': 'https://schema.org',
 	'@type': 'Person',
 	name: 'David Londoño',
 	url: siteUrl.toString(),
-	image: ogImageURL.toString(),
+	image: new URL('/david.jpg', siteUrl).toString(),
 	jobTitle: 'Software Engineer',
 	description,
 	sameAs: [
@@ -39,7 +61,7 @@ const jsonLd = JSON.stringify({
 	],
 	address: {
 		'@type': 'PostalAddress',
-		addressLocality: 'Pereira',
+		addressLocality: 'Bogotá',
 		addressCountry: 'CO',
 	},
 	knowsAbout: [
@@ -54,11 +76,30 @@ const jsonLd = JSON.stringify({
 		'React',
 		'PostgreSQL',
 	],
-});
+};
+
+const articleLd =
+	ogType === 'article'
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'BlogPosting',
+				headline: title,
+				description,
+				image: ogImageURL.toString(),
+				url: canonicalURL.toString(),
+				...(publishedTime ? { datePublished: publishedTime } : {}),
+				...(modifiedTime ? { dateModified: modifiedTime } : {}),
+				author: { '@type': 'Person', name: 'David Londoño', url: siteUrl.toString() },
+				publisher: { '@type': 'Person', name: 'David Londoño', url: siteUrl.toString() },
+				mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalURL.toString() },
+			}
+		: null;
+
+const jsonLd = JSON.stringify(articleLd ?? personLd);
 ---
 
 <!doctype html>
-<html lang={t.htmlLang}>
+<html lang={htmlLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -68,20 +109,33 @@ const jsonLd = JSON.stringify({
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonicalURL} />
 		<meta name="author" content="David Londoño" />
-		<meta name="robots" content="index, follow" />
-		<meta name="keywords" content="David Londoño, Software Engineer, Application Security, AppSec, Security Engineer, Full Stack Engineer, OWASP, Web Security, Threat Modeling, TypeScript, React, Node.js, Pereira, Colombia, Germany, Remote" />
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+		<meta name="keywords" content="David Londoño, Software Engineer, Application Security, AppSec, Security Engineer, Full Stack Engineer, OWASP, Web Security, Threat Modeling, TypeScript, React, Node.js, Bogotá, Colombia, Germany, Remote" />
 
-		<meta property="og:type" content="website" />
+		{isLocalizedHome && localeAlternates.map((alt) => (
+			<link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+		))}
+
+		<meta property="og:type" content={ogType} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:site_name" content="David Londoño" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={ogImageURL} />
-		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="David Londoño — Full Stack Engineer & AI Systems — Pereira, Colombia — davidlondon.dev" />
-		<meta property="og:locale" content="en_US" />
+		<meta property="og:image:alt" content="David Londoño — Full Stack Engineer · Application Security — Bogotá, Colombia — davidlondon.dev" />
+		<meta property="og:locale" content={ogLocale} />
+		{ogType === 'article' && publishedTime && (
+			<meta property="article:published_time" content={publishedTime} />
+		)}
+		{ogType === 'article' && modifiedTime && (
+			<meta property="article:modified_time" content={modifiedTime} />
+		)}
+		{ogType === 'article' && (
+			<meta property="article:author" content="David Londoño" />
+		)}
 		<meta property="profile:first_name" content="David" />
 		<meta property="profile:last_name" content="Londoño" />
 
