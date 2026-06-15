@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://davidlondon.dev/sitemap-index.xml
+Sitemap: https://www.davidlondon.dev/sitemap-index.xml
