@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://davidlondon.dev',
+	site: 'https://www.davidlondon.dev',
 	trailingSlash: 'ignore',
 	integrations: [
 		react(),
