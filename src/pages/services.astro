@@ -7,15 +7,12 @@ const description =
   'Fixed-scope authentication and authorization security reviews. I find the auth and access-control bugs that ship to prod — alg=none, key confusion, weak secrets, broken RBAC, and IDOR/BOLA where one user reaches another user’s data — with a clear report and the patch. Fixed price, fixed timeline.';
 
 // ───────────────────────────────────────────────────────────────────
-// PAYMENT: set this to your PayPal.me handle (the part after paypal.me/).
-// e.g. if your link is https://www.paypal.com/paypalme/davidldv  →  'davidldv'
+// PAYMENT: PayPal.me handle (the part after paypal.me/).
 const PAYPAL_ME = 'DavidLondon427';
 // ───────────────────────────────────────────────────────────────────
 
 const pay = (amount: number) =>
   `https://www.paypal.com/paypalme/${PAYPAL_ME}/${amount}USD`;
-const mailto = (subject: string) =>
-  `mailto:dlondon.dev@gmail.com?subject=${encodeURIComponent(subject)}`;
 
 const tiers = [
   {
@@ -30,7 +27,7 @@ const tiers = [
       'Concrete remediation for each issue',
       '48–72h turnaround',
     ],
-    cta: 'Book a Spot Check',
+    cta: 'Book & pay',
   },
   {
     name: 'Auth & Access Review',
@@ -45,7 +42,7 @@ const tiers = [
       'One free re-test after you patch',
       '3–5 day turnaround',
     ],
-    cta: 'Book the Review',
+    cta: 'Book & pay',
   },
   {
     name: 'Review + Fix',
@@ -59,7 +56,7 @@ const tiers = [
       'Merged hardening PR against your repo',
       'Re-test included',
     ],
-    cta: 'Book Review + Fix',
+    cta: 'Book & pay',
   },
 ];
 
@@ -122,13 +119,16 @@ const proof = [
         </p>
         <div class="flex flex-wrap items-center gap-3">
           <a
-            href={mailto('Auth & Access Review — inquiry')}
+            href="#book"
+            data-book
             class="rounded-full bg-accent px-5 py-2.5 text-[0.9rem] font-semibold text-white transition-transform duration-150 hover:-translate-y-0.5"
           >
             Start a review
           </a>
           <a
-            href={mailto('Free health check — repo or token attached')}
+            href="#book"
+            data-book
+            data-plan="Free health check"
             class="rounded-full border border-border px-5 py-2.5 text-[0.9rem] font-medium text-fg-muted transition-colors duration-150 hover:border-accent-border hover:text-fg"
           >
             Free 5-min health check
@@ -183,7 +183,9 @@ const proof = [
                   {tier.cta} →
                 </a>
                 <a
-                  href={mailto(`${tier.name} — questions before booking`)}
+                  href="#book"
+                  data-book
+                  data-plan={tier.name}
                   class="text-center font-mono text-[0.7rem] text-fg-muted underline-offset-2 hover:text-accent-secondary hover:underline"
                 >
                   questions first?
@@ -245,26 +247,164 @@ const proof = [
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="relative z-2 px-6 py-16">
-      <div class="mx-auto max-w-3xl rounded-[24px] border border-accent-border bg-surface-elevated p-10 text-center">
-        <h2 class="mb-3 text-[clamp(1.6rem,4vw,2.4rem)] font-bold tracking-[-0.03em] text-fg">
-          Not sure where your auth stands?
+    <!-- Booking form (Web3Forms) -->
+    <section id="book" class="relative z-2 px-6 py-16">
+      <div class="mx-auto max-w-3xl rounded-[24px] border border-accent-border bg-surface-elevated p-8 sm:p-10">
+        <h2 class="mb-2 text-[clamp(1.6rem,4vw,2.4rem)] font-bold tracking-[-0.03em] text-fg text-center">
+          Book a review — or ask first
         </h2>
-        <p class="mx-auto mb-7 max-w-xl text-[0.98rem] leading-[1.7] text-fg-muted">
-          Send me a test token or point me at a public Next.js repo, and I'll run jwt-scan and authzscan
-          plus a manual eyeball, then reply with a short health check — free. No pitch, just a read on
-          where you are.
+        <p class="mx-auto mb-8 max-w-xl text-center text-[0.96rem] leading-[1.65] text-fg-muted">
+          Tell me about your app and I'll reply within a day. Want a free read? Pick
+          <em>Free health check</em> below and send me a token or a public repo. Ready to go? Use the
+          PayPal buttons above to book instantly.
         </p>
-        <a
-          href={mailto('Free health check — repo or token attached')}
-          class="inline-block rounded-full bg-accent px-6 py-3 text-[0.92rem] font-semibold text-white transition-transform duration-150 hover:-translate-y-0.5"
+
+        <form
+          class="flex flex-col gap-5"
+          novalidate
+          data-services-form
         >
-          Get a free health check
-        </a>
+          <input type="hidden" name="access_key" value={import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || 'YOUR_ACCESS_KEY_HERE'} />
+          <input type="hidden" name="from_page" value="services" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div class="flex flex-col gap-1.5">
+              <label for="s-name" class="text-[0.82rem] font-medium text-fg-muted">Name</label>
+              <input id="s-name" name="name" type="text" required autocomplete="name" placeholder="Your name" class="w-full rounded-[10px] border border-border bg-surface px-4 py-3 text-[0.95rem] text-fg outline-none transition-colors duration-150 placeholder:text-fg-muted/50 focus:border-accent" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="s-email" class="text-[0.82rem] font-medium text-fg-muted">Email</label>
+              <input id="s-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com" class="w-full rounded-[10px] border border-border bg-surface px-4 py-3 text-[0.95rem] text-fg outline-none transition-colors duration-150 placeholder:text-fg-muted/50 focus:border-accent" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div class="flex flex-col gap-1.5">
+              <label for="s-url" class="text-[0.82rem] font-medium text-fg-muted">Project URL or repo <span class="text-fg-muted/60">(optional)</span></label>
+              <input id="s-url" name="project_url" type="text" autocomplete="url" placeholder="github.com/you/app" class="w-full rounded-[10px] border border-border bg-surface px-4 py-3 text-[0.95rem] text-fg outline-none transition-colors duration-150 placeholder:text-fg-muted/50 focus:border-accent" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="s-plan" class="text-[0.82rem] font-medium text-fg-muted">What do you need?</label>
+              <select id="s-plan" name="plan" required class="w-full rounded-[10px] border border-border bg-surface px-4 py-3 text-[0.95rem] text-fg outline-none transition-colors duration-150 focus:border-accent">
+                <option value="Spot Check ($150)">Spot Check — $150</option>
+                <option value="Auth & Access Review ($600)" selected>Auth & Access Review — $600</option>
+                <option value="Review + Fix ($1,200)">Review + Fix — $1,200</option>
+                <option value="Free health check">Free 5-min health check</option>
+                <option value="Not sure yet">Not sure yet — help me scope</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="s-message" class="text-[0.82rem] font-medium text-fg-muted">Message</label>
+            <textarea id="s-message" name="message" rows="5" required placeholder="Stack, what your auth looks like, anything you're worried about…" class="min-h-32.5 w-full resize-y rounded-[10px] border border-border bg-surface px-4 py-3 text-[0.95rem] text-fg outline-none transition-colors duration-150 placeholder:text-fg-muted/50 focus:border-accent"></textarea>
+          </div>
+
+          <button type="submit" class="inline-flex w-fit items-center gap-2 self-start rounded-full bg-accent px-7 py-3 text-[0.92rem] font-semibold text-white shadow-[0_0_30px_var(--accent-glow)] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50">
+            <span class="btn-text">Send</span>
+            <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z"/>
+            </svg>
+          </button>
+          <p class="m-0 text-[0.78rem] text-fg-muted" data-form-status aria-live="polite"></p>
+        </form>
       </div>
     </section>
 
     <Footer />
   </main>
 </Layout>
+
+<script>
+  const initServicesForm = () => {
+    const form = document.querySelector<HTMLFormElement>('[data-services-form]');
+
+    // Wire "Start a review" / "questions first?" buttons to focus the form
+    // and preselect the matching plan.
+    document.querySelectorAll<HTMLAnchorElement>('[data-book]').forEach((el) => {
+      if (el.dataset.bookBound === 'true') return;
+      el.dataset.bookBound = 'true';
+      el.addEventListener('click', () => {
+        const wanted = el.dataset.plan;
+        const select = form?.querySelector<HTMLSelectElement>('select[name="plan"]');
+        if (wanted && select) {
+          const match = Array.from(select.options).find((o) =>
+            o.value.toLowerCase().startsWith(wanted.toLowerCase()),
+          );
+          if (match) select.value = match.value;
+        }
+        window.setTimeout(() => {
+          form?.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
+        }, 400);
+      });
+    });
+
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const btnText = form.querySelector<HTMLElement>('.btn-text');
+    const btnIcon = form.querySelector<SVGSVGElement>('.btn-icon');
+    const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const status = form.querySelector<HTMLElement>('[data-form-status]');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const formData = new FormData(form);
+      const name = String(formData.get('name') ?? '').trim();
+      const plan = String(formData.get('plan') ?? '').trim();
+      formData.append('subject', `New service inquiry — ${plan} — ${name}`);
+
+      const json = JSON.stringify(Object.fromEntries(formData));
+
+      if (btnText && submitBtn && btnIcon) {
+        btnText.textContent = 'Sending…';
+        submitBtn.disabled = true;
+        btnIcon.style.display = 'none';
+      }
+      if (status) status.textContent = '';
+
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: json,
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          form.reset();
+          const select = form.querySelector<HTMLSelectElement>('select[name="plan"]');
+          if (select) select.value = 'Auth & Access Review ($600)';
+          if (btnText) btnText.textContent = 'Sent ✓';
+          if (status) status.textContent = "Thanks — I'll reply within a day.";
+          window.setTimeout(() => {
+            if (btnText && submitBtn && btnIcon) {
+              btnText.textContent = 'Send';
+              submitBtn.disabled = false;
+              btnIcon.style.display = 'block';
+            }
+          }, 3000);
+        } else {
+          throw new Error(data.message || 'Something went wrong');
+        }
+      } catch (error) {
+        console.error(error);
+        if (btnText && submitBtn && btnIcon) {
+          btnText.textContent = 'Send';
+          btnIcon.style.display = 'block';
+          submitBtn.disabled = false;
+        }
+        if (status) status.textContent = 'Could not send — email dlondon.dev@gmail.com directly.';
+      }
+    });
+  };
+
+  document.addEventListener('astro:page-load', initServicesForm);
+  initServicesForm();
+</script>
