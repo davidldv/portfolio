@@ -391,4 +391,10 @@ export const ui: Record<Lang, UI> = {
         error: 'Error al enviar',
         subjectPrefix: '✨ Nuevo contacto del portfolio de',
       },
-      orReach: 'O escríbeme di
+      orReach: 'O escríbeme directamente',
+    },
+    footer: {
+      rightsPrefix: '©',
+    },
+  },
+};

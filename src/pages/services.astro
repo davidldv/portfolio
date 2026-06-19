@@ -227,4 +227,44 @@ const proof = [
           I don't just run a scanner — I wrote two. <strong class="text-fg">authzscan</strong> reasons
           about IDOR/BOLA in Next.js code the way pattern-matching SAST can't, and is measured against a
           seeded benchmark with recall and precision gates. The detection logic comes from reproducing
-          the bugs from scratch. The same rigor goes into y
+          the bugs from scratch. The same rigor goes into your review.
+        </p>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {proof.map((p) => (
+            <a
+              href={p.href}
+              target={p.href.startsWith('http') ? '_blank' : null}
+              rel={p.href.startsWith('http') ? 'noopener noreferrer' : null}
+              class="group flex flex-col gap-1.5 rounded-[16px] border border-border bg-surface-elevated p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-border"
+            >
+              <span class="font-mono text-[0.9rem] font-semibold text-accent">{p.label}</span>
+              <span class="text-[0.82rem] leading-[1.55] text-fg-muted">{p.sub}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="relative z-2 px-6 py-16">
+      <div class="mx-auto max-w-3xl rounded-[24px] border border-accent-border bg-surface-elevated p-10 text-center">
+        <h2 class="mb-3 text-[clamp(1.6rem,4vw,2.4rem)] font-bold tracking-[-0.03em] text-fg">
+          Not sure where your auth stands?
+        </h2>
+        <p class="mx-auto mb-7 max-w-xl text-[0.98rem] leading-[1.7] text-fg-muted">
+          Send me a test token or point me at a public Next.js repo, and I'll run jwt-scan and authzscan
+          plus a manual eyeball, then reply with a short health check — free. No pitch, just a read on
+          where you are.
+        </p>
+        <a
+          href={mailto('Free health check — repo or token attached')}
+          class="inline-block rounded-full bg-accent px-6 py-3 text-[0.92rem] font-semibold text-white transition-transform duration-150 hover:-translate-y-0.5"
+        >
+          Get a free health check
+        </a>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
