@@ -408,3 +408,10 @@ const proof = [
   document.addEventListener('astro:page-load', initServicesForm);
   initServicesForm();
 </script>
+
+<style is:global>
+  select[name='plan'] option {
+    background-color: var(--bg-elevated);
+    color: var(--color-fg);
+  }
+</style>
