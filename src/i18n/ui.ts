@@ -28,6 +28,7 @@ type UI = {
     skills: string;
     projects: string;
     writeups: string;
+    services: string;
     contact: string;
     homeAriaLabel: string;
     mainAriaLabel: string;
@@ -107,6 +108,7 @@ export const ui: Record<Lang, UI> = {
       skills: 'Skills',
       projects: 'Projects',
       writeups: 'Writeups',
+      services: 'Services',
       contact: 'Contact',
       homeAriaLabel: 'David London home',
       mainAriaLabel: 'Main navigation',
@@ -254,6 +256,7 @@ export const ui: Record<Lang, UI> = {
       skills: 'Habilidades',
       projects: 'Proyectos',
       writeups: 'Writeups',
+      services: 'Servicios',
       contact: 'Contacto',
       homeAriaLabel: 'Inicio — David London',
       mainAriaLabel: 'Navegación principal',
@@ -388,10 +391,4 @@ export const ui: Record<Lang, UI> = {
         error: 'Error al enviar',
         subjectPrefix: '✨ Nuevo contacto del portfolio de',
       },
-      orReach: 'O escríbeme directamente',
-    },
-    footer: {
-      rightsPrefix: '©',
-    },
-  },
-};
+      orReach: 'O escríbeme di
