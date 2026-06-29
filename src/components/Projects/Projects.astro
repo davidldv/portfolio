@@ -1,5 +1,6 @@
 ---
 import { ui, type Lang } from '../../i18n/ui';
+import Eyebrow from '../ui/Eyebrow.astro';
 
 interface Props {
   lang?: Lang;
@@ -63,7 +64,7 @@ const projects = baseProjects.map((p) => {
 <section id="projects" class="relative z-2 px-6 py-28">
   <div class="mx-auto max-w-7xl">
     <div class="reveal mb-14">
-      <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">{t.eyebrow}</p>
+      <Eyebrow index="05" label={t.eyebrow} class="mb-3" />
       <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
     </div>
 
@@ -85,7 +86,7 @@ const projects = baseProjects.map((p) => {
             <p class="m-0 font-mono text-[0.82rem] font-medium text-accent">{tagline}</p>
             <p class="m-0 flex-1 text-[0.9rem] leading-[1.7] text-fg-muted">{description}</p>
             {highlights && highlights.length > 0 && (
-              <ul class={`m-0 flex list-none flex-col gap-1.5 border-l-[1.5px] pl-3.5 ${accent === 'cyan' ? 'border-l-cyan-400/30' : 'border-l-indigo-500/40'}`}>
+              <ul class={`m-0 flex list-none flex-col gap-1.5 border-l-[1.5px] pl-3.5 ${accent === 'cyan' ? 'border-l-accent-secondary/30' : 'border-l-accent/40'}`}>
                 {highlights.map((item) => (
                   <li class="flex items-baseline gap-2 text-[0.8rem] leading-[1.6] text-fg-muted">
                     <span class={`font-mono text-[0.72rem] ${accent === 'indigo' ? 'text-accent' : 'text-accent-secondary'}`} aria-hidden="true">→</span>

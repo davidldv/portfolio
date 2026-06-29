@@ -27,6 +27,7 @@ type UI = {
     timeline: string;
     skills: string;
     projects: string;
+    certs: string;
     writeups: string;
     services: string;
     contact: string;
@@ -44,6 +45,10 @@ type UI = {
     ctaPrimary: string;
     github: string;
   };
+  proof: {
+    lead: string;
+    items: { title: string; desc: string }[];
+  };
   about: {
     eyebrow: string;
     heading: string;
@@ -53,9 +58,15 @@ type UI = {
     p4: string;
     location: string;
     stats: { value: string; label: string }[];
-    certificationsLabel: string;
-    certifications: string[];
     portraitAlt: string;
+  };
+  certs: {
+    eyebrow: string;
+    heading: string;
+    intro: string;
+    inProgress: string;
+    planned: string;
+    targetLabel: string;
   };
   timeline: {
     eyebrow: string;
@@ -107,6 +118,7 @@ export const ui: Record<Lang, UI> = {
       timeline: 'Timeline',
       skills: 'Skills',
       projects: 'Projects',
+      certs: 'Certifications',
       writeups: 'Writeups',
       services: 'Services',
       contact: 'Contact',
@@ -124,6 +136,23 @@ export const ui: Record<Lang, UI> = {
       ctaPrimary: 'Explore my journey',
       github: 'GitHub',
     },
+    proof: {
+      lead: 'I work the layer where shipping fast meets shipping safe — auth, sessions, tokens, RBAC, and the OWASP Top 10. Offense-first, then hardened.',
+      items: [
+        {
+          title: 'JWT Security Lab',
+          desc: 'Five production-grade JWT flaws reproduced from scratch, then hardened against a secure mirror.',
+        },
+        {
+          title: 'jwt-scan',
+          desc: 'npm CLI that hunts those same bugs in tokens and live endpoints — CI-friendly exit codes.',
+        },
+        {
+          title: 'Security writeups',
+          desc: 'Offense-and-defense breakdowns: alg=none bypass, HS/RS confusion, kid injection.',
+        },
+      ],
+    },
     about: {
       eyebrow: 'About',
       heading: 'Who I am',
@@ -138,9 +167,16 @@ export const ui: Record<Lang, UI> = {
         { value: 'EN / ES / DE', label: 'C1 / Native / B1' },
         { value: 'Visa', label: 'EU / US sponsor' },
       ],
-      certificationsLabel: 'In progress',
-      certifications: ['CompTIA Security+ (2026 Q3)', 'PortSwigger Web Security Academy'],
       portraitAlt: 'David portrait',
+    },
+    certs: {
+      eyebrow: 'Credentials',
+      heading: 'Certification roadmap',
+      intro:
+        "Certifications I'm actively working toward — backing the security pivot with credentials, not just shipped projects.",
+      inProgress: 'In progress',
+      planned: 'Planned',
+      targetLabel: 'Target',
     },
     timeline: {
       eyebrow: 'Career',
@@ -255,6 +291,7 @@ export const ui: Record<Lang, UI> = {
       timeline: 'Trayectoria',
       skills: 'Habilidades',
       projects: 'Proyectos',
+      certs: 'Certificaciones',
       writeups: 'Writeups',
       services: 'Servicios',
       contact: 'Contacto',
@@ -273,6 +310,23 @@ export const ui: Record<Lang, UI> = {
       ctaPrimary: 'Conoce mi recorrido',
       github: 'GitHub',
     },
+    proof: {
+      lead: 'Trabajo en la capa donde entregar rápido se cruza con entregar seguro — auth, sesiones, tokens, RBAC y el OWASP Top 10. Primero ofensiva, luego endurecido.',
+      items: [
+        {
+          title: 'JWT Security Lab',
+          desc: 'Cinco fallos de JWT de nivel producción reproducidos desde cero y endurecidos contra una versión segura.',
+        },
+        {
+          title: 'jwt-scan',
+          desc: 'CLI en npm que caza esos mismos bugs en tokens y endpoints en vivo — con exit codes para CI.',
+        },
+        {
+          title: 'Writeups de seguridad',
+          desc: 'Análisis de ataque y defensa: bypass alg=none, confusión HS/RS, inyección kid.',
+        },
+      ],
+    },
     about: {
       eyebrow: 'Sobre mí',
       heading: 'Quién soy',
@@ -287,9 +341,16 @@ export const ui: Record<Lang, UI> = {
         { value: 'EN / ES / DE', label: 'C1 / Nativo / B1' },
         { value: 'Visa', label: 'Patrocinio EU / US' },
       ],
-      certificationsLabel: 'En curso',
-      certifications: ['CompTIA Security+ (2026 Q3)', 'PortSwigger Web Security Academy'],
       portraitAlt: 'Retrato de David',
+    },
+    certs: {
+      eyebrow: 'Credenciales',
+      heading: 'Hoja de ruta de certificaciones',
+      intro:
+        'Certificaciones en las que trabajo activamente — respaldando el pivote hacia seguridad con credenciales, no solo con proyectos.',
+      inProgress: 'En curso',
+      planned: 'Planeada',
+      targetLabel: 'Objetivo',
     },
     timeline: {
       eyebrow: 'Carrera',

@@ -14,8 +14,8 @@
   "dependencies": {
     "@astrojs/react": "5.0.4",
     "@astrojs/sitemap": "^3.7.3",
-    "@fontsource/instrument-sans": "^5.2.8",
-    "@fontsource/unbounded": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/space-grotesk": "^5.2.8",
     "@react-three/fiber": "^9.5.0",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.2.2",

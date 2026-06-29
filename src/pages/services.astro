@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer/Footer.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
 
 const title = 'Auth & Access-Control Review — David Londoño';
 const description =
@@ -102,9 +103,7 @@ const proof = [
     <!-- Hero -->
     <section class="relative z-2 px-6 pt-24 pb-10">
       <div class="mx-auto max-w-4xl">
-        <p class="mb-3 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">
-          Services
-        </p>
+        <Eyebrow label="Services" class="mb-3" />
         <h1 class="mb-6 text-[clamp(2.5rem,6vw,4rem)] font-bold leading-[1] tracking-[-0.04em] text-fg">
           I find the access-control bugs that
           <span class="bg-linear-to-br from-accent to-accent-secondary bg-clip-text text-transparent">ship to prod</span>
@@ -204,7 +203,7 @@ const proof = [
     <!-- How it works -->
     <section class="relative z-2 px-6 py-12">
       <div class="mx-auto max-w-5xl">
-        <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">How it works</p>
+        <Eyebrow label="How it works" class="mb-2" />
         <h2 class="mb-10 text-[clamp(1.8rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-fg">Three steps, no surprises</h2>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           {steps.map((s) => (
@@ -221,7 +220,7 @@ const proof = [
     <!-- Proof -->
     <section class="relative z-2 px-6 py-12">
       <div class="mx-auto max-w-5xl">
-        <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">Why me</p>
+        <Eyebrow label="Why me" class="mb-2" />
         <h2 class="mb-4 text-[clamp(1.8rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-fg">
           I build the tools I review with
         </h2>

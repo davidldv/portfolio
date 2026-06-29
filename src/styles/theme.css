@@ -21,66 +21,55 @@
   --color-fg-muted:          var(--foreground-muted);
   --color-fg-dim:            var(--foreground-dim);
   --color-border:            var(--border);
+
+  /* Typography — Space Grotesk display/body, JetBrains Mono for technical text */
+  --font-sans:    "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
 }
 
 /* ─── Design tokens ─────────────────────────────────────── */
 :root {
-  --bg-deep:              #050506;
-  --bg-elevated:          #0a0a0c;
+  --bg-deep:              #0c0814;
+  --bg-elevated:          #15101f;
   --bg-surface:           rgba(255 255 255 / 0.05);
-  --foreground:           #ededef;
-  --foreground-muted:     #8a8f98;
-  --foreground-dim:       color-mix(in srgb, #ededef 20%, transparent);
-  --accent:               #5e6ad2;
-  --accent-glow:          rgba(94 106 210 / 0.2);
-  --accent-secondary:     #00d4ff;
-  --accent-secondary-sub: rgba(0 212 255 / 0.07);
-  --accent-border-mix:    color-mix(in srgb, #5e6ad2 40%, rgba(255 255 255 / 0.08));
+  --foreground:           #ece8f2;
+  --foreground-muted:     #9a92ab;
+  --foreground-dim:       color-mix(in srgb, #ece8f2 20%, transparent);
+  --accent:               #7c3aed;
+  --accent-glow:          rgba(124 58 237 / 0.22);
+  --accent-secondary:     #ff6b5b;
+  --accent-secondary-sub: rgba(255 107 91 / 0.08);
+  --accent-border-mix:    color-mix(in srgb, #7c3aed 40%, rgba(255 255 255 / 0.08));
   --border:               rgba(255 255 255 / 0.08);
   --radius:               16px;
   color-scheme: dark;
 
   /* ── Hero component tokens (theme-switchable via CSS var) ── */
-  --hero-title-gradient:  linear-gradient(160deg, #ffffff 0%, rgba(255 255 255 / 0.95) 45%, rgba(200 210 255 / 0.85) 100%);
-  --hero-title-filter:    drop-shadow(0 4px 32px rgba(94 106 210 / 0.35));
-  --hero-backdrop:        radial-gradient(ellipse 70% 65% at 50% 50%, rgba(5 5 6 / 0.72) 0%, rgba(5 5 6 / 0.2) 55%, transparent 75%);
-
-  /* ── Badge chip tokens ── */
-  --badge-bg:             rgba(10 10 18 / 0.55);
-  --badge-bg-hover:       rgba(0 212 255 / 0.06);
-  --badge-border:         none;
-  --badge-shadow:         none;
-  --badge-text:           var(--accent-secondary);
-  --badge-dot:            var(--accent-secondary);
+  --hero-title-gradient:  linear-gradient(160deg, #ffffff 0%, rgba(255 255 255 / 0.95) 45%, rgba(222 206 255 / 0.85) 100%);
+  --hero-title-filter:    drop-shadow(0 4px 32px rgba(124 58 237 / 0.38));
+  --hero-backdrop:        radial-gradient(ellipse 70% 65% at 50% 50%, rgba(12 8 20 / 0.74) 0%, rgba(12 8 20 / 0.22) 55%, transparent 75%);
 }
 
 [data-theme="light"] {
-  --bg-deep:              #f8f9fc;
+  --bg-deep:              #faf7fd;
   --bg-elevated:          #ffffff;
   --bg-surface:           rgba(0 0 0 / 0.03);
-  --foreground:           #1e1b4b;
-  --foreground-muted:     #64748b;
-  --foreground-dim:       color-mix(in srgb, #1e1b4b 20%, transparent);
-  --accent:               #4f46e5;
-  --accent-glow:          rgba(79 70 229 / 0.15);
-  --accent-secondary:     #0891b2;
-  --accent-secondary-sub: rgba(8 145 178 / 0.07);
-  --accent-border-mix:    color-mix(in srgb, #4f46e5 40%, rgba(0 0 0 / 0.08));
+  --foreground:           #1f152e;
+  --foreground-muted:     #6b6478;
+  --foreground-dim:       color-mix(in srgb, #1f152e 20%, transparent);
+  --accent:               #6d28d9;
+  --accent-glow:          rgba(109 40 217 / 0.15);
+  --accent-secondary:     #db4f3c;
+  --accent-secondary-sub: rgba(219 79 60 / 0.08);
+  --accent-border-mix:    color-mix(in srgb, #6d28d9 40%, rgba(0 0 0 / 0.08));
   --border:               rgba(0 0 0 / 0.08);
   color-scheme: light;
 
   /* ── Hero tokens — light mode ── */
-  --hero-title-gradient:  linear-gradient(160deg, #1e1b4b 0%, #3730a3 100%);
+  --hero-title-gradient:  linear-gradient(160deg, #1f152e 0%, #6d28d9 100%);
   --hero-title-filter:    none;
   --hero-backdrop:        none;
-
-  /* ── Badge chip tokens — light mode ── */
-  --badge-bg:             rgba(237 239 255 / 0.72);
-  --badge-bg-hover:       rgba(230 233 255 / 0.82);
-  --badge-border:         1px solid rgba(79 70 229 / 0.22);
-  --badge-shadow:         0 1px 6px rgba(79 70 229 / 0.1);
-  --badge-text:           #3730a3;
-  --badge-dot:            #0891b2;
 }
 
 /* ─── Base ───────────────────────────────────────────────── */
@@ -93,13 +82,14 @@
   body {
     background-color: var(--bg-deep);
     color: var(--foreground);
-    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
@@ -124,112 +114,23 @@
 .hero-orb {
   background:
     radial-gradient(ellipse 80% 60% at 50% 30%, var(--accent-glow) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0 212 255 / 0.08) 0%, transparent 60%);
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(255 107 91 / 0.08) 0%, transparent 60%);
   animation: orb-breathe 6s ease-in-out infinite;
-}
-
-.role-badge-wrap::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 999px;
-  background: conic-gradient(
-    from var(--badge-angle),
-    rgba(94 106 210 / 0.15) 0deg,
-    rgba(0 212 255 / 0.95) 18deg,
-    rgba(255 255 255 / 0.85) 27deg,
-    rgba(94 106 210 / 0.15) 44deg,
-    rgba(94 106 210 / 0.15) 360deg
-  );
-}
-
-.badge-border-counter {
-  background: conic-gradient(
-    from var(--badge-angle-rev),
-    rgba(94 106 210 / 0.08) 0deg,
-    rgba(148 130 255 / 0.7) 16deg,
-    rgba(200 210 255 / 0.5) 24deg,
-    rgba(94 106 210 / 0.08) 42deg,
-    rgba(94 106 210 / 0.08) 360deg
-  );
-}
-
-.role-badge::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(255 255 255 / 0.18) 50%,
-    transparent 70%
-  );
-  transform: translateX(-100%);
-  animation: badge-shimmer 4s ease-in-out infinite 2.5s;
-  pointer-events: none;
-}
-
-.role-badge-wrap:hover .badge-hover-glow {
-  opacity: 1;
-}
-
-.role-badge-wrap:hover .role-badge {
-  background: var(--badge-bg-hover);
 }
 
 /* Light mode: blobs become gentle accent-tinted halos, not gray patches */
 [data-theme="light"] .blob   { opacity: 0.07; filter: blur(120px); }
-[data-theme="light"] .blob-1 { background: #818cf8; } /* lighter indigo so it reads as soft blue */
-[data-theme="light"] .blob-2 { background: #67e8f9; } /* lighter cyan */
+[data-theme="light"] .blob-1 { background: #a78bfa; } /* soft violet */
+[data-theme="light"] .blob-2 { background: #ff9d8f; } /* soft coral */
 [data-theme='light'] .hero-orb {
   background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(79 70 229 / 0.1) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(8 145 178 / 0.06) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(109 40 217 / 0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(219 79 60 / 0.06) 0%, transparent 60%);
 }
-[data-theme='light'] .role-badge-wrap::before {
-  background: conic-gradient(
-    from var(--badge-angle),
-    rgba(79 70 229 / 0.12) 0deg,
-    rgba(8 145 178 / 0.9) 20deg,
-    rgba(255 255 255 / 0.8) 30deg,
-    rgba(79 70 229 / 0.12) 50deg,
-    rgba(79 70 229 / 0.12) 360deg
-  );
-}
-[data-theme='light'] .badge-border-counter {
-  background: conic-gradient(
-    from var(--badge-angle-rev),
-    rgba(79 70 229 / 0.05) 0deg,
-    rgba(79 70 229 / 0.5) 16deg,
-    rgba(165 180 252 / 0.4) 24deg,
-    rgba(79 70 229 / 0.05) 42deg,
-    rgba(79 70 229 / 0.05) 360deg
-  );
-}
-[data-theme='light'] .badge-hover-glow {
-  background: radial-gradient(
-    80px 50px at var(--mx, 50%) var(--my, 50%),
-    rgba(8 145 178 / 0.22),
-    transparent 70%
-  );
-}
-
 @keyframes blobFloat {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33%       { transform: translate(30px, -40px) scale(1.05); }
   66%       { transform: translate(-20px, 20px) scale(0.95); }
-}
-
-@property --badge-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@property --badge-angle-rev {
-  syntax: '<angle>';
-  initial-value: 360deg;
-  inherits: false;
 }
 
 @keyframes orb-breathe {
@@ -240,35 +141,6 @@
   50% {
     opacity: 1;
     transform: scale(1.08);
-  }
-}
-
-@keyframes badge-spin {
-  from { --badge-angle: 0deg; }
-  to { --badge-angle: 360deg; }
-}
-
-@keyframes badge-spin-rev {
-  from { --badge-angle-rev: 360deg; }
-  to { --badge-angle-rev: 0deg; }
-}
-
-@keyframes badge-shimmer {
-  0% { transform: translateX(-100%); }
-  30%, 100% { transform: translateX(220%); }
-}
-
-@keyframes dot-pulse {
-  0%, 100% {
-    box-shadow:
-      0 0 0 2px rgba(0 212 255 / 0.2),
-      0 0 8px rgba(0 212 255 / 0.6);
-  }
-  50% {
-    box-shadow:
-      0 0 0 4px rgba(0 212 255 / 0.1),
-      0 0 14px rgba(0 212 255 / 0.9),
-      0 0 26px rgba(0 212 255 / 0.3);
   }
 }
 
@@ -360,11 +232,11 @@ html[data-theme="light"] .logo-img {
 
 /* CTA button — directional shadow, not a spread glow */
 [data-theme="light"] .hero-cta {
-  box-shadow: 0 4px 20px rgba(79 70 229 / 0.3), 0 1px 4px rgba(79 70 229 / 0.15);
+  box-shadow: 0 4px 20px rgba(109 40 217 / 0.3), 0 1px 4px rgba(109 40 217 / 0.15);
 }
 
 [data-theme="light"] .hero-cta:hover {
-  box-shadow: 0 6px 28px rgba(79 70 229 / 0.38), 0 2px 6px rgba(79 70 229 / 0.18);
+  box-shadow: 0 6px 28px rgba(109 40 217 / 0.38), 0 2px 6px rgba(109 40 217 / 0.18);
   opacity: 1;
   transform: translateY(-1px);
 }
@@ -379,7 +251,7 @@ html[data-theme="light"] .logo-img {
 [data-theme="light"] .hero-secondary-link:hover {
   background: #ffffff;
   border-color: var(--accent);
-  box-shadow: 0 2px 8px rgba(79 70 229 / 0.12);
+  box-shadow: 0 2px 8px rgba(109 40 217 / 0.12);
 }
 
 /* ─── Custom scrollbar ───────────────────────────────────── */
@@ -431,11 +303,7 @@ body,
   }
   .blob   { animation: none; }
   .hero-orb,
-  .role-badge-wrap,
-  .role-badge-wrap::before,
-  .badge-border-counter,
-  .role-badge::after,
-  .role-badge-dot,
+  .hero-kicker,
   .hero-title,
   .hero-subtitle,
   .hero-actions,

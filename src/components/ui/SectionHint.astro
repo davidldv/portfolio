@@ -6,4 +6,7 @@ interface Props {
 const { text } = Astro.props as Props;
 ---
 
-<p class="font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">{text}</p>
+<p class="flex items-center gap-2.5">
+  <span class="inline-block h-[2px] w-6 shrink-0 bg-accent-secondary" aria-hidden="true"></span>
+  <span class="text-[0.92rem] font-medium tracking-[-0.005em] text-fg-muted">{text}</span>
+</p>

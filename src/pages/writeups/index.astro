@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer/Footer.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('writeups', ({ data }) => !data.draft)).sort(
@@ -41,9 +42,7 @@ const description =
   <main class="flex min-h-screen flex-col">
     <section class="relative z-2 px-6 pt-24 pb-12">
       <div class="mx-auto max-w-4xl">
-        <p class="mb-3 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">
-          Writeups
-        </p>
+        <Eyebrow label="Writeups" class="mb-3" />
         <h1 class="mb-6 text-[clamp(2.5rem,6vw,4rem)] font-bold leading-[1] tracking-[-0.04em] text-fg">
           Notes from <span class="bg-linear-to-br from-accent to-accent-secondary bg-clip-text text-transparent">breaking & fixing</span>
         </h1>

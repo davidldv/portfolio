@@ -9,13 +9,13 @@ const DESKTOP_CONNS = 100;
 const MOBILE_NODES = 30;
 const MOBILE_CONNS = 40;
 
-const D_NODE = new THREE.Color('#5E6AD2');
-const D_EDGE = new THREE.Color('#00D4FF');
-const D_HALO = new THREE.Color('#c8d2ff');
+const D_NODE = new THREE.Color('#7C3AED');
+const D_EDGE = new THREE.Color('#FF6B5B');
+const D_HALO = new THREE.Color('#dccdff');
 
-const L_NODE = new THREE.Color('#4f46e5');
-const L_EDGE = new THREE.Color('#818cf8');
-const L_HALO = new THREE.Color('#c7d2fe');
+const L_NODE = new THREE.Color('#6d28d9');
+const L_EDGE = new THREE.Color('#db4f3c');
+const L_HALO = new THREE.Color('#c4b5fd');
 
 function makeRng(seed: number) {
   let s = seed;
@@ -72,16 +72,41 @@ function buildPhasePositions(nodeCount: number): THREE.Vector3[][] {
     ));
   }
 
-  const icoGeo = new THREE.IcosahedronGeometry(1.8, 2);
-  const posAttr = icoGeo.getAttribute('position');
-  const unique: THREE.Vector3[] = [];
-  for (let i = 0; i < posAttr.count; i++) {
-    const v = new THREE.Vector3().fromBufferAttribute(posAttr, i);
-    if (!unique.some((u) => u.distanceTo(v) < 0.12)) unique.push(v);
+  // Phase 3 — a shield lattice: the chaotic surface resolves into something hardened.
+  const shieldPts: THREE.Vector3[] = [];
+  const rows = 17;
+  const cols = 11;
+  const yTop = 1.15;
+  const yBot = -1.45;
+  const halfWidthAt = (y: number) => {
+    if (y >= 0) return 1.0; // straight upper flanks
+    const k = y / yBot; // 0 at the waist → 1 at the point
+    return Math.max(0, 1.0 * (1 - k * k)); // parabolic taper to a single point
+  };
+  for (let r = 0; r < rows; r++) {
+    const y = yTop - (r / (rows - 1)) * (yTop - yBot);
+    const hw = halfWidthAt(y);
+    if (hw <= 0.02) {
+      shieldPts.push(new THREE.Vector3(0, y, 0));
+      continue;
+    }
+    const n = Math.max(1, Math.round(cols * hw));
+    for (let c = 0; c < n; c++) {
+      const x = n === 1 ? 0 : -hw + (c / (n - 1)) * 2 * hw;
+      const z = 0.4 * (1 - (x * x) / (hw * hw)); // center bevels toward the viewer
+      shieldPts.push(new THREE.Vector3(x, y, z));
+    }
   }
-  icoGeo.dispose();
+  // Center vertically, then scale to match the other phases' extent.
+  for (const v of shieldPts) {
+    v.y += 0.18;
+    v.multiplyScalar(1.45);
+  }
 
-  const p3 = Array.from({ length: nodeCount }, (_, i) => unique[i % unique.length].clone());
+  // Sample evenly across the whole silhouette so the pointed base is always represented.
+  const p3 = Array.from({ length: nodeCount }, (_, i) =>
+    shieldPts[Math.floor((i * shieldPts.length) / nodeCount) % shieldPts.length].clone(),
+  );
 
   return [p0, p1, p2, p3];
 }
@@ -309,14 +334,14 @@ function NeuralScene({ phases, connections, theme, isMobile, nodeCount, visibleR
       groupRef.current.rotation.x +=
         (-mouse.y * 0.25 - groupRef.current.rotation.x) * Math.min(delta * 3, 1);
     } else {
-      const idleSpeed = THREE.MathUtils.lerp(
-        isMobile ? 0.1 : 0.14,
-        isMobile ? 0.05 : 0.06,
-        Math.min(t / 0.8, 1),
-      );
-      groupRef.current.rotation.y += delta * idleSpeed;
+      // As the shield phase locks in (high scroll), ease the spin to a stop and
+      // straighten the tilt so it reads upright and front-facing.
+      const settle = THREE.MathUtils.smoothstep(t, 0.74, 0.96);
+      const idleSpeed = THREE.MathUtils.lerp(isMobile ? 0.1 : 0.14, 0, Math.min(t / 0.8, 1));
+      groupRef.current.rotation.y += delta * idleSpeed * (1 - settle);
       groupRef.current.rotation.x +=
-        (Math.sin(time * 0.25) * 0.12 - groupRef.current.rotation.x) * Math.min(delta * 1.5, 1);
+        (Math.sin(time * 0.25) * 0.12 * (1 - settle) - groupRef.current.rotation.x) *
+        Math.min(delta * 1.5, 1);
     }
   });
 

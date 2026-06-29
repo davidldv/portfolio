@@ -59,6 +59,6 @@ Better: use a library that requires explicit algorithm at construction time and 
 
 ## References
 
-- [JWT Lab — repo](https://github.com/davidldv/jwt-lab)
+- [JWT Lab — repo](https://github.com/davidldv/jwtsecuritylab)
 - [RFC 7518 §3.6 — `none` algorithm](https://www.rfc-editor.org/rfc/rfc7518#section-3.6)
 - [PortSwigger — JWT attacks](https://portswigger.net/web-security/jwt)

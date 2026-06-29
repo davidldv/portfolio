@@ -10,22 +10,18 @@ const { lang = 'en' } = Astro.props as Props;
 const t = ui[lang].hero;
 ---
 
-<section id="hero" class="hero relative flex min-h-svh w-full items-center justify-center overflow-hidden px-[clamp(1rem,2.6vw,2rem)] pb-0 pt-16 before:pointer-events-none before:absolute before:inset-0 before:z-1 before:content-[''] before:[background:linear-gradient(180deg,rgba(3_7_18/0.28)_0%,rgba(3_7_18/0.12)_52%,rgba(3_7_18/0)_100%),radial-gradient(66%_44%_at_50%_12%,rgba(22_40_108/0.2),transparent_72%)]">
+<section id="hero" class="hero relative flex min-h-svh w-full items-center justify-center overflow-hidden px-[clamp(1rem,2.6vw,2rem)] pb-0 pt-16 before:pointer-events-none before:absolute before:inset-0 before:z-1 before:content-[''] before:[background:linear-gradient(180deg,rgba(12_8_20/0.28)_0%,rgba(12_8_20/0.12)_52%,rgba(12_8_20/0)_100%),radial-gradient(66%_44%_at_50%_12%,rgba(76_40_140/0.2),transparent_72%)]">
   <div class="hero-orb fixed inset-0 z-0 pointer-events-none lg:hidden" aria-hidden="true"></div>
   <HeroScene client:only="react" />
   <div class="hero-backdrop pointer-events-none absolute inset-0 z-2 [background:var(--hero-backdrop)]" aria-hidden="true"></div>
 
   <div class="hero-content relative z-3 flex max-w-170 flex-col items-center text-center">
-    <div class="role-badge-wrap relative mb-6 inline-flex rounded-full p-[1.5px] opacity-0 animate-[fade-up_0.6s_ease_forwards_0.2s,badge-spin_4s_linear_2.7s_infinite]">
-      <div class="badge-hover-glow pointer-events-none absolute -inset-3 rounded-full opacity-0 blur-[3px] transition-opacity duration-300 [background:radial-gradient(80px_50px_at_var(--mx,50%)_var(--my,50%),rgba(0_212_255/0.28),transparent_70%)]" aria-hidden="true"></div>
-      <div class="badge-border-counter pointer-events-none absolute inset-0 z-0 rounded-full animate-[badge-spin-rev_6.5s_linear_2.7s_infinite]" aria-hidden="true"></div>
-      <div class="role-badge relative z-1 inline-flex cursor-default items-center gap-2 overflow-hidden rounded-full border px-4 py-1.5 pl-2.5 [background:var(--badge-bg)] [border:var(--badge-border)] [box-shadow:var(--badge-shadow)] [backdrop-filter:blur(20px)_saturate(150%)] transition-colors duration-200">
-        <span class="role-badge-dot relative z-1 h-1.75 w-1.75 shrink-0 rounded-full [background:var(--badge-dot)] animate-[dot-pulse_2.5s_ease-in-out_infinite]" aria-hidden="true"></span>
-        <span class="role-badge-text relative z-1 font-mono text-[0.73rem] uppercase tracking-[0.12em] text-(--badge-text)">{t.badge}</span>
-      </div>
+    <div class="hero-kicker mb-7 flex flex-col items-center gap-3.5 opacity-0 animate-[fade-up_0.6s_ease_forwards_0.2s]">
+      <span class="h-[2px] w-12 bg-accent-secondary" aria-hidden="true"></span>
+      <p class="max-w-md text-[0.95rem] font-medium leading-snug tracking-[-0.01em] text-fg-muted">{t.badge}</p>
     </div>
 
-    <h1 class="hero-title mb-6 text-[clamp(3.5rem,9vw,7rem)] font-bold leading-[0.93] tracking-[-0.04em] text-fg opacity-0 animate-[fade-up_0.6s_ease_forwards_0.35s] [text-shadow:0_4px_32px_rgba(94_106_210/0.28)]">
+    <h1 class="hero-title mb-6 text-[clamp(3.5rem,9vw,7rem)] font-bold leading-[0.93] tracking-[-0.04em] text-fg opacity-0 animate-[fade-up_0.6s_ease_forwards_0.35s] [text-shadow:0_4px_32px_rgba(124_58_237/0.28)]">
       {t.title1}<br />
       {t.title2}
     </h1>
@@ -72,23 +68,3 @@ const t = ui[lang].hero;
     </div>
   </div>
 </section>
-
-<script>
-  const bindBadgeGlow = () => {
-    const badgeWrap = document.querySelector<HTMLElement>('.role-badge-wrap');
-    if (!badgeWrap) return;
-
-    const onMouseMove = (e: MouseEvent) => {
-      const r = badgeWrap.getBoundingClientRect();
-      badgeWrap.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      badgeWrap.style.setProperty('--my', `${e.clientY - r.top}px`);
-    };
-
-    if (badgeWrap.dataset.glowBound === 'true') return;
-    badgeWrap.dataset.glowBound = 'true';
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
-  };
-
-  document.addEventListener('astro:page-load', bindBadgeGlow);
-  bindBadgeGlow();
-</script>

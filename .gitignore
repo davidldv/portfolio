@@ -26,6 +26,9 @@ pnpm-debug.log*
 # resume 
 Resume.pdf
 David_Londono_CV_en.pdf
+*.pdf
+*.xlsx
+monetization-plan.md
 
 .claude/
 .vscode/

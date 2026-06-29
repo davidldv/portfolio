@@ -1,5 +1,6 @@
 ---
 import { ui, type Lang } from '../../i18n/ui';
+import Eyebrow from '../ui/Eyebrow.astro';
 
 interface Props {
   lang?: Lang;
@@ -45,7 +46,7 @@ const socials = [
 <section id="contact" class="relative z-2 px-6 pb-16 pt-28">
   <div class="mx-auto max-w-7xl">
     <div class="reveal mb-14 max-w-140">
-      <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">{t.eyebrow}</p>
+      <Eyebrow index="06" label={t.eyebrow} class="mb-3" />
       <h2 class="mb-4 text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
       <p class="text-base leading-[1.7] text-fg-muted">{t.intro}</p>
     </div>

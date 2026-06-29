@@ -1,6 +1,7 @@
 ---
 import { ui, type Lang } from '../../i18n/ui';
 import { SkillsInteractive } from './SkillsInteractive';
+import Eyebrow from '../ui/Eyebrow.astro';
 
 interface Props {
   lang?: Lang;
@@ -13,7 +14,7 @@ const t = ui[lang].skills;
 <section id="skills" class="relative z-2 px-6 py-28">
   <div class="mx-auto max-w-7xl">
     <div class="reveal mb-14">
-      <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">{t.eyebrow}</p>
+      <Eyebrow index="04" label={t.eyebrow} class="mb-3" />
       <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
     </div>
 

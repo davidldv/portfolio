@@ -1,0 +1,106 @@
+---
+import { ui, type Lang } from '../../i18n/ui';
+import Eyebrow from '../ui/Eyebrow.astro';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props as Props;
+const t = ui[lang].certs;
+
+type Cert = {
+  name: string;
+  issuer: string;
+  status: 'in-progress' | 'planned';
+  target: string;
+  /** Indicative completion 0..1 for in-progress items; 0 for planned. */
+  progress: number;
+};
+
+// Certification roadmap — placeholders for credentials in progress / planned.
+// Update `status` to 'in-progress' / 'planned' and `target` as exams are scheduled.
+const certs: Cert[] = [
+  {
+    name: 'Google Professional Cybersecurity Certificate',
+    issuer: 'Google · Coursera',
+    status: 'in-progress',
+    target: '2026 Q3',
+    progress: 0.5,
+  },
+  {
+    name: 'CompTIA Security+',
+    issuer: 'CompTIA',
+    status: 'in-progress',
+    target: '2026 Q3',
+    progress: 0.65,
+  },
+  {
+    name: 'TryHackMe SOC Level 1',
+    issuer: 'TryHackMe',
+    status: 'planned',
+    target: '2026 Q4',
+    progress: 0,
+  },
+  {
+    name: 'AWS Solutions Architect – Associate',
+    issuer: 'Amazon Web Services',
+    status: 'planned',
+    target: '2027 Q1',
+    progress: 0,
+  },
+];
+
+const statusLabel = (s: Cert['status']) => (s === 'in-progress' ? t.inProgress : t.planned);
+---
+
+<section id="certifications" class="relative z-2 px-6 py-28">
+  <div class="mx-auto max-w-7xl">
+    <div class="reveal mb-14">
+      <Eyebrow index="03" label={t.eyebrow} class="mb-3" />
+      <h2 class="mb-4 text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
+      <p class="max-w-2xl text-[1rem] leading-[1.7] text-fg-muted">{t.intro}</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {certs.map((cert) => (
+        <article
+          class={`cert-card group reveal relative flex flex-col gap-4 overflow-hidden rounded-[20px] border bg-surface-elevated p-6 transition-all duration-250 hover:-translate-y-0.5 hover:border-accent-border ${cert.status === 'in-progress' ? 'border-border' : 'border-dashed border-border'}`}
+        >
+          <div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 [background:radial-gradient(ellipse_80%_60%_at_50%_0%,var(--accent-glow),transparent)] group-hover:opacity-100"></div>
+
+          <div class="relative z-1 flex items-center justify-between gap-3">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-surface text-accent" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </span>
+            <span class={`font-mono text-[0.72rem] ${cert.status === 'in-progress' ? 'text-accent-secondary' : 'text-fg-muted'}`}>
+              {statusLabel(cert.status)}
+            </span>
+          </div>
+
+          <div class="relative z-1 flex flex-1 flex-col gap-1.5">
+            <h3 class="m-0 text-[1.02rem] font-bold leading-[1.25] tracking-[-0.01em] text-fg">{cert.name}</h3>
+            <p class="m-0 font-mono text-[0.76rem] text-fg-muted">{cert.issuer}</p>
+          </div>
+
+          <div class="relative z-1 flex flex-col gap-3 pt-1">
+            {cert.status === 'in-progress' ? (
+              <div class="h-[3px] w-full bg-border">
+                <div class="h-full bg-accent-secondary" style={`width:${Math.round(cert.progress * 100)}%`}></div>
+              </div>
+            ) : (
+              <div class="h-0 w-full border-t border-dashed border-border"></div>
+            )}
+            <p class="m-0 font-mono text-[0.72rem]">
+              <span class="text-fg-muted">{t.targetLabel}:</span>
+              <span class="text-accent">{cert.target}</span>
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

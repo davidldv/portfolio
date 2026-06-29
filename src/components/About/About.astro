@@ -1,5 +1,6 @@
 ---
 import { ui, type Lang } from '../../i18n/ui';
+import Eyebrow from '../ui/Eyebrow.astro';
 
 interface Props {
   lang?: Lang;
@@ -12,7 +13,7 @@ const t = ui[lang].about;
 <section id="about" class="relative z-2 px-6 py-28">
   <div class="mx-auto max-w-7xl">
     <div class="reveal mb-14">
-      <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">{t.eyebrow}</p>
+      <Eyebrow index="02" label={t.eyebrow} class="mb-3" />
       <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
     </div>
 
@@ -47,16 +48,6 @@ const t = ui[lang].about;
               </svg>
               {t.location}
             </div>
-            {t.certifications.map((cert) => (
-              <div class="bio-cert inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-[0.85rem] text-fg-muted">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
-                  <path d="M9 12l2 2 4-4"/>
-                </svg>
-                <span class="text-accent-secondary">{t.certificationsLabel}:</span>
-                <span>{cert}</span>
-              </div>
-            ))}
           </div>
         </div>
 

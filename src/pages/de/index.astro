@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer/Footer.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
 
 const title = 'David Londoño — Software Engineer · Application Security';
 const description =
@@ -18,16 +19,33 @@ const socials = [
   { label: 'LinkedIn', href: 'https://linkedin.com/in/davidldv' },
   { label: 'E-Mail', href: 'mailto:dlondon.dev@gmail.com' },
 ];
+
+const certs = [
+  { name: 'Google Professional Cybersecurity Certificate', issuer: 'Google · Coursera', status: 'in-progress', target: '2026 Q3', progress: 0.5 },
+  { name: 'CompTIA Security+', issuer: 'CompTIA', status: 'in-progress', target: '2026 Q3', progress: 0.65 },
+  { name: 'TryHackMe SOC Level 1', issuer: 'TryHackMe', status: 'planned', target: '2026 Q4', progress: 0 },
+  { name: 'AWS Solutions Architect – Associate', issuer: 'Amazon Web Services', status: 'planned', target: '2027 Q1', progress: 0 },
+];
+const certStatus = { 'in-progress': 'In Bearbeitung', planned: 'Geplant' } as const;
+
+const proofLead =
+  'Ich arbeite in der Schicht, in der schnelles Liefern auf sicheres Liefern trifft — Auth, Sessions, Tokens, RBAC und die OWASP Top 10. Erst Angriff, dann gehärtet.';
+const proofItems = [
+  { title: 'JWT Security Lab', desc: 'Fünf produktionsreife JWT-Schwachstellen von Grund auf reproduziert und gegen eine sichere Version gehärtet.', href: 'https://github.com/davidldv/jwtsecuritylab' },
+  { title: 'jwt-scan', desc: 'npm-CLI, die dieselben Bugs in Tokens und Live-Endpoints aufspürt — CI-taugliche Exit-Codes.', href: 'https://www.npmjs.com/package/jwt-scan' },
+  { title: 'Security-Writeups', desc: 'Angriff und Verteidigung: alg=none-Bypass, HS/RS-Confusion, kid-Injection.', href: '/writeups/' },
+];
 ---
 
 <Layout title={title} description={description} canonicalPath="/de/">
   <main class="flex min-h-screen flex-col">
     <section class="relative z-2 px-6 pt-24 pb-16">
       <div class="mx-auto max-w-4xl">
-        <p class="mb-3 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">
-          DE · <a href="/" class="underline hover:text-accent">EN</a> ·
-          <a href="/es/" class="underline hover:text-accent">ES</a>
-        </p>
+        <nav class="mb-6 inline-flex items-center gap-1 rounded-lg border border-border p-1 text-[0.8rem] font-medium" aria-label="Sprache wählen">
+          <span class="rounded-md bg-accent-glow px-2.5 py-1 text-accent" aria-current="true">DE</span>
+          <a href="/" data-astro-reload class="rounded-md px-2.5 py-1 text-fg-muted no-underline transition-colors duration-150 hover:bg-surface hover:text-fg">EN</a>
+          <a href="/es/" data-astro-reload class="rounded-md px-2.5 py-1 text-fg-muted no-underline transition-colors duration-150 hover:bg-surface hover:text-fg">ES</a>
+        </nav>
         <h1 class="mb-6 text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[0.95] tracking-[-0.04em] text-fg">
           Hallo, ich bin David.<br />
           <span class="bg-linear-to-br from-accent to-accent-secondary bg-clip-text text-transparent">
@@ -56,11 +74,31 @@ const socials = [
       </div>
     </section>
 
+    <section class="relative z-2 px-6 pt-6 pb-2">
+      <div class="mx-auto max-w-4xl rounded-[24px] border border-border bg-surface-elevated p-6 sm:p-8">
+        <p class="mb-6 flex items-stretch gap-4 text-[1rem] leading-[1.7] text-fg-muted">
+          <span class="w-[2px] shrink-0 bg-accent-secondary" aria-hidden="true"></span>
+          <span>{proofLead}</span>
+        </p>
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {proofItems.map(({ title, desc, href }) => (
+            <a
+              href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              class="flex flex-col gap-2 rounded-2xl border border-border bg-surface p-5 no-underline transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-border"
+            >
+              <h3 class="m-0 font-mono text-[0.9rem] font-semibold text-fg">{title}</h3>
+              <p class="m-0 text-[0.82rem] leading-[1.6] text-fg-muted">{desc}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section id="ueber-mich" class="relative z-2 px-6 py-20">
       <div class="mx-auto max-w-4xl">
-        <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">
-          Über mich
-        </p>
+        <Eyebrow index="01" label="Über mich" class="mb-3" />
         <h2 class="mb-10 text-[clamp(2rem,5vw,3rem)] font-bold tracking-[-0.04em] text-fg">
           Wer ich bin
         </h2>
@@ -100,11 +138,49 @@ const socials = [
       </div>
     </section>
 
+    <section id="zertifizierungen" class="relative z-2 px-6 py-20">
+      <div class="mx-auto max-w-4xl">
+        <Eyebrow index="02" label="Zertifizierungen" class="mb-3" />
+        <h2 class="mb-10 text-[clamp(2rem,5vw,3rem)] font-bold tracking-[-0.04em] text-fg">
+          Zertifizierungs-Fahrplan
+        </h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {certs.map((cert) => (
+            <article class={`flex flex-col gap-3 rounded-2xl border bg-surface-elevated p-5 ${cert.status === 'in-progress' ? 'border-border' : 'border-dashed border-border'}`}>
+              <div class="flex items-center justify-between gap-3">
+                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface text-accent" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                  </svg>
+                </span>
+                <span class={`font-mono text-[0.72rem] ${cert.status === 'in-progress' ? 'text-accent-secondary' : 'text-fg-muted'}`}>
+                  {certStatus[cert.status]}
+                </span>
+              </div>
+              <div class="flex flex-col gap-1">
+                <h3 class="m-0 text-[0.98rem] font-bold leading-[1.25] text-fg">{cert.name}</h3>
+                <p class="m-0 font-mono text-[0.74rem] text-fg-muted">{cert.issuer}</p>
+              </div>
+              <div class="flex flex-col gap-2.5 pt-1">
+                {cert.status === 'in-progress' ? (
+                  <div class="h-[3px] w-full bg-border">
+                    <div class="h-full bg-accent-secondary" style={`width:${Math.round(cert.progress * 100)}%`}></div>
+                  </div>
+                ) : (
+                  <div class="h-0 w-full border-t border-dashed border-border"></div>
+                )}
+                <p class="m-0 font-mono text-[0.72rem]"><span class="text-fg-muted">Ziel:</span> <span class="text-accent">{cert.target}</span></p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section class="relative z-2 px-6 py-20">
       <div class="mx-auto max-w-4xl">
-        <p class="mb-2 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-accent-secondary">
-          Kontakt
-        </p>
+        <Eyebrow index="03" label="Kontakt" class="mb-3" />
         <h2 class="mb-6 text-[clamp(2rem,5vw,3rem)] font-bold tracking-[-0.04em] text-fg">
           Lass uns sprechen
         </h2>
