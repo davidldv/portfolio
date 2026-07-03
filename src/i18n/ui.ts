@@ -84,6 +84,8 @@ type UI = {
     eyebrow: string;
     heading: string;
     visit: string;
+    play: string;
+    playable: string;
     items: Record<string, Project>;
   };
   contact: {
@@ -217,6 +219,8 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Work',
       heading: 'Projects',
       visit: 'Visit',
+      play: 'Play',
+      playable: 'Playable',
       items: {
         paircode: {
           tagline: 'Secure real-time collaborative workspace',
@@ -257,6 +261,16 @@ export const ui: Record<Lang, UI> = {
           tagline: 'Portfolio site as a MacOS app',
           description:
             'Interactive portfolio mimicking a real OS experience: macOS-style desktop windows on desktop and iPhone-style full-screen apps on mobile.',
+        },
+        ctf: {
+          tagline: 'Playable, sandboxed web-security CTF',
+          description:
+            'An interactive hacking terminal you can actually play — four boxes reproducing real vulnerability classes, safely simulated in the browser with no network and no eval.',
+          highlights: [
+            'Four exploit paths: SQLi auth bypass, IDOR / broken access control, JWT alg=none signature strip, and reflected XSS — each pattern-matched against a fake target.',
+            'Full terminal UX: command interpreter, command history, typewriter boot, matrix-rain canvas, CRT scanlines, and flag-capture progression.',
+            'The same attack classes I defend against in my JWT Security Lab and jwt-scan work — offense to prove the defense.',
+          ],
         },
       },
     },
@@ -391,6 +405,8 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Trabajo',
       heading: 'Proyectos',
       visit: 'Visitar',
+      play: 'Jugar',
+      playable: 'Jugable',
       items: {
         paircode: {
           tagline: 'Workspace colaborativo seguro en tiempo real',
@@ -431,6 +447,16 @@ export const ui: Record<Lang, UI> = {
           tagline: 'Portfolio como aplicación MacOS',
           description:
             'Portfolio interactivo que imita una experiencia de sistema operativo: ventanas estilo macOS en desktop y apps tipo iPhone a pantalla completa en móvil.',
+        },
+        ctf: {
+          tagline: 'CTF de seguridad web jugable y en sandbox',
+          description:
+            'Una terminal de hacking que puedes jugar de verdad — cuatro retos que reproducen clases reales de vulnerabilidades, simuladas de forma segura en el navegador, sin red ni eval.',
+          highlights: [
+            'Cuatro vías de explotación: bypass de login por SQLi, IDOR / control de acceso roto, JWT alg=none y XSS reflejado — cada una contra un objetivo simulado.',
+            'Experiencia de terminal completa: intérprete de comandos, historial, arranque con efecto máquina de escribir, lluvia matrix en canvas, scanlines CRT y progresión por flags.',
+            'Las mismas clases de ataque que defiendo en mi JWT Security Lab y jwt-scan — ofensiva para demostrar la defensa.',
+          ],
         },
       },
     },

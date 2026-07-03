@@ -15,9 +15,18 @@ interface Project {
   tags: string[];
   href: string | null;
   accent: 'indigo' | 'cyan';
+  playable?: boolean;
 }
 
 const baseProjects: Project[] = [
+  {
+    id: 'ctf',
+    name: 'Exploit the Box',
+    tags: ['React', 'TypeScript', 'SQLi', 'IDOR', 'JWT', 'XSS'],
+    href: '/ctf',
+    accent: 'cyan',
+    playable: true,
+  },
   {
     id: 'paircode',
     name: 'PairCode',
@@ -69,17 +78,33 @@ const projects = baseProjects.map((p) => {
     </div>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-      {projects.map(({ name, tagline, description, highlights, tags, href, accent }) => (
-        <article class={`group relative cursor-pointer overflow-hidden rounded-[20px] border border-border bg-surface-elevated transition-all duration-250 hover:-translate-y-0.5 hover:border-accent-border reveal`}>
-          <div class={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ${accent === 'cyan' ? '[background:radial-gradient(ellipse_80%_60%_at_50%_0%,var(--accent-glow),transparent)]' : '[background:radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(94_106_210/0.12),transparent)]'} group-hover:opacity-100`}></div>
+      {projects.map(({ name, tagline, description, highlights, tags, href, accent, playable }) => {
+        const isInternal = !!href && href.startsWith('/');
+        return (
+        <article class={`group relative cursor-pointer overflow-hidden rounded-[20px] border ${playable ? 'border-accent-border' : 'border-border'} bg-surface-elevated transition-all duration-250 hover:-translate-y-0.5 hover:border-accent-border reveal`}>
+          <div class={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ${accent === 'cyan' ? '[background:radial-gradient(ellipse_80%_60%_at_50%_0%,var(--accent-glow),transparent)]' : '[background:radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(94_106_210/0.12),transparent)]'} ${playable ? 'opacity-100' : 'group-hover:opacity-100'}`}></div>
           <div class="relative z-1 flex h-full flex-col gap-3 p-8">
             <div class="flex items-start justify-between gap-4">
-              <h3 class="m-0 text-[1.15rem] font-bold tracking-[-0.02em] text-fg">{name}</h3>
+              <div class="flex items-center gap-2.5">
+                <h3 class="m-0 text-[1.15rem] font-bold tracking-[-0.02em] text-fg">{name}</h3>
+                {playable && (
+                  <span class="inline-flex items-center gap-1 rounded-full border border-accent-border bg-accent-sub px-2 py-0.5 font-mono text-[0.62rem] font-medium uppercase tracking-wider text-accent">
+                    <span class="relative flex h-1.5 w-1.5"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"></span><span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent"></span></span>
+                    {t.playable}
+                  </span>
+                )}
+              </div>
               {href && (
-                <a href={href} target="_blank" rel="noopener noreferrer" class="mt-0.5 shrink-0 text-fg-muted transition-colors duration-150 hover:text-accent-secondary" aria-label={`${t.visit} ${name}`}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                  </svg>
+                <a href={href} target={isInternal ? undefined : '_blank'} rel={isInternal ? undefined : 'noopener noreferrer'} class="mt-0.5 shrink-0 text-fg-muted transition-colors duration-150 hover:text-accent-secondary" aria-label={`${isInternal ? t.play : t.visit} ${name}`}>
+                  {isInternal ? (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polygon points="6 3 20 12 6 21 6 3"/>
+                    </svg>
+                  ) : (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    </svg>
+                  )}
                 </a>
               )}
             </div>
@@ -101,8 +126,12 @@ const projects = baseProjects.map((p) => {
               ))}
             </div>
           </div>
+          {isInternal && href && (
+            <a href={href} class="absolute inset-0 z-2" aria-label={`${t.play} ${name}`}></a>
+          )}
         </article>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>
