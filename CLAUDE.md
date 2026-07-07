@@ -18,7 +18,7 @@
 
 - Land a **Software Engineer or junior AppSec** role — full-time preferred, remote or relocation.
 - End goal: **relocate to Germany** (EU Blue Card) or US. Interviewing locally in Colombia meanwhile.
-- Pass **CompTIA Security+** (target 2026 Q3). Working through PortSwigger Web Security Academy.
+- Pass **CompTIA Security+** (target 2026 Q3, in progress). Completed: Google Professional Cybersecurity Certificate, PortSwigger Web Security Academy (all free courses).
 - Build credible security pivot via shipped projects, not just certifications.
 
 ## Stack I work in

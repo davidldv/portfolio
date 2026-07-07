@@ -12,21 +12,26 @@ const t = ui[lang].certs;
 type Cert = {
   name: string;
   issuer: string;
-  status: 'in-progress' | 'planned';
+  status: 'completed' | 'in-progress' | 'planned';
   target: string;
-  /** Indicative completion 0..1 for in-progress items; 0 for planned. */
+  /** Indicative completion 0..1 for in-progress items; 1 for completed, 0 for planned. */
   progress: number;
 };
 
-// Certification roadmap — placeholders for credentials in progress / planned.
-// Update `status` to 'in-progress' / 'planned' and `target` as exams are scheduled.
 const certs: Cert[] = [
   {
     name: 'Google Professional Cybersecurity Certificate',
     issuer: 'Google · Coursera',
-    status: 'in-progress',
-    target: '2026 Q3',
-    progress: 0.5,
+    status: 'completed',
+    target: '2026',
+    progress: 1,
+  },
+  {
+    name: 'PortSwigger Web Security Academy',
+    issuer: 'PortSwigger',
+    status: 'completed',
+    target: 'All free courses',
+    progress: 1,
   },
   {
     name: 'CompTIA Security+',
@@ -35,23 +40,10 @@ const certs: Cert[] = [
     target: '2026 Q3',
     progress: 0.65,
   },
-  {
-    name: 'TryHackMe SOC Level 1',
-    issuer: 'TryHackMe',
-    status: 'planned',
-    target: '2026 Q4',
-    progress: 0,
-  },
-  {
-    name: 'AWS Solutions Architect – Associate',
-    issuer: 'Amazon Web Services',
-    status: 'planned',
-    target: '2027 Q1',
-    progress: 0,
-  },
 ];
 
-const statusLabel = (s: Cert['status']) => (s === 'in-progress' ? t.inProgress : t.planned);
+const statusLabel = (s: Cert['status']) =>
+  s === 'completed' ? t.completed : s === 'in-progress' ? t.inProgress : t.planned;
 ---
 
 <section id="certifications" class="relative z-2 px-6 py-28">
@@ -62,10 +54,10 @@ const statusLabel = (s: Cert['status']) => (s === 'in-progress' ? t.inProgress :
       <p class="max-w-2xl text-[1rem] leading-[1.7] text-fg-muted">{t.intro}</p>
     </div>
 
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {certs.map((cert) => (
         <article
-          class={`cert-card group reveal relative flex flex-col gap-4 overflow-hidden rounded-[20px] border bg-surface-elevated p-6 transition-all duration-250 hover:-translate-y-0.5 hover:border-accent-border ${cert.status === 'in-progress' ? 'border-border' : 'border-dashed border-border'}`}
+          class={`cert-card group reveal relative flex flex-col gap-4 overflow-hidden rounded-[20px] border bg-surface-elevated p-6 transition-all duration-250 hover:-translate-y-0.5 hover:border-accent-border ${cert.status === 'planned' ? 'border-dashed border-border' : 'border-border'}`}
         >
           <div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 [background:radial-gradient(ellipse_80%_60%_at_50%_0%,var(--accent-glow),transparent)] group-hover:opacity-100"></div>
 
@@ -76,7 +68,7 @@ const statusLabel = (s: Cert['status']) => (s === 'in-progress' ? t.inProgress :
                 <path d="M9 12l2 2 4-4"/>
               </svg>
             </span>
-            <span class={`font-mono text-[0.72rem] ${cert.status === 'in-progress' ? 'text-accent-secondary' : 'text-fg-muted'}`}>
+            <span class={`font-mono text-[0.72rem] ${cert.status === 'planned' ? 'text-fg-muted' : 'text-accent-secondary'}`}>
               {statusLabel(cert.status)}
             </span>
           </div>
@@ -87,15 +79,15 @@ const statusLabel = (s: Cert['status']) => (s === 'in-progress' ? t.inProgress :
           </div>
 
           <div class="relative z-1 flex flex-col gap-3 pt-1">
-            {cert.status === 'in-progress' ? (
+            {cert.status === 'planned' ? (
+              <div class="h-0 w-full border-t border-dashed border-border"></div>
+            ) : (
               <div class="h-[3px] w-full bg-border">
                 <div class="h-full bg-accent-secondary" style={`width:${Math.round(cert.progress * 100)}%`}></div>
               </div>
-            ) : (
-              <div class="h-0 w-full border-t border-dashed border-border"></div>
             )}
             <p class="m-0 font-mono text-[0.72rem]">
-              <span class="text-fg-muted">{t.targetLabel}:</span>
+              <span class="text-fg-muted">{cert.status === 'completed' ? t.completed : t.targetLabel}:</span>
               <span class="text-accent">{cert.target}</span>
             </p>
           </div>

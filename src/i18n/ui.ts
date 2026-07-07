@@ -64,6 +64,7 @@ type UI = {
     eyebrow: string;
     heading: string;
     intro: string;
+    completed: string;
     inProgress: string;
     planned: string;
     targetLabel: string;
@@ -175,7 +176,8 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Credentials',
       heading: 'Certification roadmap',
       intro:
-        "Certifications I'm actively working toward — backing the security pivot with credentials, not just shipped projects.",
+        'Credentials backing the security pivot — completed and in progress, alongside shipped projects.',
+      completed: 'Completed',
       inProgress: 'In progress',
       planned: 'Planned',
       targetLabel: 'Target',
@@ -371,7 +373,8 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Credenciales',
       heading: 'Hoja de ruta de certificaciones',
       intro:
-        'Certificaciones en las que trabajo activamente — respaldando el pivote hacia seguridad con credenciales, no solo con proyectos.',
+        'Credenciales que respaldan el pivote hacia seguridad — completadas y en curso, junto a los proyectos publicados.',
+      completed: 'Completada',
       inProgress: 'En curso',
       planned: 'Planeada',
       targetLabel: 'Objetivo',

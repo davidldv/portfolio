@@ -21,12 +21,11 @@ const socials = [
 ];
 
 const certs = [
-  { name: 'Google Professional Cybersecurity Certificate', issuer: 'Google · Coursera', status: 'in-progress', target: '2026 Q3', progress: 0.5 },
+  { name: 'Google Professional Cybersecurity Certificate', issuer: 'Google · Coursera', status: 'completed', target: '2026', progress: 1 },
+  { name: 'PortSwigger Web Security Academy', issuer: 'PortSwigger', status: 'completed', target: 'Alle kostenlosen Kurse', progress: 1 },
   { name: 'CompTIA Security+', issuer: 'CompTIA', status: 'in-progress', target: '2026 Q3', progress: 0.65 },
-  { name: 'TryHackMe SOC Level 1', issuer: 'TryHackMe', status: 'planned', target: '2026 Q4', progress: 0 },
-  { name: 'AWS Solutions Architect – Associate', issuer: 'Amazon Web Services', status: 'planned', target: '2027 Q1', progress: 0 },
-];
-const certStatus = { 'in-progress': 'In Bearbeitung', planned: 'Geplant' } as const;
+] as const;
+const certStatus = { completed: 'Abgeschlossen', 'in-progress': 'In Bearbeitung', planned: 'Geplant' } as const;
 
 const proofLead =
   'Ich arbeite in der Schicht, in der schnelles Liefern auf sicheres Liefern trifft — Auth, Sessions, Tokens, RBAC und die OWASP Top 10. Erst Angriff, dann gehärtet.';
@@ -146,7 +145,7 @@ const proofItems = [
         </h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {certs.map((cert) => (
-            <article class={`flex flex-col gap-3 rounded-2xl border bg-surface-elevated p-5 ${cert.status === 'in-progress' ? 'border-border' : 'border-dashed border-border'}`}>
+            <article class={`flex flex-col gap-3 rounded-2xl border bg-surface-elevated p-5 ${cert.status === 'planned' ? 'border-dashed border-border' : 'border-border'}`}>
               <div class="flex items-center justify-between gap-3">
                 <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface text-accent" aria-hidden="true">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -154,7 +153,7 @@ const proofItems = [
                     <path d="M9 12l2 2 4-4"/>
                   </svg>
                 </span>
-                <span class={`font-mono text-[0.72rem] ${cert.status === 'in-progress' ? 'text-accent-secondary' : 'text-fg-muted'}`}>
+                <span class={`font-mono text-[0.72rem] ${cert.status === 'planned' ? 'text-fg-muted' : 'text-accent-secondary'}`}>
                   {certStatus[cert.status]}
                 </span>
               </div>
@@ -163,14 +162,14 @@ const proofItems = [
                 <p class="m-0 font-mono text-[0.74rem] text-fg-muted">{cert.issuer}</p>
               </div>
               <div class="flex flex-col gap-2.5 pt-1">
-                {cert.status === 'in-progress' ? (
+                {cert.status === 'planned' ? (
+                  <div class="h-0 w-full border-t border-dashed border-border"></div>
+                ) : (
                   <div class="h-[3px] w-full bg-border">
                     <div class="h-full bg-accent-secondary" style={`width:${Math.round(cert.progress * 100)}%`}></div>
                   </div>
-                ) : (
-                  <div class="h-0 w-full border-t border-dashed border-border"></div>
                 )}
-                <p class="m-0 font-mono text-[0.72rem]"><span class="text-fg-muted">Ziel:</span> <span class="text-accent">{cert.target}</span></p>
+                <p class="m-0 font-mono text-[0.72rem]"><span class="text-fg-muted">{cert.status === 'completed' ? 'Abgeschlossen' : 'Ziel'}:</span> <span class="text-accent">{cert.target}</span></p>
               </div>
             </article>
           ))}
