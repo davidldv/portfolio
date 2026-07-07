@@ -35,6 +35,8 @@
 
 - **PairCode** — secure real-time collaborative workspace. Node.js + Express + PostgreSQL. In-house auth (EdDSA JWTs, rotating refresh tokens with reuse detection, Argon2id, CSRF), custom WebSocket server with single-use ticket handshake + server-side RBAC.
 - **Materiales La Bodega** — production retail platform (family business). Auth, session security, RBAC, OWASP hardening.
+- **authzscan** — autonomous IDOR/BOLA review for Next.js App Router repos, driven by Claude agents. Deterministic ts-morph inventory + agent trace/verify passes, SARIF output, seeded 16-vuln eval benchmark. Repo currently PRIVATE (github.com/davidldv/authzscan).
+- **LLM/RAG Security Lab** (`llmseclab`) — offense/defense lab for RAG systems: vulnerable + hardened FastAPI pair, 5 OWASP LLM Top 10 attacks as pytest suite (cross-tenant retrieval, indirect injection, poisoning, MCP excessive agency, output XSS).
 - **JWT Security Lab** — offense/defense lab. From-scratch JWT sign/verify in TypeScript reproducing 5 production-grade flaws (`alg=none`, HS/RS confusion, weak-secret brute-force, `kid` injection, missing claim validation) against a hardened mirror.
 - **jwt-scan** — npm CLI scanner derived from the lab. Token + live-endpoint modes, CI-friendly exit codes.
 - **Ghost AI** — collaborative architecture-first canvas (Next.js, Liveblocks, React Flow, Vercel AI SDK + Gemini). Exports Markdown specs.

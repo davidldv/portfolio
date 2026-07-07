@@ -252,15 +252,25 @@ export const ui: Record<Lang, UI> = {
             'Hardened the application layer against OWASP Top 10 risks: parameterized queries, server-side input validation, CSRF protection on state-changing endpoints, and least-privilege database roles.',
           ],
         },
-        kanby: {
-          tagline: 'Kanban app with auth and access control',
+        authzscan: {
+          tagline: 'Autonomous IDOR/BOLA review, driven by Claude agents',
           description:
-            'Collaborative Kanban: boards, lists, drag-and-drop cards, secure session handling and per-board authorization over SSE.',
+            'An autonomous pentest of authorization logic in Next.js App Router repos: agents trace each client-controlled identifier to the database query it reaches and flag the ownership checks that are missing — the #1 OWASP risk that pattern-matching SAST largely misses.',
+          highlights: [
+            'Four-phase pipeline: deterministic endpoint inventory with ts-morph (route handlers, Server Actions, auth-library detection), an agent trace pass, an adversarial verify pass that kills false positives, and Markdown / SARIF / JSON reports with CI-ready exit codes.',
+            'Measured, not vibes: evaluated on a seeded benchmark of 16 IDOR/BOLA vulnerabilities plus 6 hardened twins as false-positive tripwires, with recall/precision gates and an oracle runner that validates the harness independently of model quality.',
+            'Degrades loudly, never silently: endpoints that can’t be analyzed are reported as not-analyzed rather than clean, and unverifiable candidates surface as low-confidence instead of being dropped.',
+          ],
         },
-        macos: {
-          tagline: 'Portfolio site as a MacOS app',
+        llmseclab: {
+          tagline: 'Offense-and-defense LLM/RAG security lab',
           description:
-            'Interactive portfolio mimicking a real OS experience: macOS-style desktop windows on desktop and iPhone-style full-screen apps on mobile.',
+            'Two FastAPI services with the same RAG surface — one intentionally vulnerable, one hardened. Every attack in the suite succeeds against the first and fails against the second, so each fix is demonstrated rather than claimed.',
+          highlights: [
+            'Five OWASP LLM Top 10 scenarios as an executable pytest attack suite: cross-tenant retrieval leak (confused deputy), indirect prompt injection via retrieved documents, vector-store poisoning through forged ingest metadata, excessive agency over a real MCP tool server, and stored XSS from model output.',
+            'RAG pipeline built by hand — embeddings, in-memory vector store, multi-tenant ACL corpus — no LangChain, so the diff between the two apps is exactly the set of security decisions.',
+            'A deterministic mock LLM makes “every attack fails against the secure API” a reliable CI property; an OpenRouter-backed provider re-checks injection behavior against a real model.',
+          ],
         },
         ctf: {
           tagline: 'Playable, sandboxed web-security CTF',
@@ -438,15 +448,25 @@ export const ui: Record<Lang, UI> = {
             'Endurecí la capa de aplicación frente al OWASP Top 10: consultas parametrizadas, validación de entrada en el servidor, protección CSRF en endpoints que modifican estado y roles de base de datos con mínimos privilegios.',
           ],
         },
-        kanby: {
-          tagline: 'App Kanban con autenticación y control de acceso',
+        authzscan: {
+          tagline: 'Revisión autónoma de IDOR/BOLA con agentes de Claude',
           description:
-            'Kanban colaborativo: tableros, listas, tarjetas arrastrables, manejo seguro de sesiones y autorización por tablero sobre SSE.',
+            'Un pentest autónomo de la lógica de autorización en repos Next.js App Router: agentes siguen cada identificador controlado por el cliente hasta la consulta de base de datos que alcanza y marcan los checks de propiedad que faltan — el riesgo #1 de OWASP que las herramientas SAST de pattern-matching suelen pasar por alto.',
+          highlights: [
+            'Pipeline de cuatro fases: inventario determinista de endpoints con ts-morph (route handlers, Server Actions, detección de librería de auth), una pasada de trazado por agente, una pasada adversarial de verificación que elimina falsos positivos, y reportes Markdown / SARIF / JSON con códigos de salida listos para CI.',
+            'Medido, no intuición: evaluado sobre un benchmark con 16 vulnerabilidades IDOR/BOLA sembradas más 6 gemelos endurecidos como trampas de falsos positivos, con umbrales de recall/precisión y un runner oráculo que valida el harness independientemente de la calidad del modelo.',
+            'Falla ruidosamente, nunca en silencio: los endpoints que no puede analizar se reportan como no-analizados en lugar de limpios, y los candidatos no verificables aparecen como baja confianza en vez de descartarse.',
+          ],
         },
-        macos: {
-          tagline: 'Portfolio como aplicación MacOS',
+        llmseclab: {
+          tagline: 'Laboratorio ofensivo y defensivo de seguridad LLM/RAG',
           description:
-            'Portfolio interactivo que imita una experiencia de sistema operativo: ventanas estilo macOS en desktop y apps tipo iPhone a pantalla completa en móvil.',
+            'Dos servicios FastAPI con la misma superficie RAG — uno intencionalmente vulnerable, otro endurecido. Cada ataque de la suite tiene éxito contra el primero y falla contra el segundo, de modo que cada mitigación queda demostrada, no sólo afirmada.',
+          highlights: [
+            'Cinco escenarios del OWASP LLM Top 10 como suite de ataques ejecutable en pytest: fuga de recuperación entre tenants (confused deputy), inyección indirecta de prompts vía documentos recuperados, envenenamiento del vector store con metadatos de ingesta falsificados, agencia excesiva sobre un servidor MCP real y XSS almacenado desde la salida del modelo.',
+            'Pipeline RAG construido a mano — embeddings, vector store en memoria, corpus multi-tenant con ACL — sin LangChain, de modo que el diff entre las dos apps es exactamente el conjunto de decisiones de seguridad.',
+            'Un mock LLM determinista hace que «todos los ataques fallan contra la API segura» sea una propiedad confiable en CI; un proveedor sobre OpenRouter re-verifica el comportamiento de inyección contra un modelo real.',
+          ],
         },
         ctf: {
           tagline: 'CTF de seguridad web jugable y en sandbox',
