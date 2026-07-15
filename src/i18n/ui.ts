@@ -159,7 +159,7 @@ export const ui: Record<Lang, UI> = {
     about: {
       eyebrow: 'About',
       heading: 'Who I am',
-      p1: "I'm a Full-Stack Engineer from Pereira, Colombia, focused on Application Security and the reliability of modern web systems. I build end-to-end, React and Next.js on the front, Node, TypeScript, and PostgreSQL on the back, with attention on the layer where working code becomes a security risk.",
+      p1: "I'm a Full-Stack Engineer from Bogotá, Colombia, focused on Application Security and the reliability of modern web systems. I build end-to-end, React and Next.js on the front, Node, TypeScript, and PostgreSQL on the back, with attention on the layer where working code becomes a security risk.",
       p2: 'I approach development with a security-first mindset: threat modeling features before they ship, using the OWASP Top 10 as a baseline, and validating systems through offensive testing. I actively train on platforms like TryHackMe and PortSwigger Web Security Academy to understand how real attacks work and how to prevent them.',
       p3: "I'm particularly interested in securing AI-integrated applications as they introduce new attack surfaces beyond traditional web security.",
       p4: "Open to full-time roles, freelance, or interesting side projects. If you have a problem worth solving, let's talk.",
@@ -356,7 +356,7 @@ export const ui: Record<Lang, UI> = {
     about: {
       eyebrow: 'Sobre mí',
       heading: 'Quién soy',
-      p1: 'Soy Ingeniero Full-Stack de Pereira, Colombia, enfocado en Seguridad de Aplicaciones y en la confiabilidad de los sistemas web modernos. Construyo de punta a punta: React y Next.js en el frontend; Node, TypeScript y PostgreSQL en el backend, con atención especial en la capa donde el código que funciona se convierte en un riesgo de seguridad.',
+      p1: 'Soy Ingeniero Full-Stack de Bogotá, Colombia, enfocado en Seguridad de Aplicaciones y en la confiabilidad de los sistemas web modernos. Construyo de punta a punta: React y Next.js en el frontend; Node, TypeScript y PostgreSQL en el backend, con atención especial en la capa donde el código que funciona se convierte en un riesgo de seguridad.',
       p2: 'Trabajo con mentalidad de seguridad desde el inicio: threat modeling de las features antes de lanzarlas, OWASP Top 10 como línea base y validación mediante pruebas ofensivas. Entreno de forma activa en plataformas como TryHackMe y la PortSwigger Web Security Academy para entender cómo funcionan los ataques reales y cómo prevenirlos.',
       p3: 'Me interesa especialmente la seguridad de aplicaciones integradas con IA, ya que introducen nuevas superficies de ataque más allá de la seguridad web tradicional.',
       p4: 'Abierto a roles full-time, freelance o proyectos personales interesantes. Si tienes un problema que valga la pena resolver, hablemos.',
