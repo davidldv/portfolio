@@ -15,8 +15,8 @@ interface Props {
 }
 
 const {
-	title = 'David Londoño — Software Engineer · Application Security',
-	description = 'Full-Stack Engineer moving into Application Security. Building and hardening web systems with TypeScript, React, Node.js and PostgreSQL. Based in Colombia, open to relocation to Germany or the US.',
+	title = 'David Londoño — Full-Stack Engineer · Security-Focused',
+	description = 'Full-Stack Engineer shipping web systems with TypeScript, React, Node.js and PostgreSQL — with application security as the differentiator. Based in Pereira, Colombia; open to remote work and relocation to Germany or the US.',
 	image = '/og.png',
 	canonicalPath,
 	ogType = 'website',
@@ -52,7 +52,7 @@ const personLd = {
 	name: 'David Londoño',
 	url: siteUrl.toString(),
 	image: new URL('/david.jpg', siteUrl).toString(),
-	jobTitle: 'Software Engineer',
+	jobTitle: 'Full-Stack Engineer',
 	description,
 	sameAs: [
 		'https://github.com/davidldv',
@@ -61,20 +61,21 @@ const personLd = {
 	],
 	address: {
 		'@type': 'PostalAddress',
-		addressLocality: 'Bogotá',
+		addressLocality: 'Pereira',
 		addressCountry: 'CO',
 	},
 	knowsAbout: [
+		'Full Stack Engineering',
+		'TypeScript',
+		'Node.js',
+		'React',
+		'Next.js',
+		'PostgreSQL',
 		'Application Security',
 		'Web Application Security',
 		'OWASP Top 10',
 		'Threat Modeling',
 		'Authentication and Authorization',
-		'Full Stack Engineering',
-		'TypeScript',
-		'Node.js',
-		'React',
-		'PostgreSQL',
 	],
 };
 
@@ -110,7 +111,7 @@ const jsonLd = JSON.stringify(articleLd ?? personLd);
 		<link rel="canonical" href={canonicalURL} />
 		<meta name="author" content="David Londoño" />
 		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-		<meta name="keywords" content="David Londoño, Software Engineer, Application Security, AppSec, Security Engineer, Full Stack Engineer, OWASP, Web Security, Threat Modeling, TypeScript, React, Node.js, Bogotá, Colombia, Germany, Remote" />
+		<meta name="keywords" content="David Londoño, Full Stack Engineer, Software Engineer, Backend Engineer, TypeScript, React, Next.js, Node.js, PostgreSQL, Application Security, AppSec, OWASP, Web Security, Threat Modeling, Pereira, Colombia, Germany, Remote" />
 
 		{isLocalizedHome && localeAlternates.map((alt) => (
 			<link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
@@ -125,7 +126,7 @@ const jsonLd = JSON.stringify(articleLd ?? personLd);
 		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="David Londoño — Full Stack Engineer · Application Security — Bogotá, Colombia — davidlondon.dev" />
+		<meta property="og:image:alt" content="David Londoño — Full-Stack Engineer · Security-Focused — Pereira, Colombia — davidlondon.dev" />
 		<meta property="og:locale" content={ogLocale} />
 		{ogType === 'article' && publishedTime && (
 			<meta property="article:published_time" content={publishedTime} />

@@ -21,7 +21,32 @@ interface Category {
   skills: string[];
 }
 
+// ponytail: order is the pitch — full-stack engineering first, security as the differentiator after.
 const CATEGORIES: Category[] = [
+  {
+    id: 'languages',
+    Icon: Code2,
+    accent: 'primary',
+    skills: ['TypeScript', 'JavaScript', 'Python', 'C', 'SQL', 'Bash', 'HTML/CSS'],
+  },
+  {
+    id: 'backend',
+    Icon: Server,
+    accent: 'primary',
+    skills: ['Node.js', 'Next.js', 'Express', 'REST APIs', 'WebSockets', 'Jest', 'Zod'],
+  },
+  {
+    id: 'frontend',
+    Icon: Monitor,
+    accent: 'primary',
+    skills: ['React', 'Next.js', 'Astro', 'TailwindCSS', 'Framer Motion', 'Three.js'],
+  },
+  {
+    id: 'databases',
+    Icon: Database,
+    accent: 'primary',
+    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Prisma', 'Redis'],
+  },
   {
     id: 'appsec',
     Icon: ShieldCheck,
@@ -66,34 +91,10 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
-    id: 'backend',
-    Icon: Server,
-    accent: 'primary',
-    skills: ['Node.js', 'Next.js', 'Express', 'REST APIs', 'WebSockets', 'Jest', 'Zod'],
-  },
-  {
-    id: 'frontend',
-    Icon: Monitor,
-    accent: 'primary',
-    skills: ['React', 'Next.js', 'Astro', 'TailwindCSS', 'Framer Motion', 'Three.js'],
-  },
-  {
-    id: 'databases',
-    Icon: Database,
-    accent: 'primary',
-    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Prisma', 'Redis'],
-  },
-  {
     id: 'devops',
     Icon: Cloud,
     accent: 'primary',
     skills: ['AWS', 'Azure', 'Docker', 'CI/CD', 'Digital Ocean', 'Linux hardening', 'Vercel'],
-  },
-  {
-    id: 'languages',
-    Icon: Code2,
-    accent: 'primary',
-    skills: ['TypeScript', 'JavaScript', 'Python', 'C', 'SQL', 'Bash', 'HTML/CSS'],
   },
   {
     id: 'ai',

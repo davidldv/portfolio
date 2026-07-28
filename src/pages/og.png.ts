@@ -5,7 +5,7 @@ export const GET: APIRoute = async () => {
 	const png = await renderOg({
 		eyebrow: 'davidlondon.dev',
 		title: 'David Londoño',
-		footer: 'Software Engineer · Application Security · Full-Stack',
+		footer: 'Full-Stack Engineer · TypeScript & Node · Security-Focused',
 	});
 
 	return new Response(png, {

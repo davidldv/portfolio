@@ -131,10 +131,10 @@ export const ui: Record<Lang, UI> = {
       openMenu: 'Open navigation menu',
     },
     hero: {
-      badge: 'Software Engineer · Application Security & AI Systems',
+      badge: 'Full-Stack Engineer · TypeScript, Node & React · Security-Focused',
       title1: 'David',
       title2: 'Builds & Breaks',
-      subtitle1: 'Full-Stack Engineer focused on Application Security.',
+      subtitle1: 'Full-Stack Engineer — React, Next.js, Node, TypeScript, PostgreSQL.',
       subtitle2: 'Shipping web systems with security as a design input, not an afterthought.',
       ctaPrimary: 'Explore my journey',
       github: 'GitHub',
@@ -159,14 +159,14 @@ export const ui: Record<Lang, UI> = {
     about: {
       eyebrow: 'About',
       heading: 'Who I am',
-      p1: "I'm a Full-Stack Engineer from Bogotá, Colombia, focused on Application Security and the reliability of modern web systems. I build end-to-end, React and Next.js on the front, Node, TypeScript, and PostgreSQL on the back, with attention on the layer where working code becomes a security risk.",
+      p1: "I'm a Full-Stack Engineer from Pereira, Colombia. I build and ship production web systems end-to-end — React and Next.js on the front, Node, TypeScript, and PostgreSQL on the back — and I go deeper than most on the layer where working code becomes a security risk.",
       p2: 'I approach development with a security-first mindset: threat modeling features before they ship, using the OWASP Top 10 as a baseline, and validating systems through offensive testing. I actively train on platforms like TryHackMe and PortSwigger Web Security Academy to understand how real attacks work and how to prevent them.',
       p3: "I'm particularly interested in securing AI-integrated applications as they introduce new attack surfaces beyond traditional web security.",
       p4: "Open to full-time roles, freelance, or interesting side projects. If you have a problem worth solving, let's talk.",
-      location: 'Bogotá, Colombia',
+      location: 'Pereira, Colombia',
       stats: [
         { value: '2024', label: 'Building since' },
-        { value: 'AppSec', label: 'Focus area' },
+        { value: 'Full-Stack', label: 'Security-focused' },
         { value: 'EN / ES / DE', label: 'C1 / Native / B1' },
         { value: 'Remote', label: 'LATAM / US / EU hours' },
       ],
@@ -290,7 +290,7 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Get in touch',
       heading: "Let's build something",
       intro:
-        "Open to Software Engineer and junior AppSec roles — remote, or relocating. If you're hiring for security-minded developers, let's talk.",
+        "Open to Full-Stack, Backend, and Software Engineer roles — remote, or relocating. Security is what I bring on top of shipping features. If that's useful to your team, let's talk.",
       form: {
         name: 'Name',
         namePlaceholder: 'Your name',
@@ -327,10 +327,10 @@ export const ui: Record<Lang, UI> = {
       openMenu: 'Abrir menú de navegación',
     },
     hero: {
-      badge: 'Ingeniero de Software · Seguridad de Aplicaciones y Sistemas de IA',
+      badge: 'Ingeniero Full-Stack · TypeScript, Node y React · Enfoque en seguridad',
       title1: 'David',
       title2: 'Construye y Rompe',
-      subtitle1: 'Ingeniero Full-Stack enfocado en Seguridad de Aplicaciones.',
+      subtitle1: 'Ingeniero Full-Stack — React, Next.js, Node, TypeScript, PostgreSQL.',
       subtitle2:
         'Sistemas web con la seguridad integrada desde el diseño, no como un agregado al final.',
       ctaPrimary: 'Conoce mi recorrido',
@@ -356,14 +356,14 @@ export const ui: Record<Lang, UI> = {
     about: {
       eyebrow: 'Sobre mí',
       heading: 'Quién soy',
-      p1: 'Soy Ingeniero Full-Stack de Bogotá, Colombia, enfocado en Seguridad de Aplicaciones y en la confiabilidad de los sistemas web modernos. Construyo de punta a punta: React y Next.js en el frontend; Node, TypeScript y PostgreSQL en el backend, con atención especial en la capa donde el código que funciona se convierte en un riesgo de seguridad.',
+      p1: 'Soy Ingeniero Full-Stack de Pereira, Colombia. Construyo y lanzo sistemas web de producción de punta a punta: React y Next.js en el frontend; Node, TypeScript y PostgreSQL en el backend, y profundizo más que la mayoría en la capa donde el código que funciona se convierte en un riesgo de seguridad.',
       p2: 'Trabajo con mentalidad de seguridad desde el inicio: threat modeling de las features antes de lanzarlas, OWASP Top 10 como línea base y validación mediante pruebas ofensivas. Entreno de forma activa en plataformas como TryHackMe y la PortSwigger Web Security Academy para entender cómo funcionan los ataques reales y cómo prevenirlos.',
       p3: 'Me interesa especialmente la seguridad de aplicaciones integradas con IA, ya que introducen nuevas superficies de ataque más allá de la seguridad web tradicional.',
       p4: 'Abierto a roles full-time, freelance o proyectos personales interesantes. Si tienes un problema que valga la pena resolver, hablemos.',
-      location: 'Bogotá, Colombia',
+      location: 'Pereira, Colombia',
       stats: [
         { value: '2024', label: 'Programando desde' },
-        { value: 'AppSec', label: 'Área de enfoque' },
+        { value: 'Full-Stack', label: 'Con enfoque en seguridad' },
         { value: 'EN / ES / DE', label: 'C1 / Nativo / B1' },
         { value: 'Remoto', label: 'Horario LATAM / US / EU' },
       ],
@@ -487,7 +487,7 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Contacto',
       heading: 'Construyamos algo',
       intro:
-        'Abierto a roles de Software Engineer y junior AppSec — remoto o con reubicación. Si contratas desarrolladores con mentalidad de seguridad, hablemos.',
+        'Abierto a roles Full-Stack, Backend y Software Engineer — remoto o con reubicación. La seguridad es lo que aporto además de entregar features. Si eso le sirve a tu equipo, hablemos.',
       form: {
         name: 'Nombre',
         namePlaceholder: 'Tu nombre',

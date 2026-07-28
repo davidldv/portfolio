@@ -30,6 +30,11 @@ David_Londono_CV_en.pdf
 *.xlsx
 *.tex
 monetization-plan.md
+resume/interview-prep.md
+roadmap.html
+
+# personal context, not for the public repo
+CLAUDE.md
 
 .claude/
 .vscode/

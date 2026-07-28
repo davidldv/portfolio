@@ -58,7 +58,7 @@ const div = (style: Record<string, unknown>, children?: unknown): El => ({
 	props: { style: { display: 'flex', ...style }, children },
 });
 
-const tree = ({ eyebrow = 'davidlondon.dev', title, footer = 'David Londoño · Software Engineer · Application Security' }: OgOptions): El =>
+const tree = ({ eyebrow = 'davidlondon.dev', title, footer = 'David Londoño · Full-Stack Engineer · Security-Focused' }: OgOptions): El =>
 	div(
 		{
 			width: '100%',
