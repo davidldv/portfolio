@@ -42,10 +42,10 @@ const CATEGORIES: Category[] = [
     skills: ['React', 'Next.js', 'Astro', 'TailwindCSS', 'Framer Motion', 'Three.js'],
   },
   {
-    id: 'databases',
-    Icon: Database,
-    accent: 'primary',
-    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Prisma', 'Redis'],
+    id: 'ai',
+    Icon: BrainCircuit,
+    accent: 'secondary',
+    skills: ['Claude API', 'OpenAI', 'SSE Streaming', 'MCP Servers', 'LLM Integration', 'Prompt Injection defense', 'LLM Guardrails', 'RAG', 'Prompt Engineering'],
   },
   {
     id: 'appsec',
@@ -91,16 +91,16 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    id: 'databases',
+    Icon: Database,
+    accent: 'primary',
+    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Prisma', 'Redis'],
+  },
+  {
     id: 'devops',
     Icon: Cloud,
     accent: 'primary',
     skills: ['AWS', 'Azure', 'Docker', 'CI/CD', 'Digital Ocean', 'Linux hardening', 'Vercel'],
-  },
-  {
-    id: 'ai',
-    Icon: BrainCircuit,
-    accent: 'secondary',
-    skills: ['Claude API', 'OpenAI', 'SSE Streaming', 'MCP Servers', 'LLM Integration', 'Prompt Injection defense', 'LLM Guardrails', 'RAG', 'Prompt Engineering'],
   },
   {
     id: 'tooling',

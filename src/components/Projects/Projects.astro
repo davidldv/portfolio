@@ -20,14 +20,6 @@ interface Project {
 
 const baseProjects: Project[] = [
   {
-    id: 'ctf',
-    name: 'Exploit the Box',
-    tags: ['React', 'TypeScript', 'SQLi', 'IDOR', 'JWT', 'XSS'],
-    href: '/ctf',
-    accent: 'cyan',
-    playable: true,
-  },
-  {
     id: 'authzscan',
     name: 'authzscan',
     tags: ['TypeScript', 'Claude agents', 'ts-morph', 'Next.js', 'IDOR/BOLA', 'SARIF'],
@@ -35,10 +27,10 @@ const baseProjects: Project[] = [
     accent: 'indigo',
   },
   {
-    id: 'llmseclab',
-    name: 'LLM/RAG Security Lab',
-    tags: ['Python', 'FastAPI', 'RAG', 'Prompt Injection', 'MCP', 'OWASP LLM Top 10'],
-    href: 'https://github.com/davidldv/llmseclab',
+    id: 'paircode',
+    name: 'PairCode',
+    tags: ['Next.js', 'PostgreSQL', 'EdDSA', 'Argon2id', 'RBAC', 'WebSockets'],
+    href: 'https://paircode-lime.vercel.app/',
     accent: 'cyan',
   },
   {
@@ -49,11 +41,19 @@ const baseProjects: Project[] = [
     accent: 'indigo',
   },
   {
-    id: 'paircode',
-    name: 'PairCode',
-    tags: ['Next.js', 'PostgreSQL', 'EdDSA', 'Argon2id', 'RBAC', 'WebSockets'],
-    href: 'https://paircode-lime.vercel.app/',
+    id: 'llmseclab',
+    name: 'LLM/RAG Security Lab',
+    tags: ['Python', 'FastAPI', 'RAG', 'Prompt Injection', 'MCP', 'OWASP LLM Top 10'],
+    href: 'https://github.com/davidldv/llmseclab',
     accent: 'cyan',
+  },
+  {
+    id: 'ctf',
+    name: 'Exploit the Box',
+    tags: ['React', 'TypeScript', 'SQLi', 'IDOR', 'JWT', 'XSS'],
+    href: '/ctf',
+    accent: 'cyan',
+    playable: true,
   },
   {
     id: 'la-bodega',
@@ -77,12 +77,13 @@ const projects = baseProjects.map((p) => {
       <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
     </div>
 
-    <!-- ponytail: items-start lets each card size to its content instead of stretching to the tallest in the row -->
-    <div class="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
+    <!-- ponytail: CSS columns masonry — cards pack vertically, no row stretching.
+         Reading order goes down column 1 then column 2, not left-to-right. -->
+    <div class="gap-6 md:columns-2">
       {projects.map(({ name, tagline, description, highlights, tags, href, accent, playable }) => {
         const isInternal = !!href && href.startsWith('/');
         return (
-        <article class={`group relative cursor-pointer overflow-hidden rounded-[20px] border ${playable ? 'border-accent-border' : 'border-border'} bg-surface-elevated transition-all duration-250 hover:-translate-y-0.5 hover:border-accent-border reveal`}>
+        <article class={`group relative mb-6 block break-inside-avoid cursor-pointer overflow-hidden rounded-[20px] border ${playable ? 'border-accent-border' : 'border-border'} bg-surface-elevated transition-all duration-250 hover:-translate-y-0.5 hover:border-accent-border reveal`}>
           <div class={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ${accent === 'cyan' ? '[background:radial-gradient(ellipse_80%_60%_at_50%_0%,var(--accent-glow),transparent)]' : '[background:radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(94_106_210/0.12),transparent)]'} ${playable ? 'opacity-100' : 'group-hover:opacity-100'}`}></div>
           <div class="relative z-1 flex flex-col gap-3 p-8">
             <div class="flex items-start justify-between gap-4">
