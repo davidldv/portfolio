@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import Analytics from '@vercel/analytics/astro';
 import Navigation from '../components/Navigation/Navigation.astro';
 import { detectLang, ui } from '../i18n/ui';
 import '../styles/theme.css';
@@ -105,6 +106,7 @@ const jsonLd = JSON.stringify(articleLd ?? personLd);
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<Analytics />
 
 		<title>{title}</title>
 		<meta name="description" content={description} />
