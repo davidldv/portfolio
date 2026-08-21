@@ -9,7 +9,7 @@ difficulty: "easy"
 
 ## TL;DR
 
-If a JWT verifier honors the `alg` field from the token header, an attacker swaps `alg` to `none`, drops the signature, and forges arbitrary claims. Fix: pin algorithm server-side, never trust header `alg`.
+If a verifier reads the `alg` field out of the token header and does what it says, an attacker sets `alg` to `none`, drops the signature, and writes whatever claims they want. The fix is to pin the algorithm server-side and never trust the header.
 
 ## The vulnerable pattern
 
@@ -18,7 +18,7 @@ If a JWT verifier honors the `alg` field from the token header, an attacker swap
 const decoded = jwt.verify(token, secretOrKey);
 ```
 
-Most libraries default to honoring the `alg` claim in the token header. Send `{"alg":"none","typ":"JWT"}`, base64url it, attach an empty signature, and many verifiers will accept the token as valid.
+Most libraries default to honoring the `alg` claim in the token header. Send `{"alg":"none","typ":"JWT"}`, base64url it, attach an empty signature, and plenty of verifiers accept the token as valid.
 
 ## Exploit walkthrough
 
@@ -48,17 +48,17 @@ const decoded = jwt.verify(token, publicKey, {
 });
 ```
 
-Better: use a library that requires explicit algorithm at construction time and rejects token-supplied `alg` entirely.
+Better still: use a library that makes you name the algorithm when you construct the verifier and ignores whatever the token claims.
 
 ## Lessons learned
 
-- **Never trust attacker-controlled metadata.** The `alg` header is attacker-controlled.
-- **Allowlist, don't denylist.** Blocking `none` misses HS/RS confusion. Pin the exact algorithm you expect.
-- **Validate `iss`, `aud`, `exp` server-side.** Signature alone is not enough.
-- **Audit your auth library defaults.** Some still honor header `alg` in 2026.
+- The `alg` header is attacker-controlled, so treat it the way you treat any other attacker input.
+- Allowlist, don't denylist. Blocking `none` still leaves HS/RS confusion open. Pin the exact algorithm you expect.
+- A valid signature is not the whole check. Validate `iss`, `aud` and `exp` server-side too.
+- Read your auth library's defaults. Some still honor the header `alg` in 2026.
 
 ## References
 
-- [JWT Lab — repo](https://github.com/davidldv/jwtsecuritylab)
-- [RFC 7518 §3.6 — `none` algorithm](https://www.rfc-editor.org/rfc/rfc7518#section-3.6)
-- [PortSwigger — JWT attacks](https://portswigger.net/web-security/jwt)
+- [JWT Lab (repo)](https://github.com/davidldv/jwtsecuritylab)
+- [RFC 7518 §3.6, the `none` algorithm](https://www.rfc-editor.org/rfc/rfc7518#section-3.6)
+- [PortSwigger: JWT attacks](https://portswigger.net/web-security/jwt)

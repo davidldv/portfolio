@@ -3,9 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer/Footer.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 
-const title = 'Auth & Access-Control Review — David Londoño';
+const title = 'Auth & Access-Control Review · David Londoño';
 const description =
-  'Fixed-scope authentication and authorization security reviews. I find the auth and access-control bugs that ship to prod — alg=none, key confusion, weak secrets, broken RBAC, and IDOR/BOLA where one user reaches another user’s data — with a clear report and the patch. Fixed price, fixed timeline.';
+  "Fixed-scope reviews of authentication and authorization. I look for the access-control bugs that reach production: alg=none, key confusion, weak secrets, broken RBAC, and the IDOR/BOLA cases where one logged-in user can read another user's data. You get a report with proof and the patch, at a fixed price and a fixed date.";
 
 // ───────────────────────────────────────────────────────────────────
 // PAYMENT: PayPal.me handle (the part after paypal.me/).
@@ -22,11 +22,11 @@ const tiers = [
     accent: 'cyan' as const,
     tagline: 'One flow, fast read',
     blurb:
-      'A single auth flow or endpoint checked against the five JWT classes, claim hygiene, and the most likely IDOR on that route. Proof of value, fast.',
+      'One auth flow or endpoint, checked against the five JWT bug classes, claim hygiene, and the IDOR most likely to be sitting on that route. Small enough to find out whether the bigger engagement is worth it.',
     points: [
       '1-page findings report with severities',
       'Concrete remediation for each issue',
-      '48–72h turnaround',
+      '48 to 72 hour turnaround',
     ],
     cta: 'Book & pay',
   },
@@ -37,11 +37,11 @@ const tiers = [
     featured: true,
     tagline: 'Authentication + authorization',
     blurb:
-      'The full surface: JWT, sessions, RBAC and OAuth/OIDC config — plus an IDOR/BOLA pass over your Next.js route handlers and Server Actions, where one user reaches another user’s data.',
+      "The whole surface: JWT, sessions, RBAC and OAuth/OIDC config, plus an IDOR/BOLA pass over your Next.js route handlers and Server Actions, looking for the spots where one user can reach another user's data.",
     points: [
       'Report: severities, PoCs, remediation, SARIF',
       'One free re-test after you patch',
-      '3–5 day turnaround',
+      '3 to 5 day turnaround',
     ],
     cta: 'Book & pay',
   },
@@ -51,7 +51,7 @@ const tiers = [
     accent: 'cyan' as const,
     tagline: 'I find it and I patch it',
     blurb:
-      'Everything in the Auth & Access Review, then I implement the hardening myself and hand you a reviewed pull request ready to merge.',
+      'Everything in the Auth & Access Review, and then I write the hardening myself and hand you a pull request that is ready to merge.',
     points: [
       'Everything in the Review',
       'Merged hardening PR against your repo',
@@ -65,34 +65,34 @@ const steps = [
   {
     n: '01',
     t: 'Scope in one call',
-    d: 'A 15-minute call (or async) to confirm the surface. Fixed price, fixed timeline — no hourly meter, no scope creep.',
+    d: 'A 15-minute call, or async if you prefer, to agree on what is in scope. Price and date are fixed from there, so there is no hourly meter running against you.',
   },
   {
     n: '02',
     t: 'I break it',
-    d: 'My own tooling plus manual review: jwt-scan over your tokens, authzscan over your route handlers, and a human read of the auth and access-control logic.',
+    d: 'My own tooling plus manual review: jwt-scan over your tokens, authzscan over your route handlers, and me reading the auth and access-control logic myself.',
   },
   {
     n: '03',
     t: 'You get the fix',
-    d: 'A clear report with severities, proof-of-concept and remediation (Markdown + SARIF for code scanning). One free re-test after you patch so you know it is closed.',
+    d: 'A report with severities, a proof of concept and the remediation for each finding (Markdown plus SARIF for code scanning). One free re-test after you patch, so you know it is actually closed.',
   },
 ];
 
 const proof = [
   {
     label: 'authzscan',
-    sub: 'Autonomous IDOR/BOLA review for Next.js — validated on a 16-vuln benchmark with recall/precision gates',
+    sub: 'Automated IDOR/BOLA review for Next.js, measured against a 16-vuln benchmark with recall and precision gates',
     href: 'https://github.com/davidldv/authzscan',
   },
   {
     label: 'jwt-scan',
-    sub: 'Published on npm — CLI scanner for JWT misconfigurations',
+    sub: 'A CLI scanner for JWT misconfigurations, published on npm',
     href: 'https://www.npmjs.com/package/jwt-scan',
   },
   {
     label: 'JWT Security Lab + writeups',
-    sub: 'Five production-grade JWT flaws reproduced from scratch, written up in detail',
+    sub: 'Five JWT flaws reproduced from scratch and written up in detail',
     href: '/writeups/',
   },
 ];
@@ -110,11 +110,11 @@ const proof = [
         </h1>
         <p class="mb-8 max-w-2xl text-[1.05rem] leading-[1.7] text-fg-muted">
           <code class="font-mono text-[0.92em] text-accent">alg=none</code>, HS/RS key confusion,
-          weak secrets, broken RBAC — and the bug pattern-matching scanners miss:
-          <strong class="text-fg">IDOR/BOLA</strong>, where an authenticated user reaches
-          <em>another user’s</em> data. I review your authentication and authorization surface,
-          hand you a report with proof-of-concept and remediation, and re-test it after you patch.
-          Fixed price, fixed timeline.
+          weak secrets, broken RBAC, and the one that pattern-matching scanners tend to walk past:
+          <strong class="text-fg">IDOR/BOLA</strong>, where a logged-in user reaches
+          <em>another user's</em> data. I go through your authentication and authorization surface,
+          hand you a report with a proof of concept and the fix for each finding, and re-test after
+          you patch. Fixed price, fixed date.
         </p>
         <div class="flex flex-wrap items-center gap-3">
           <a
@@ -194,8 +194,8 @@ const proof = [
           ))}
         </div>
         <p class="mx-auto mt-5 max-w-2xl text-center text-[0.8rem] leading-[1.6] text-fg-muted">
-          Prices in USD, paid via PayPal. Remote, worldwide. Engagements run under a written scope and
-          authorization — I only test systems you own or are authorized to test.
+          Prices in USD, paid via PayPal. Remote, worldwide. Every engagement runs under a written
+          scope and authorization: I only test systems you own or are authorized to test.
         </p>
       </div>
     </section>
@@ -204,7 +204,7 @@ const proof = [
     <section class="relative z-2 px-6 py-12">
       <div class="mx-auto max-w-5xl">
         <Eyebrow label="How it works" class="mb-2" />
-        <h2 class="mb-10 text-[clamp(1.8rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-fg">Three steps, no surprises</h2>
+        <h2 class="mb-10 text-[clamp(1.8rem,4vw,2.6rem)] font-bold tracking-[-0.04em] text-fg">How a review runs</h2>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           {steps.map((s) => (
             <div class="rounded-[18px] border border-border bg-surface-elevated p-7">
@@ -225,10 +225,11 @@ const proof = [
           I build the tools I review with
         </h2>
         <p class="mb-8 max-w-2xl text-[0.98rem] leading-[1.7] text-fg-muted">
-          I don't just run a scanner — I wrote two. <strong class="text-fg">authzscan</strong> reasons
-          about IDOR/BOLA in Next.js code the way pattern-matching SAST can't, and is measured against a
-          seeded benchmark with recall and precision gates. The detection logic comes from reproducing
-          the bugs from scratch. The same rigor goes into your review.
+          I wrote two of the scanners I run. <strong class="text-fg">authzscan</strong> reads Next.js
+          code and reasons about IDOR/BOLA the way pattern-matching SAST can't, and it is measured
+          against a seeded benchmark with recall and precision gates. That detection logic exists
+          because I reproduced every one of those bugs from scratch first. Your code gets the same
+          treatment.
         </p>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {proof.map((p) => (
@@ -250,12 +251,12 @@ const proof = [
     <section id="book" class="relative z-2 px-6 py-16">
       <div class="mx-auto max-w-3xl rounded-[24px] border border-accent-border bg-surface-elevated p-8 sm:p-10">
         <h2 class="mb-2 text-[clamp(1.6rem,4vw,2.4rem)] font-bold tracking-[-0.03em] text-fg text-center">
-          Book a review — or ask first
+          Book a review, or ask first
         </h2>
         <p class="mx-auto mb-8 max-w-xl text-center text-[0.96rem] leading-[1.65] text-fg-muted">
-          Tell me about your app and I'll reply within a day. Want a free read? Pick
-          <em>Free health check</em> below and send me a token or a public repo. Ready to go? Use the
-          PayPal buttons above to book instantly.
+          Tell me about your app and I'll reply within a day. If you want a free read first, pick
+          <em>Free health check</em> below and send me a token or a public repo. If you already know
+          what you need, the PayPal buttons above book it right away.
         </p>
 
         <form
@@ -286,11 +287,11 @@ const proof = [
             <div class="flex flex-col gap-1.5">
               <label for="s-plan" class="text-[0.82rem] font-medium text-fg-muted">What do you need?</label>
               <select id="s-plan" name="plan" required class="w-full rounded-[10px] border border-border bg-surface px-4 py-3 text-[0.95rem] text-fg outline-none transition-colors duration-150 focus:border-accent">
-                <option value="Spot Check ($150)">Spot Check — $150</option>
-                <option value="Auth & Access Review ($600)" selected>Auth & Access Review — $600</option>
-                <option value="Review + Fix ($1,200)">Review + Fix — $1,200</option>
+                <option value="Spot Check ($150)">Spot Check · $150</option>
+                <option value="Auth & Access Review ($600)" selected>Auth & Access Review · $600</option>
+                <option value="Review + Fix ($1,200)">Review + Fix · $1,200</option>
                 <option value="Free health check">Free 5-min health check</option>
-                <option value="Not sure yet">Not sure yet — help me scope</option>
+                <option value="Not sure yet">Not sure yet, help me scope</option>
               </select>
             </div>
           </div>
@@ -357,7 +358,7 @@ const proof = [
       const formData = new FormData(form);
       const name = String(formData.get('name') ?? '').trim();
       const plan = String(formData.get('plan') ?? '').trim();
-      formData.append('subject', `New service inquiry — ${plan} — ${name}`);
+      formData.append('subject', `New service inquiry: ${plan} (${name})`);
 
       const json = JSON.stringify(Object.fromEntries(formData));
 
@@ -381,7 +382,7 @@ const proof = [
           const select = form.querySelector<HTMLSelectElement>('select[name="plan"]');
           if (select) select.value = 'Auth & Access Review ($600)';
           if (btnText) btnText.textContent = 'Sent ✓';
-          if (status) status.textContent = "Thanks — I'll reply within a day.";
+          if (status) status.textContent = "Thanks, I'll reply within a day.";
           window.setTimeout(() => {
             if (btnText && submitBtn && btnIcon) {
               btnText.textContent = 'Send';
@@ -399,7 +400,7 @@ const proof = [
           btnIcon.style.display = 'block';
           submitBtn.disabled = false;
         }
-        if (status) status.textContent = 'Could not send — email dlondon.dev@gmail.com directly.';
+        if (status) status.textContent = 'Could not send. Email dlondon.dev@gmail.com directly.';
       }
     });
   };

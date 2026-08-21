@@ -16,8 +16,8 @@ interface Props {
 }
 
 const {
-	title = 'David Londoño — Full-Stack Engineer · Security-Focused',
-	description = 'Full-Stack Engineer shipping web systems with TypeScript, React, Node.js and PostgreSQL — with application security as the differentiator. Based in Pereira, Colombia; open to remote work and relocation to Germany or the US.',
+	title = 'David Londoño · Full-Stack Engineer, Security-Focused',
+	description = 'Full-Stack Engineer building web systems with TypeScript, React, Node.js and PostgreSQL, with application security as the differentiator. Based in Pereira, Colombia, open to remote work and to relocating to Germany or the US.',
 	image = '/og.png',
 	canonicalPath,
 	ogType = 'website',
@@ -128,7 +128,7 @@ const jsonLd = JSON.stringify(articleLd ?? personLd);
 		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="David Londoño — Full-Stack Engineer · Security-Focused — Pereira, Colombia — davidlondon.dev" />
+		<meta property="og:image:alt" content="David Londoño · Full-Stack Engineer, security-focused · Pereira, Colombia · davidlondon.dev" />
 		<meta property="og:locale" content={ogLocale} />
 		{ogType === 'article' && publishedTime && (
 			<meta property="article:published_time" content={publishedTime} />
@@ -148,7 +148,7 @@ const jsonLd = JSON.stringify(articleLd ?? personLd);
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImageURL} />
-		<meta name="twitter:image:alt" content="David Londoño — Full Stack Engineer & AI Systems — Pereira, Colombia" />
+		<meta name="twitter:image:alt" content="David Londoño · Full-Stack Engineer, security-focused · Pereira, Colombia" />
 
 		<meta name="theme-color" content="#050506" media="(prefers-color-scheme: dark)" />
 		<meta name="theme-color" content="#f8f9fc" media="(prefers-color-scheme: light)" />

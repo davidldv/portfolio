@@ -3,9 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer/Footer.astro';
 import Eyebrow from '../../components/ui/Eyebrow.astro';
 
-const title = 'David Londoño — Full-Stack Engineer · Sicherheitsfokus';
+const title = 'David Londoño · Full-Stack Engineer mit Sicherheitsfokus';
 const description =
-  'Full-Stack-Entwickler aus Kolumbien: TypeScript, React, Node.js, PostgreSQL — mit Application Security als Schwerpunkt. Offen für Umzug nach Deutschland.';
+  'Full-Stack-Entwickler aus Kolumbien: TypeScript, React, Node.js und PostgreSQL, mit Application Security als Schwerpunkt. Offen für einen Umzug nach Deutschland.';
 
 const stats = [
   { value: '2024', label: 'Entwickler seit' },
@@ -28,11 +28,11 @@ const certs = [
 const certStatus = { completed: 'Abgeschlossen', 'in-progress': 'In Bearbeitung', planned: 'Geplant' } as const;
 
 const proofLead =
-  'Ich arbeite in der Schicht, in der schnelles Liefern auf sicheres Liefern trifft — Auth, Sessions, Tokens, RBAC und die OWASP Top 10. Erst Angriff, dann gehärtet.';
+  'Der größte Teil meiner Arbeit liegt bei Auth, Sessions, Tokens und RBAC, mit den OWASP Top 10 als Checkliste. Ich greife zuerst an und repariere danach, was ich gefunden habe.';
 const proofItems = [
-  { title: 'JWT Security Lab', desc: 'Fünf produktionsreife JWT-Schwachstellen von Grund auf reproduziert und gegen eine sichere Version gehärtet.', href: 'https://github.com/davidldv/jwtsecuritylab' },
-  { title: 'jwt-scan', desc: 'npm-CLI, die dieselben Bugs in Tokens und Live-Endpoints aufspürt — CI-taugliche Exit-Codes.', href: 'https://www.npmjs.com/package/jwt-scan' },
-  { title: 'Security-Writeups', desc: 'Angriff und Verteidigung: alg=none-Bypass, HS/RS-Confusion, kid-Injection.', href: '/writeups/' },
+  { title: 'JWT Security Lab', desc: 'Fünf echte JWT-Schwachstellen von Grund auf nachgebaut und dann in einer gehärteten Kopie derselben API repariert.', href: 'https://github.com/davidldv/jwtsecuritylab' },
+  { title: 'jwt-scan', desc: 'Eine npm-CLI, die dieselben Bugs in Tokens und Live-Endpoints sucht. Die Exit-Codes funktionieren in CI.', href: 'https://www.npmjs.com/package/jwt-scan' },
+  { title: 'Security-Writeups', desc: 'Wie die Angriffe funktionieren und wie ich sie gestoppt habe: alg=none-Bypass, HS/RS-Confusion, kid-Injection.', href: '/writeups/' },
 ];
 ---
 
@@ -53,7 +53,7 @@ const proofItems = [
         </h1>
         <p class="mb-10 max-w-2xl text-[1.05rem] leading-[1.75] text-fg-muted">
           Full-Stack-Entwickler aus Pereira, Kolumbien. React, Next.js, Node,
-          TypeScript und PostgreSQL — mit Application Security als Schwerpunkt.
+          TypeScript und PostgreSQL, mit Application Security als Schwerpunkt.
           Offen für einen Umzug nach Deutschland.
         </p>
         <div class="flex flex-wrap gap-3">
@@ -104,17 +104,18 @@ const proofItems = [
 
         <div class="flex flex-col gap-6 text-[1.05rem] leading-[1.8] text-fg-muted">
           <p>
-            Ich baue Web-Systeme von vorne bis hinten, React und Next.js im
-            Frontend, Node, TypeScript und PostgreSQL im Backend, und interessiere
-            mich besonders für die Schicht, in der aus funktionierendem Code
-            Sicherheitsvorfälle werden.
+            Ich baue Web-Systeme von vorne bis hinten: React und Next.js im
+            Frontend, Node, TypeScript und PostgreSQL im Backend. Am meisten
+            interessiert mich die Stelle, an der Code, der einwandfrei
+            funktioniert, trotzdem ein Sicherheitsproblem ist.
           </p>
           <p>
-            Mein aktueller Fokus: die Lücke zwischen „schnell liefern" und „sicher
-            liefern" schließen. Das bedeutet Threat Modeling für Features, die ich
-            entwickle, OWASP Top 10 als praktische Checkliste, und Angriffstechniken
-            lernen über TryHackMe und die PortSwigger Web Security Academy, damit
-            ich Angriffe verstehe, bevor ich mich verteidige.
+            Mein aktueller Fokus: die Lücke zwischen „schnell liefern“ und „sicher
+            liefern“ schließen. Das heißt Threat Modeling für Features, die ich
+            selbst entwickle, die OWASP Top 10 als praktische Checkliste, und
+            Angriffstechniken über TryHackMe und die PortSwigger Web Security
+            Academy lernen. Gegen einen Angriff, den man nie selbst ausgeführt hat,
+            verteidigt man sich schlecht.
           </p>
           <p>
             Offen für Full-Stack-, Backend- und Software-Engineer-Stellen, remote
@@ -184,8 +185,8 @@ const proofItems = [
           Lass uns sprechen
         </h2>
         <p class="mb-8 max-w-2xl text-[1.05rem] leading-[1.7] text-fg-muted">
-          Wenn Sie für sicherheitsbewusste Entwickler einstellen oder ein Projekt
-          haben, das sich lohnt, schreiben Sie mir gerne.
+          Wenn Sie jemanden suchen, der beim Bauen schon an die Angriffsseite denkt,
+          oder ein Projekt haben, das sich lohnt: schreiben Sie mir.
         </p>
         <ul class="m-0 flex flex-wrap gap-3 p-0" role="list">
           {socials.map(({ label, href }) => (

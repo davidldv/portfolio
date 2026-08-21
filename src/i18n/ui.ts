@@ -134,35 +134,35 @@ export const ui: Record<Lang, UI> = {
       badge: 'Full-Stack Engineer · TypeScript, Node & React · Security-Focused',
       title1: 'David',
       title2: 'Builds & Breaks',
-      subtitle1: 'Full-Stack Engineer — React, Next.js, Node, TypeScript, PostgreSQL.',
-      subtitle2: 'Shipping web systems with security as a design input, not an afterthought.',
+      subtitle1: 'Full-Stack Engineer: React, Next.js, Node, TypeScript, PostgreSQL.',
+      subtitle2: 'I build web systems and think about how they break while I build them.',
       ctaPrimary: 'Explore my journey',
       github: 'GitHub',
     },
     proof: {
-      lead: 'I work the layer where shipping fast meets shipping safe — auth, sessions, tokens, RBAC, and the OWASP Top 10. Offense-first, then hardened.',
+      lead: 'Most of my work sits in auth, sessions, tokens and RBAC, with the OWASP Top 10 as the checklist. I attack it first, then fix what I found.',
       items: [
         {
           title: 'JWT Security Lab',
-          desc: 'Five production-grade JWT flaws reproduced from scratch, then hardened against a secure mirror.',
+          desc: 'Five real JWT flaws rebuilt from scratch, then fixed in a hardened copy of the same API.',
         },
         {
           title: 'jwt-scan',
-          desc: 'npm CLI that hunts those same bugs in tokens and live endpoints — CI-friendly exit codes.',
+          desc: 'An npm CLI that looks for those same bugs in tokens and live endpoints. The exit codes work in CI.',
         },
         {
           title: 'Security writeups',
-          desc: 'Offense-and-defense breakdowns: alg=none bypass, HS/RS confusion, kid injection.',
+          desc: 'How the attacks work and how I stopped them: alg=none bypass, HS/RS confusion, kid injection.',
         },
       ],
     },
     about: {
       eyebrow: 'About',
       heading: 'Who I am',
-      p1: "I'm a Full-Stack Engineer from Pereira, Colombia. I build and ship production web systems end-to-end — React and Next.js on the front, Node, TypeScript, and PostgreSQL on the back — and I go deeper than most on the layer where working code becomes a security risk.",
-      p2: 'I approach development with a security-first mindset: threat modeling features before they ship, using the OWASP Top 10 as a baseline, and validating systems through offensive testing. I actively train on platforms like TryHackMe and PortSwigger Web Security Academy to understand how real attacks work and how to prevent them.',
-      p3: "I'm particularly interested in securing AI-integrated applications as they introduce new attack surfaces beyond traditional web security.",
-      p4: "Open to full-time roles, freelance, or interesting side projects. If you have a problem worth solving, let's talk.",
+      p1: "I'm a Full-Stack Engineer from Pereira, Colombia. I build production web systems end to end, React and Next.js on the front, Node, TypeScript and PostgreSQL on the back. I spend more time than most developers on the point where code that works correctly is still a security problem.",
+      p2: 'That means threat modeling a feature before it ships, keeping the OWASP Top 10 as the baseline, and testing my own work by attacking it. I train on TryHackMe and the PortSwigger Web Security Academy, because it is hard to defend against an attack you have never run yourself.',
+      p3: "Right now the part I'm most interested in is securing apps with an LLM inside them. They add attack surface that traditional web security doesn't cover.",
+      p4: 'Open to full-time work, freelance, or a side project that sounds interesting. If you have a problem worth solving, send me a message.',
       location: 'Pereira, Colombia',
       stats: [
         { value: '2024', label: 'Building since' },
@@ -176,7 +176,7 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Credentials',
       heading: 'Certification roadmap',
       intro:
-        'Credentials backing the security pivot — completed and in progress, alongside shipped projects.',
+        "The certifications behind the move into security: what's finished, and what I'm studying for now. The projects are the other half.",
       completed: 'Completed',
       inProgress: 'In progress',
       planned: 'Planned',
@@ -192,13 +192,13 @@ export const ui: Record<Lang, UI> = {
           role: 'Frontend Developer',
           dateRange: 'Jul 2025 - Sep 2025',
           description:
-            'Migrated business-critical legacy modules from jQuery to React: 40% bundle-size reduction and shrunk the client-side attack surface by consolidating logic into a modular Atomic Design library. Engineered Azure CI/CD to replace manual SSH deploys, cutting deploy time from 2+ hours to <15 min and enabling automated test gates — foundation for SAST and dependency scanning.',
+            'Moved business-critical legacy modules from jQuery to React: 40% smaller bundle, and less client-side attack surface once the logic lived in one modular Atomic Design library. I also swapped the manual SSH deploys for an Azure CI/CD pipeline, which took a deploy from over two hours to under fifteen minutes and gave the team somewhere to hang automated test gates, SAST and dependency scanning.',
         },
         elitestack: {
           role: 'Full-Stack Development',
           dateRange: 'Jun 2024 - Jul 2024',
           description:
-            'Hands-on bootcamp: Linux/CLI, TypeScript, Node.js, Docker, REST APIs, WebSockets, Next.js, AWS. Foundation of how modern production systems fit together.',
+            'Hands-on bootcamp: Linux/CLI, TypeScript, Node.js, Docker, REST APIs, WebSockets, Next.js, AWS. Where I learned how the pieces of a production system fit together.',
         },
       },
     },
@@ -227,61 +227,61 @@ export const ui: Record<Lang, UI> = {
         paircode: {
           tagline: 'Secure real-time collaborative workspace',
           description:
-            'Secure collaborative system with verified identity, hardened authentication, and a purpose-built realtime layer.',
+            'A collaborative workspace where I wrote the identity and auth layer myself instead of importing one, plus a realtime layer built to match it.',
           highlights: [
-            'In-house auth stack: EdDSA JWTs, rotating refresh tokens with reuse detection, Argon2id hashing, CSRF protection.',
-            'Custom WebSocket server with single-use ticket handshake, per-event authorization, and RBAC enforced server-side.',
-            'Realtime room layer: presence, typing, shared threaded context, and persistent history that survives reconnects.',
+            'Auth built in-house: EdDSA JWTs, rotating refresh tokens that detect reuse, Argon2id hashing, CSRF protection.',
+            'My own WebSocket server. The handshake uses a single-use ticket, every event is authorized on its own, and RBAC is checked server-side.',
+            'Rooms carry presence, typing indicators, shared threaded context, and history that survives a reconnect.',
           ],
         },
         'jwt-lab': {
-          tagline: 'Offense-and-defense JWT vulnerability lab',
+          tagline: 'A JWT lab with a broken half and a fixed half',
           description:
-            'Offense-and-defense lab exercising real-world JWT vulnerabilities against a hardened mirror, proving each fix rather than claiming it.',
+            'Two versions of the same API, one vulnerable and one hardened. Every attack lands on the first and bounces off the second, so you can run the fixes instead of taking my word for them.',
           highlights: [
-            'From-scratch JWT sign/verify in TypeScript (no libraries) reproducing five production-grade flaws: alg=none bypass, HS256/RS256 key confusion, weak-secret brute-force, kid header injection, and missing iss/aud/exp validation.',
-            'Reproducible exploit scripts (Bash + OpenSSL) and a harness that proves each payload succeeds against the vulnerable API and is rejected by the secure one.',
-            'Hardened service eliminates entire bug classes: single-algorithm RS256 allowlist, fixed in-memory kid registry with rotation, generic errors, and scrypt password hashing.',
+            'JWT signing and verification written from scratch in TypeScript, no libraries, reproducing five flaws that reach production: alg=none bypass, HS256/RS256 key confusion, weak-secret brute force, kid header injection, and missing iss/aud/exp validation.',
+            'Exploit scripts in Bash and OpenSSL, plus a harness that runs every payload against both APIs and checks the result each way.',
+            'The hardened service removes whole classes of bug at once: one allowed algorithm (RS256), a fixed in-memory kid registry with rotation, generic errors, and scrypt for passwords.',
           ],
         },
         'la-bodega': {
-          tagline: 'Solo-built, in-production e-commerce platform',
+          tagline: 'Solo-built e-commerce platform, live in production',
           description:
-            'Solo-built, in-production e-commerce platform for a family-owned hardware retailer.',
+            'A live storefront for a family-owned hardware retailer. Real customers, real payments, and nobody else to call when it breaks.',
           highlights: [
-            'Sole engineer end-to-end: requirements, architecture, real-time inventory catalog, deployment, and ongoing maintenance for a live retail storefront.',
-            'Designed and shipped authentication, session security, and RBAC for staff vs. customer surfaces; integrated Mercado Pago for live online transactions.',
-            'Hardened the application layer against OWASP Top 10 risks: parameterized queries, server-side input validation, CSRF protection on state-changing endpoints, and least-privilege database roles.',
+            'I was the only engineer on it: requirements, architecture, the real-time inventory catalog, deployment, and the maintenance it still gets.',
+            'Built the authentication, session security and RBAC that keep the staff side separate from the customer side, and wired up Mercado Pago for live transactions.',
+            'Hardened the application layer against the OWASP Top 10: parameterized queries, input validated on the server, CSRF protection on anything that changes state, and database roles with the least privilege that still works.',
           ],
         },
         authzscan: {
-          tagline: 'Autonomous IDOR/BOLA review, driven by Claude agents',
+          tagline: 'IDOR/BOLA review that runs itself, on Claude agents',
           description:
-            'An autonomous pentest of authorization logic in Next.js App Router repos: agents trace each client-controlled identifier to the database query it reaches and flag the ownership checks that are missing — the #1 OWASP risk that pattern-matching SAST largely misses.',
+            'An automated pentest of authorization logic in Next.js App Router repos. Agents follow every client-controlled identifier to the database query it reaches and flag the ownership checks nobody wrote. It is the top OWASP risk, and pattern-matching SAST mostly cannot see it.',
           highlights: [
-            'Four-phase pipeline: deterministic endpoint inventory with ts-morph (route handlers, Server Actions, auth-library detection), an agent trace pass, an adversarial verify pass that kills false positives, and Markdown / SARIF / JSON reports with CI-ready exit codes.',
-            'Measured, not vibes: evaluated on a seeded benchmark of 16 IDOR/BOLA vulnerabilities plus 6 hardened twins as false-positive tripwires, with recall/precision gates and an oracle runner that validates the harness independently of model quality.',
-            'Degrades loudly, never silently: endpoints that can’t be analyzed are reported as not-analyzed rather than clean, and unverifiable candidates surface as low-confidence instead of being dropped.',
+            'Four phases: a deterministic endpoint inventory with ts-morph (route handlers, Server Actions, auth-library detection), an agent trace pass, an adversarial verify pass whose whole job is killing false positives, and reports in Markdown, SARIF or JSON with exit codes CI can gate on.',
+            'The accuracy is a number, not a feeling: a seeded benchmark of 16 IDOR/BOLA bugs plus 6 correctly written twins as false-positive traps, recall and precision gates, and an oracle runner that proves the harness scores right regardless of how good the model is.',
+            'It fails loudly. An endpoint it could not analyze is reported as not analyzed, never as clean, and a candidate it cannot confirm comes back as low confidence instead of quietly disappearing.',
           ],
         },
         llmseclab: {
-          tagline: 'Offense-and-defense LLM/RAG security lab',
+          tagline: 'LLM/RAG security lab, attack side and defense side',
           description:
-            'Two FastAPI services with the same RAG surface — one intentionally vulnerable, one hardened. Every attack in the suite succeeds against the first and fails against the second, so each fix is demonstrated rather than claimed.',
+            'Two FastAPI services with the same RAG surface: one left vulnerable on purpose, one hardened. Every attack in the suite works on the first and fails on the second.',
           highlights: [
-            'Five OWASP LLM Top 10 scenarios as an executable pytest attack suite: cross-tenant retrieval leak (confused deputy), indirect prompt injection via retrieved documents, vector-store poisoning through forged ingest metadata, excessive agency over a real MCP tool server, and stored XSS from model output.',
-            'RAG pipeline built by hand — embeddings, in-memory vector store, multi-tenant ACL corpus — no LangChain, so the diff between the two apps is exactly the set of security decisions.',
-            'A deterministic mock LLM makes “every attack fails against the secure API” a reliable CI property; an OpenRouter-backed provider re-checks injection behavior against a real model.',
+            'Five OWASP LLM Top 10 scenarios written as a pytest attack suite: cross-tenant retrieval leak (confused deputy), indirect prompt injection through retrieved documents, vector-store poisoning via forged ingest metadata, excessive agency over a real MCP tool server, and stored XSS coming straight out of the model.',
+            'The RAG pipeline is hand-built (embeddings, in-memory vector store, multi-tenant ACL corpus) with no LangChain, so the diff between the two apps is the security decisions and nothing else.',
+            'A deterministic mock LLM turns "every attack fails against the secure API" into something CI can rely on, and an OpenRouter provider re-runs the injection tests against a real model.',
           ],
         },
         ctf: {
           tagline: 'Playable, sandboxed web-security CTF',
           description:
-            'An interactive hacking terminal you can actually play — four boxes reproducing real vulnerability classes, safely simulated in the browser with no network and no eval.',
+            'A hacking terminal you can actually type into. Four boxes, four real vulnerability classes, all simulated in the browser: no network calls, no eval.',
           highlights: [
-            'Four exploit paths: SQLi auth bypass, IDOR / broken access control, JWT alg=none signature strip, and reflected XSS — each pattern-matched against a fake target.',
-            'Full terminal UX: command interpreter, command history, typewriter boot, matrix-rain canvas, CRT scanlines, and flag-capture progression.',
-            'The same attack classes I defend against in my JWT Security Lab and jwt-scan work — offense to prove the defense.',
+            'Four exploit paths: SQLi auth bypass, IDOR, a JWT alg=none signature strip, and reflected XSS, each matched against a fake target.',
+            'The whole terminal: a command interpreter with history, a typewriter boot sequence, matrix rain on a canvas, CRT scanlines, and flags to capture in order.',
+            'Same attack classes I defend against in the JWT Security Lab and jwt-scan.',
           ],
         },
       },
@@ -290,7 +290,7 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Get in touch',
       heading: "Let's build something",
       intro:
-        "Open to Full-Stack, Backend, and Software Engineer roles — remote, or relocating. Security is what I bring on top of shipping features. If that's useful to your team, let's talk.",
+        'Open to Full-Stack, Backend and Software Engineer roles, remote or relocating. Security is what I bring on top of shipping features. If your team could use that, write to me.',
       form: {
         name: 'Name',
         namePlaceholder: 'Your name',
@@ -302,7 +302,7 @@ export const ui: Record<Lang, UI> = {
         sending: 'Sending...',
         sent: 'Message sent!',
         error: 'Error sending',
-        subjectPrefix: '✨ New Portfolio Inquiry from',
+        subjectPrefix: 'New portfolio inquiry from',
       },
       orReach: 'Or reach me directly',
     },
@@ -321,7 +321,7 @@ export const ui: Record<Lang, UI> = {
       writeups: 'Writeups',
       services: 'Servicios',
       contact: 'Contacto',
-      homeAriaLabel: 'Inicio — David London',
+      homeAriaLabel: 'Inicio: David London',
       mainAriaLabel: 'Navegación principal',
       skipToMain: 'Saltar al contenido principal',
       openMenu: 'Abrir menú de navegación',
@@ -330,36 +330,35 @@ export const ui: Record<Lang, UI> = {
       badge: 'Ingeniero Full-Stack · TypeScript, Node y React · Enfoque en seguridad',
       title1: 'David',
       title2: 'Construye y Rompe',
-      subtitle1: 'Ingeniero Full-Stack — React, Next.js, Node, TypeScript, PostgreSQL.',
-      subtitle2:
-        'Sistemas web con la seguridad integrada desde el diseño, no como un agregado al final.',
+      subtitle1: 'Ingeniero Full-Stack: React, Next.js, Node, TypeScript, PostgreSQL.',
+      subtitle2: 'Construyo sistemas web y pienso en cómo se rompen mientras los construyo.',
       ctaPrimary: 'Conoce mi recorrido',
       github: 'GitHub',
     },
     proof: {
-      lead: 'Trabajo en la capa donde entregar rápido se cruza con entregar seguro — auth, sesiones, tokens, RBAC y el OWASP Top 10. Primero ofensiva, luego endurecido.',
+      lead: 'Casi todo mi trabajo está en auth, sesiones, tokens y RBAC, con el OWASP Top 10 como lista de chequeo. Primero lo ataco y después arreglo lo que encontré.',
       items: [
         {
           title: 'JWT Security Lab',
-          desc: 'Cinco fallos de JWT de nivel producción reproducidos desde cero y endurecidos contra una versión segura.',
+          desc: 'Cinco fallos reales de JWT reconstruidos desde cero y luego corregidos en una copia endurecida de la misma API.',
         },
         {
           title: 'jwt-scan',
-          desc: 'CLI en npm que caza esos mismos bugs en tokens y endpoints en vivo — con exit codes para CI.',
+          desc: 'CLI en npm que busca esos mismos bugs en tokens y endpoints en vivo. Los exit codes sirven en CI.',
         },
         {
           title: 'Writeups de seguridad',
-          desc: 'Análisis de ataque y defensa: bypass alg=none, confusión HS/RS, inyección kid.',
+          desc: 'Cómo funcionan los ataques y cómo los detuve: bypass alg=none, confusión HS/RS, inyección kid.',
         },
       ],
     },
     about: {
       eyebrow: 'Sobre mí',
       heading: 'Quién soy',
-      p1: 'Soy Ingeniero Full-Stack de Pereira, Colombia. Construyo y lanzo sistemas web de producción de punta a punta: React y Next.js en el frontend; Node, TypeScript y PostgreSQL en el backend, y profundizo más que la mayoría en la capa donde el código que funciona se convierte en un riesgo de seguridad.',
-      p2: 'Trabajo con mentalidad de seguridad desde el inicio: threat modeling de las features antes de lanzarlas, OWASP Top 10 como línea base y validación mediante pruebas ofensivas. Entreno de forma activa en plataformas como TryHackMe y la PortSwigger Web Security Academy para entender cómo funcionan los ataques reales y cómo prevenirlos.',
-      p3: 'Me interesa especialmente la seguridad de aplicaciones integradas con IA, ya que introducen nuevas superficies de ataque más allá de la seguridad web tradicional.',
-      p4: 'Abierto a roles full-time, freelance o proyectos personales interesantes. Si tienes un problema que valga la pena resolver, hablemos.',
+      p1: 'Soy Ingeniero Full-Stack de Pereira, Colombia. Construyo sistemas web de producción de punta a punta: React y Next.js en el frontend, Node, TypeScript y PostgreSQL en el backend. Le dedico más tiempo que la mayoría al punto donde un código que funciona bien sigue siendo un problema de seguridad.',
+      p2: 'Eso significa hacer threat modeling de una feature antes de lanzarla, mantener el OWASP Top 10 como línea base y probar mi propio trabajo atacándolo. Entreno en TryHackMe y en la PortSwigger Web Security Academy, porque es difícil defenderse de un ataque que uno nunca ha ejecutado.',
+      p3: 'Ahora mismo lo que más me interesa es asegurar aplicaciones que llevan un LLM adentro. Suman superficie de ataque que la seguridad web tradicional no cubre.',
+      p4: 'Abierto a trabajo full-time, freelance o algún proyecto paralelo que suene interesante. Si tienes un problema que valga la pena resolver, escríbeme.',
       location: 'Pereira, Colombia',
       stats: [
         { value: '2024', label: 'Programando desde' },
@@ -373,7 +372,7 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Credenciales',
       heading: 'Hoja de ruta de certificaciones',
       intro:
-        'Credenciales que respaldan el pivote hacia seguridad — completadas y en curso, junto a los proyectos publicados.',
+        'Las certificaciones detrás del giro hacia seguridad: lo que ya terminé y lo que estoy estudiando ahora. Los proyectos son la otra mitad.',
       completed: 'Completada',
       inProgress: 'En curso',
       planned: 'Planeada',
@@ -389,13 +388,13 @@ export const ui: Record<Lang, UI> = {
           role: 'Desarrollador Frontend',
           dateRange: 'Jul 2025 - Sep 2025',
           description:
-            'Migré módulos críticos del negocio de jQuery a React: reducción del 40% en el tamaño del bundle y disminución de la superficie de ataque del cliente al consolidar la lógica en una librería modular con Atomic Design. Diseñé CI/CD en Azure para reemplazar los deploys manuales por SSH, bajando el tiempo de despliegue de más de 2 horas a menos de 15 minutos y habilitando test gates automáticos — base para SAST y escaneo de dependencias.',
+            'Pasé módulos críticos del negocio de jQuery a React: 40% menos de bundle, y menos superficie de ataque en el cliente al dejar la lógica en una sola librería modular con Atomic Design. También cambié los deploys manuales por SSH por un pipeline de CI/CD en Azure, que bajó un despliegue de más de dos horas a menos de quince minutos y le dio al equipo dónde poner test gates automáticos, SAST y escaneo de dependencias.',
         },
         elitestack: {
           role: 'Desarrollo Full-Stack',
           dateRange: 'Jun 2024 - Jul 2024',
           description:
-            'Bootcamp práctico: Linux/CLI, TypeScript, Node.js, Docker, REST APIs, WebSockets, Next.js, AWS. Base de cómo encajan los sistemas modernos de producción.',
+            'Bootcamp práctico: Linux/CLI, TypeScript, Node.js, Docker, REST APIs, WebSockets, Next.js, AWS. Ahí aprendí cómo encajan las piezas de un sistema en producción.',
         },
       },
     },
@@ -424,61 +423,61 @@ export const ui: Record<Lang, UI> = {
         paircode: {
           tagline: 'Workspace colaborativo seguro en tiempo real',
           description:
-            'Sistema colaborativo seguro con identidad verificada, autenticación endurecida y una capa de tiempo real hecha a medida.',
+            'Un workspace colaborativo donde escribí yo mismo la capa de identidad y autenticación en vez de importar una, con una capa de tiempo real hecha a la medida.',
           highlights: [
-            'Stack de autenticación propio: JWT con EdDSA, refresh tokens rotativos con detección de reutilización, hashing con Argon2id y protección CSRF.',
-            'Servidor WebSocket propio con handshake de ticket de un solo uso, autorización por evento y RBAC aplicado del lado del servidor.',
-            'Capa de rooms en tiempo real: presencia, indicador de escritura, contexto compartido por hilos e historial persistente que sobrevive a reconexiones.',
+            'Autenticación propia: JWT con EdDSA, refresh tokens rotativos que detectan reutilización, hashing con Argon2id y protección CSRF.',
+            'Mi propio servidor WebSocket. El handshake usa un ticket de un solo uso, cada evento se autoriza por separado y el RBAC se verifica en el servidor.',
+            'Las salas mantienen presencia, indicador de escritura, contexto compartido por hilos e historial que sobrevive a una reconexión.',
           ],
         },
         'jwt-lab': {
-          tagline: 'Laboratorio ofensivo y defensivo de vulnerabilidades JWT',
+          tagline: 'Un laboratorio de JWT con una mitad rota y una mitad arreglada',
           description:
-            'Laboratorio de ataque y defensa que ejercita vulnerabilidades reales de JWT contra una versión endurecida, demostrando cada mitigación en lugar de sólo afirmarla.',
+            'Dos versiones de la misma API, una vulnerable y otra endurecida. Cada ataque entra en la primera y rebota en la segunda, así que puedes correr las mitigaciones en vez de creerme.',
           highlights: [
-            'Firma y verificación de JWT en TypeScript desde cero (sin librerías) reproduciendo cinco fallos de nivel producción: bypass con alg=none, confusión de claves HS256/RS256, fuerza bruta de secretos débiles, inyección en el header kid y falta de validación de iss/aud/exp.',
-            'Scripts de explotación reproducibles (Bash + OpenSSL) y un harness que prueba que cada payload tiene éxito contra la API vulnerable y es rechazado por la segura.',
-            'Servicio endurecido que elimina clases enteras de bugs: allowlist de un único algoritmo RS256, registro fijo de kids en memoria con rotación, errores genéricos y hashing de contraseñas con scrypt.',
+            'Firma y verificación de JWT escritas desde cero en TypeScript, sin librerías, reproduciendo cinco fallos que llegan a producción: bypass con alg=none, confusión de claves HS256/RS256, fuerza bruta de secretos débiles, inyección en el header kid y falta de validación de iss/aud/exp.',
+            'Scripts de explotación en Bash y OpenSSL, más un harness que corre cada payload contra las dos APIs y comprueba el resultado en ambos lados.',
+            'El servicio endurecido elimina clases enteras de bug de una vez: un solo algoritmo permitido (RS256), un registro fijo de kids en memoria con rotación, errores genéricos y scrypt para contraseñas.',
           ],
         },
         'la-bodega': {
-          tagline: 'Plataforma e-commerce en producción construida en solitario',
+          tagline: 'Plataforma e-commerce hecha en solitario, viva en producción',
           description:
-            'Plataforma e-commerce en producción, construida de extremo a extremo en solitario para una ferretería familiar.',
+            'Una tienda en línea para una ferretería familiar. Clientes reales, pagos reales, y nadie más a quien llamar cuando algo se rompe.',
           highlights: [
-            'Único ingeniero de extremo a extremo: requisitos, arquitectura, catálogo de inventario en tiempo real, despliegue y mantenimiento continuo de una tienda retail en vivo.',
-            'Diseñé e implementé autenticación, seguridad de sesiones y RBAC para superficies de staff y clientes; integré Mercado Pago para transacciones reales en línea.',
-            'Endurecí la capa de aplicación frente al OWASP Top 10: consultas parametrizadas, validación de entrada en el servidor, protección CSRF en endpoints que modifican estado y roles de base de datos con mínimos privilegios.',
+            'Fui el único ingeniero: requisitos, arquitectura, catálogo de inventario en tiempo real, despliegue y el mantenimiento que todavía recibe.',
+            'Construí la autenticación, la seguridad de sesiones y el RBAC que separan la parte del staff de la del cliente, y conecté Mercado Pago para transacciones reales.',
+            'Endurecí la capa de aplicación frente al OWASP Top 10: consultas parametrizadas, validación de entrada en el servidor, protección CSRF en todo lo que cambia estado y roles de base de datos con los mínimos privilegios que aún funcionan.',
           ],
         },
         authzscan: {
-          tagline: 'Revisión autónoma de IDOR/BOLA con agentes de Claude',
+          tagline: 'Revisión de IDOR/BOLA que se ejecuta sola, con agentes de Claude',
           description:
-            'Un pentest autónomo de la lógica de autorización en repos Next.js App Router: agentes siguen cada identificador controlado por el cliente hasta la consulta de base de datos que alcanza y marcan los checks de propiedad que faltan — el riesgo #1 de OWASP que las herramientas SAST de pattern-matching suelen pasar por alto.',
+            'Un pentest automatizado de la lógica de autorización en repos Next.js App Router. Los agentes siguen cada identificador controlado por el cliente hasta la consulta de base de datos que alcanza y marcan los checks de propiedad que nadie escribió. Es el riesgo número uno de OWASP, y las herramientas SAST de pattern-matching casi nunca lo ven.',
           highlights: [
-            'Pipeline de cuatro fases: inventario determinista de endpoints con ts-morph (route handlers, Server Actions, detección de librería de auth), una pasada de trazado por agente, una pasada adversarial de verificación que elimina falsos positivos, y reportes Markdown / SARIF / JSON con códigos de salida listos para CI.',
-            'Medido, no intuición: evaluado sobre un benchmark con 16 vulnerabilidades IDOR/BOLA sembradas más 6 gemelos endurecidos como trampas de falsos positivos, con umbrales de recall/precisión y un runner oráculo que valida el harness independientemente de la calidad del modelo.',
-            'Falla ruidosamente, nunca en silencio: los endpoints que no puede analizar se reportan como no-analizados en lugar de limpios, y los candidatos no verificables aparecen como baja confianza en vez de descartarse.',
+            'Cuatro fases: inventario determinista de endpoints con ts-morph (route handlers, Server Actions, detección de la librería de auth), una pasada de trazado por agente, una pasada adversarial de verificación cuyo único trabajo es matar falsos positivos, y reportes en Markdown, SARIF o JSON con códigos de salida que CI puede usar.',
+            'La precisión es un número, no una intuición: un benchmark con 16 bugs IDOR/BOLA sembrados más 6 gemelos bien escritos como trampas de falsos positivos, umbrales de recall y precisión, y un runner oráculo que demuestra que el harness puntúa bien sin importar qué tan bueno sea el modelo.',
+            'Falla en voz alta. Un endpoint que no pudo analizar se reporta como no analizado, nunca como limpio, y un candidato que no puede confirmar vuelve como baja confianza en lugar de desaparecer sin ruido.',
           ],
         },
         llmseclab: {
-          tagline: 'Laboratorio ofensivo y defensivo de seguridad LLM/RAG',
+          tagline: 'Laboratorio de seguridad LLM/RAG, lado ataque y lado defensa',
           description:
-            'Dos servicios FastAPI con la misma superficie RAG — uno intencionalmente vulnerable, otro endurecido. Cada ataque de la suite tiene éxito contra el primero y falla contra el segundo, de modo que cada mitigación queda demostrada, no sólo afirmada.',
+            'Dos servicios FastAPI con la misma superficie RAG: uno vulnerable a propósito y otro endurecido. Cada ataque de la suite funciona en el primero y falla en el segundo.',
           highlights: [
-            'Cinco escenarios del OWASP LLM Top 10 como suite de ataques ejecutable en pytest: fuga de recuperación entre tenants (confused deputy), inyección indirecta de prompts vía documentos recuperados, envenenamiento del vector store con metadatos de ingesta falsificados, agencia excesiva sobre un servidor MCP real y XSS almacenado desde la salida del modelo.',
-            'Pipeline RAG construido a mano — embeddings, vector store en memoria, corpus multi-tenant con ACL — sin LangChain, de modo que el diff entre las dos apps es exactamente el conjunto de decisiones de seguridad.',
-            'Un mock LLM determinista hace que «todos los ataques fallan contra la API segura» sea una propiedad confiable en CI; un proveedor sobre OpenRouter re-verifica el comportamiento de inyección contra un modelo real.',
+            'Cinco escenarios del OWASP LLM Top 10 escritos como suite de ataques en pytest: fuga de recuperación entre tenants (confused deputy), inyección indirecta de prompts a través de documentos recuperados, envenenamiento del vector store con metadatos de ingesta falsificados, agencia excesiva sobre un servidor MCP real y XSS almacenado que sale directo del modelo.',
+            'El pipeline RAG está hecho a mano (embeddings, vector store en memoria, corpus multi-tenant con ACL) y sin LangChain, así que el diff entre las dos apps son las decisiones de seguridad y nada más.',
+            'Un mock LLM determinista convierte «todos los ataques fallan contra la API segura» en algo de lo que CI se puede fiar, y un proveedor sobre OpenRouter vuelve a correr las pruebas de inyección contra un modelo real.',
           ],
         },
         ctf: {
           tagline: 'CTF de seguridad web jugable y en sandbox',
           description:
-            'Una terminal de hacking que puedes jugar de verdad — cuatro retos que reproducen clases reales de vulnerabilidades, simuladas de forma segura en el navegador, sin red ni eval.',
+            'Una terminal de hacking en la que puedes escribir de verdad. Cuatro retos, cuatro clases reales de vulnerabilidad, todo simulado en el navegador: sin llamadas de red y sin eval.',
           highlights: [
-            'Cuatro vías de explotación: bypass de login por SQLi, IDOR / control de acceso roto, JWT alg=none y XSS reflejado — cada una contra un objetivo simulado.',
-            'Experiencia de terminal completa: intérprete de comandos, historial, arranque con efecto máquina de escribir, lluvia matrix en canvas, scanlines CRT y progresión por flags.',
-            'Las mismas clases de ataque que defiendo en mi JWT Security Lab y jwt-scan — ofensiva para demostrar la defensa.',
+            'Cuatro vías de explotación: bypass de login por SQLi, IDOR, un JWT con alg=none al que se le quita la firma, y XSS reflejado, cada una contra un objetivo simulado.',
+            'La terminal completa: intérprete de comandos con historial, arranque con efecto máquina de escribir, lluvia matrix en canvas, scanlines CRT y flags que se capturan en orden.',
+            'Las mismas clases de ataque que defiendo en el JWT Security Lab y en jwt-scan.',
           ],
         },
       },
@@ -487,7 +486,7 @@ export const ui: Record<Lang, UI> = {
       eyebrow: 'Contacto',
       heading: 'Construyamos algo',
       intro:
-        'Abierto a roles Full-Stack, Backend y Software Engineer — remoto o con reubicación. La seguridad es lo que aporto además de entregar features. Si eso le sirve a tu equipo, hablemos.',
+        'Abierto a roles Full-Stack, Backend y Software Engineer, remoto o con reubicación. La seguridad es lo que aporto además de entregar features. Si a tu equipo le sirve, escríbeme.',
       form: {
         name: 'Nombre',
         namePlaceholder: 'Tu nombre',
@@ -499,7 +498,7 @@ export const ui: Record<Lang, UI> = {
         sending: 'Enviando...',
         sent: '¡Mensaje enviado!',
         error: 'Error al enviar',
-        subjectPrefix: '✨ Nuevo contacto del portfolio de',
+        subjectPrefix: 'Nuevo contacto del portfolio de',
       },
       orReach: 'O escríbeme directamente',
     },

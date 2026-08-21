@@ -33,7 +33,7 @@ const difficultyColor: Record<string, string> = {
   insane: 'text-red-400',
 };
 
-const title = 'Writeups — David Londoño';
+const title = 'Writeups · David Londoño';
 const description =
   'Security writeups: web application vulnerabilities, JWT attacks, HTB/THM walkthroughs, and AppSec research.';
 ---
@@ -47,12 +47,12 @@ const description =
           Notes from <span class="bg-linear-to-br from-accent to-accent-secondary bg-clip-text text-transparent">breaking & fixing</span>
         </h1>
         <p class="mb-10 max-w-2xl text-[1.05rem] leading-[1.7] text-fg-muted">
-          Vulnerability research, exploit walkthroughs, retired-box reports, and
-          AppSec patterns I learn the hard way so you don't have to.
+          Vulnerability research, exploit walkthroughs, retired-box reports, and the
+          AppSec patterns I usually learn by getting them wrong first.
         </p>
 
         {posts.length === 0 ? (
-          <p class="text-fg-muted">No posts yet. Coming soon.</p>
+          <p class="text-fg-muted">Nothing published yet.</p>
         ) : (
           <ul class="m-0 flex list-none flex-col gap-4 p-0" role="list">
             {posts.map((post) => (

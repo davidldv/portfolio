@@ -4,9 +4,9 @@ import Footer from '../components/Footer/Footer.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import ExploitTheBox from '../components/CtfGame/ExploitTheBox';
 
-const title = 'Exploit the Box — a playable web-security CTF · David Londoño';
+const title = 'Exploit the Box · a playable web-security CTF · David Londoño';
 const description =
-  'A sandboxed, interactive capture-the-flag terminal. Four real web-vulnerability classes — SQL injection auth bypass, IDOR, JWT alg=none, and reflected XSS — each safely simulated in the browser. No network, no eval, just the attack patterns.';
+  'A sandboxed capture-the-flag terminal you can type into. Four real web-vulnerability classes: SQL injection auth bypass, IDOR, JWT alg=none, and reflected XSS, each simulated safely in the browser. Nothing touches the network and no input is ever evaluated as code.';
 ---
 
 <Layout title={title} description={description}>
@@ -19,9 +19,9 @@ const description =
 
     <p class="mt-4 max-w-2xl text-fg-muted">
       A playable CTF built from the same vulnerability classes I study and defend against.
-      Four boxes, four flags — SQL injection, IDOR, a JWT <code class="text-accent">alg=none</code>
-      signature strip, and reflected XSS. Every target is a safe, client-side simulation:
-      nothing hits the network and no input is ever evaluated as code. Type
+      Four boxes, four flags: SQL injection, IDOR, a JWT <code class="text-accent">alg=none</code>
+      signature strip, and reflected XSS. Every target is a client-side simulation, so nothing
+      hits the network and no input is ever evaluated as code. Type
       <code class="text-accent-secondary">help</code> to begin.
     </p>
 
@@ -30,9 +30,9 @@ const description =
     </div>
 
     <p class="mt-6 text-sm text-fg-dim">
-      Each of these is patched in the hardened mirror of my
-      <a href="https://github.com/davidldv" class="text-accent underline-offset-4 hover:underline">JWT Security Lab &amp; jwt-scan</a>
-      work. Prefer to break the real thing? The source is on GitHub.
+      All four are patched in the hardened mirror of my
+      <a href="https://github.com/davidldv" class="text-accent underline-offset-4 hover:underline">JWT Security Lab and jwt-scan</a>
+      work. If you would rather break the real thing, the source is on GitHub.
     </p>
   </main>
   <Footer />
