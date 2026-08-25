@@ -12,7 +12,6 @@ import {
   Bug,
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { ShimmerCard } from '../ui/ShimmerCard';
 
 interface Category {
   id: string;
@@ -115,49 +114,52 @@ function SkillCard({ category, name }: { category: Category; name: string }) {
   const isSecondary = accent === 'secondary';
 
   return (
-    <ShimmerCard
+    <div
       className={cn(
-        'rounded-2xl border overflow-hidden transition-all duration-300',
-        'bg-surface-elevated border-border',
-        'hover:border-accent-border hover:-translate-y-0.5',
+        'group relative overflow-hidden rounded-2xl border border-border bg-surface-elevated',
+        'transition-colors duration-200 hover:border-accent-border',
       )}
     >
-      <div className="relative z-10 p-7 flex flex-col gap-5">
-        <div className="flex items-center gap-3">
-          <div
-            className={cn(
-              'flex items-center justify-center w-10 h-10 rounded-xl border transition-all duration-300',
-              isSecondary
-                ? 'bg-accent-sub border-accent-secondary/30 text-accent-secondary group-hover:shadow-[0_0_16px_rgba(0,212,255,0.3)]'
-                : 'bg-accent-sub border-accent/30 text-accent group-hover:shadow-[0_0_16px_var(--accent-glow)]',
-            )}
-          >
-            <Icon className="w-5 h-5" />
-          </div>
+      {/* Top rule wipes in on hover. Violet for engineering groups, coral for
+          the security/AI ones - the taxonomy reads without a legend. */}
+      <span
+        aria-hidden="true"
+        className={cn(
+          'pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0',
+          'transition-transform duration-400 ease-out group-hover:scale-x-100',
+          isSecondary ? 'bg-accent-secondary' : 'bg-accent',
+        )}
+      />
 
-          <h3 className="text-base font-semibold tracking-tight text-fg">
-            {name}
-          </h3>
+      <div className="relative z-10 flex flex-col gap-5 p-7">
+        <div className="flex items-center gap-3">
+          <Icon
+            className={cn(
+              'h-[18px] w-[18px] shrink-0',
+              isSecondary ? 'text-accent-secondary' : 'text-accent',
+            )}
+          />
+          <h3 className="text-base font-semibold tracking-tight text-fg">{name}</h3>
         </div>
 
         <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
             <span
               key={skill}
-              className="text-xs px-3 py-1 rounded-full border text-fg-muted border-border bg-surface transition-colors duration-200 group-hover:text-fg group-hover:border-accent/20"
+              className="rounded-full border border-border bg-surface px-3 py-1 text-xs text-fg-muted transition-colors duration-200 group-hover:text-fg"
             >
               {skill}
             </span>
           ))}
         </div>
       </div>
-    </ShimmerCard>
+    </div>
   );
 }
 
 export function SkillsInteractive({ categoryNames }: { categoryNames: Record<string, string> }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {CATEGORIES.map((cat) => (
         <SkillCard key={cat.id} category={cat} name={categoryNames[cat.id] ?? cat.id} />
       ))}

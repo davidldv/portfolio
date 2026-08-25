@@ -8,17 +8,27 @@ interface Props {
 
 const { lang = 'en' } = Astro.props as Props;
 const t = ui[lang].hero;
+
+// The badge is authored as one "·"-separated line; split it so it renders as a
+// rule-separated spec line instead of a paragraph that orphans its last word.
+const badgeParts = t.badge.split('·').map((part) => part.trim()).filter(Boolean);
 ---
 
 <section id="hero" class="hero relative flex min-h-svh w-full items-center justify-center overflow-hidden px-[clamp(1rem,2.6vw,2rem)] pb-0 pt-16 before:pointer-events-none before:absolute before:inset-0 before:z-1 before:content-[''] before:[background:linear-gradient(180deg,rgba(12_8_20/0.28)_0%,rgba(12_8_20/0.12)_52%,rgba(12_8_20/0)_100%),radial-gradient(66%_44%_at_50%_12%,rgba(76_40_140/0.2),transparent_72%)]">
-  <div class="hero-orb fixed inset-0 z-0 pointer-events-none lg:hidden" aria-hidden="true"></div>
+  <div class="hero-orb absolute inset-0 z-0 pointer-events-none lg:hidden" aria-hidden="true"></div>
   <HeroScene client:only="react" />
   <div class="hero-backdrop pointer-events-none absolute inset-0 z-2 [background:var(--hero-backdrop)]" aria-hidden="true"></div>
+  <!-- Dissolves the particle field into the page instead of letting the hero edge cut it. -->
+  <div class="hero-fade pointer-events-none absolute inset-x-0 bottom-0 z-2 h-48 [background:linear-gradient(to_bottom,transparent,var(--bg-deep))]" aria-hidden="true"></div>
 
-  <div class="hero-content relative z-3 flex max-w-170 flex-col items-center text-center">
-    <div class="hero-kicker mb-7 flex flex-col items-center gap-3.5 opacity-0 animate-[fade-up_0.6s_ease_forwards_0.2s]">
-      <span class="h-[2px] w-12 bg-accent-secondary" aria-hidden="true"></span>
-      <p class="max-w-md text-[0.95rem] font-medium leading-snug tracking-[-0.01em] text-fg-muted">{t.badge}</p>
+  <div class="hero-content relative z-3 flex max-w-190 flex-col items-center text-center">
+    <div class="hero-kicker mb-8 flex flex-col items-center gap-y-1.5 opacity-0 animate-[fade-up_0.6s_ease_forwards_0.2s] sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-4 sm:gap-y-2">
+      {badgeParts.map((part, i) => (
+        <>
+          {i > 0 && <span class="hidden h-3.5 w-px bg-fg-muted/30 sm:block" aria-hidden="true"></span>}
+          <span class="text-[0.82rem] font-medium tracking-[0.06em] text-fg-muted uppercase">{part}</span>
+        </>
+      ))}
     </div>
 
     <h1 class="hero-title mb-6 text-[clamp(3.5rem,9vw,7rem)] font-bold leading-[0.93] tracking-[-0.04em] text-fg opacity-0 animate-[fade-up_0.6s_ease_forwards_0.35s] [text-shadow:0_4px_32px_rgba(124_58_237/0.28)]">
@@ -26,7 +36,7 @@ const t = ui[lang].hero;
       {t.title2}
     </h1>
 
-    <p class="hero-subtitle mb-10 text-[clamp(1rem,2vw,1.15rem)] leading-[1.75] text-fg-muted opacity-0 animate-[fade-up_0.6s_ease_forwards_0.5s] [text-shadow:0_1px_8px_rgba(0_0_0/0.4)]">
+    <p class="hero-subtitle mb-10 max-w-160 text-[clamp(1rem,2vw,1.15rem)] leading-[1.75] text-balance text-fg-muted opacity-0 animate-[fade-up_0.6s_ease_forwards_0.5s] [text-shadow:0_1px_8px_rgba(0_0_0/0.4)]">
       {t.subtitle1}<br class="hidden sm:inline" />
       {t.subtitle2}
     </p>

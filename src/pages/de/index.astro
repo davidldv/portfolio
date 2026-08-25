@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer/Footer.astro';
-import Eyebrow from '../../components/ui/Eyebrow.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
 
 const title = 'David Londoño · Full-Stack Engineer mit Sicherheitsfokus';
 const description =
@@ -23,7 +23,7 @@ const socials = [
 const certs = [
   { name: 'Google Professional Cybersecurity Certificate', issuer: 'Google · Coursera', status: 'completed', target: '2026', progress: 1 },
   { name: 'PortSwigger Web Security Academy', issuer: 'PortSwigger', status: 'completed', target: 'Alle kostenlosen Kurse', progress: 1 },
-  { name: 'CompTIA Security+', issuer: 'CompTIA', status: 'in-progress', target: '2026 Q3', progress: 0.65 },
+  { name: 'Burp Suite Certified Practitioner', issuer: 'PortSwigger', status: 'in-progress', target: '2026 Q4', progress: 0.65 },
 ] as const;
 const certStatus = { completed: 'Abgeschlossen', 'in-progress': 'In Bearbeitung', planned: 'Geplant' } as const;
 
@@ -97,10 +97,7 @@ const proofItems = [
 
     <section id="ueber-mich" class="relative z-2 px-6 py-20">
       <div class="mx-auto max-w-4xl">
-        <Eyebrow index="01" label="Über mich" class="mb-3" />
-        <h2 class="mb-10 text-[clamp(2rem,5vw,3rem)] font-bold tracking-[-0.04em] text-fg">
-          Wer ich bin
-        </h2>
+        <SectionHeader index="01" label="Über mich" heading="Wer ich bin" class="mb-10" />
 
         <div class="flex flex-col gap-6 text-[1.05rem] leading-[1.8] text-fg-muted">
           <p>
@@ -125,65 +122,58 @@ const proofItems = [
           </p>
         </div>
 
-        <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <dl class="mt-12 grid grid-cols-2 gap-x-8 gap-y-7 sm:grid-cols-4">
           {stats.map(({ value, label }) => (
-            <div class="flex flex-col gap-1.5 rounded-2xl border border-border bg-surface-elevated px-6 py-5">
-              <span class="bg-linear-to-br from-accent to-accent-secondary bg-clip-text font-mono text-[1.5rem] font-bold tracking-[-0.04em] text-transparent">
-                {value}
-              </span>
-              <span class="text-[0.78rem] font-medium text-fg-muted">{label}</span>
+            <div class="flex flex-col gap-2 border-t border-border pt-4">
+              <dt class="order-2 text-[0.78rem] font-medium text-fg-muted">{label}</dt>
+              <dd class="order-1 m-0 font-mono text-[clamp(1.15rem,2.1vw,1.5rem)] font-semibold leading-tight tracking-[-0.03em] text-fg">{value}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
 
     <section id="zertifizierungen" class="relative z-2 px-6 py-20">
       <div class="mx-auto max-w-4xl">
-        <Eyebrow index="02" label="Zertifizierungen" class="mb-3" />
-        <h2 class="mb-10 text-[clamp(2rem,5vw,3rem)] font-bold tracking-[-0.04em] text-fg">
-          Zertifizierungs-Fahrplan
-        </h2>
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <SectionHeader index="02" label="Zertifizierungen" heading="Zertifizierungs-Fahrplan" class="mb-10" />
+        <ul class="m-0 flex list-none flex-col border-t border-border p-0" role="list">
           {certs.map((cert) => (
-            <article class={`flex flex-col gap-3 rounded-2xl border bg-surface-elevated p-5 ${cert.status === 'planned' ? 'border-dashed border-border' : 'border-border'}`}>
-              <div class="flex items-center justify-between gap-3">
-                <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface text-accent" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <li class="grid grid-cols-1 items-center gap-x-10 gap-y-4 border-b border-border py-6 md:grid-cols-[1fr_9rem_12rem]">
+              <div class="flex items-start gap-3.5">
+                <span class="mt-0.5 shrink-0 text-accent" aria-hidden="true">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
                     <path d="M9 12l2 2 4-4"/>
                   </svg>
                 </span>
-                <span class={`font-mono text-[0.72rem] ${cert.status === 'planned' ? 'text-fg-muted' : 'text-accent-secondary'}`}>
+                <div class="flex flex-col gap-1">
+                  <h3 class="m-0 text-[1.02rem] font-semibold leading-[1.35] tracking-[-0.01em] text-fg">{cert.name}</h3>
+                  <p class="m-0 text-[0.84rem] text-fg-muted">{cert.issuer}</p>
+                </div>
+              </div>
+
+              <div class="h-[3px] w-full max-w-44 bg-border md:max-w-none" role="presentation">
+                <div
+                  class={`h-full ${cert.status === 'completed' ? 'bg-accent' : 'bg-accent-secondary'}`}
+                  style={`width:${Math.round(cert.progress * 100)}%`}
+                ></div>
+              </div>
+
+              <div class="flex flex-col gap-0.5 font-mono text-[0.76rem] md:items-end md:text-right">
+                <span class={cert.status === 'in-progress' ? 'text-accent-secondary' : 'text-fg-muted'}>
                   {certStatus[cert.status]}
                 </span>
+                <span class="text-fg">{cert.target}</span>
               </div>
-              <div class="flex flex-col gap-1">
-                <h3 class="m-0 text-[0.98rem] font-bold leading-[1.25] text-fg">{cert.name}</h3>
-                <p class="m-0 font-mono text-[0.74rem] text-fg-muted">{cert.issuer}</p>
-              </div>
-              <div class="flex flex-col gap-2.5 pt-1">
-                {cert.status === 'planned' ? (
-                  <div class="h-0 w-full border-t border-dashed border-border"></div>
-                ) : (
-                  <div class="h-[3px] w-full bg-border">
-                    <div class="h-full bg-accent-secondary" style={`width:${Math.round(cert.progress * 100)}%`}></div>
-                  </div>
-                )}
-                <p class="m-0 font-mono text-[0.72rem]"><span class="text-fg-muted">{cert.status === 'completed' ? 'Abgeschlossen' : 'Ziel'}:</span> <span class="text-accent">{cert.target}</span></p>
-              </div>
-            </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
 
     <section class="relative z-2 px-6 py-20">
       <div class="mx-auto max-w-4xl">
-        <Eyebrow index="03" label="Kontakt" class="mb-3" />
-        <h2 class="mb-6 text-[clamp(2rem,5vw,3rem)] font-bold tracking-[-0.04em] text-fg">
-          Lass uns sprechen
-        </h2>
+        <SectionHeader index="03" label="Kontakt" heading="Lass uns sprechen" class="mb-10" />
         <p class="mb-8 max-w-2xl text-[1.05rem] leading-[1.7] text-fg-muted">
           Wenn Sie jemanden suchen, der beim Bauen schon an die Angriffsseite denkt,
           oder ein Projekt haben, das sich lohnt: schreiben Sie mir.

@@ -1,6 +1,6 @@
 ---
 import { ui, type Lang } from '../../i18n/ui';
-import Eyebrow from '../ui/Eyebrow.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
 
 interface Props {
   lang?: Lang;
@@ -14,7 +14,6 @@ interface Project {
   name: string;
   tags: string[];
   href: string | null;
-  accent: 'indigo' | 'cyan';
   playable?: boolean;
 }
 
@@ -24,35 +23,30 @@ const baseProjects: Project[] = [
     name: 'authzscan',
     tags: ['TypeScript', 'Claude agents', 'ts-morph', 'Next.js', 'IDOR/BOLA', 'SARIF'],
     href: 'https://github.com/davidldv/authzscan',
-    accent: 'indigo',
   },
   {
     id: 'paircode',
     name: 'PairCode',
     tags: ['Next.js', 'PostgreSQL', 'EdDSA', 'Argon2id', 'RBAC', 'WebSockets'],
     href: 'https://paircode-lime.vercel.app/',
-    accent: 'cyan',
   },
   {
     id: 'jwt-lab',
     name: 'JWT Security Lab',
     tags: ['TypeScript', 'Node.js', 'Docker', 'JWT', 'OpenSSL', 'Bash'],
     href: 'https://github.com/davidldv/jwtsecuritylab',
-    accent: 'indigo',
   },
   {
     id: 'llmseclab',
     name: 'LLM/RAG Security Lab',
     tags: ['Python', 'FastAPI', 'RAG', 'Prompt Injection', 'MCP', 'OWASP LLM Top 10'],
     href: 'https://github.com/davidldv/llmseclab',
-    accent: 'cyan',
   },
   {
     id: 'ctf',
     name: 'Exploit the Box',
     tags: ['React', 'TypeScript', 'SQLi', 'IDOR', 'JWT', 'XSS'],
     href: '/ctf',
-    accent: 'cyan',
     playable: true,
   },
   {
@@ -60,7 +54,6 @@ const baseProjects: Project[] = [
     name: 'Materiales La Bodega',
     tags: ['Next.js', 'PostgreSQL', 'Mercado Pago', 'OWASP', 'RBAC', 'CSRF'],
     href: 'https://materialeslabodega.com.co',
-    accent: 'indigo',
   },
 ];
 
@@ -70,21 +63,19 @@ const projects = baseProjects.map((p) => {
 });
 ---
 
-<section id="projects" class="relative z-2 px-6 py-28">
+<section id="projects" class="relative z-2 px-6 py-24">
   <div class="mx-auto max-w-7xl">
-    <div class="reveal mb-14">
-      <Eyebrow index="05" label={t.eyebrow} class="mb-3" />
-      <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
-    </div>
+    <SectionHeader index="05" label={t.eyebrow} heading={t.heading} class="mb-14" />
 
     <!-- ponytail: CSS columns masonry — cards pack vertically, no row stretching.
          Reading order goes down column 1 then column 2, not left-to-right. -->
     <div class="gap-6 md:columns-2">
-      {projects.map(({ name, tagline, description, highlights, tags, href, accent, playable }) => {
+      {projects.map(({ name, tagline, description, highlights, tags, href, playable }) => {
         const isInternal = !!href && href.startsWith('/');
         return (
-        <article class={`group relative mb-6 block break-inside-avoid cursor-pointer overflow-hidden rounded-[20px] border ${playable ? 'border-accent-border' : 'border-border'} bg-surface-elevated transition-all duration-250 hover:-translate-y-0.5 hover:border-accent-border reveal`}>
-          <div class={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ${accent === 'cyan' ? '[background:radial-gradient(ellipse_80%_60%_at_50%_0%,var(--accent-glow),transparent)]' : '[background:radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(94_106_210/0.12),transparent)]'} ${playable ? 'opacity-100' : 'group-hover:opacity-100'}`}></div>
+        <article class="group reveal relative mb-6 block break-inside-avoid cursor-pointer overflow-hidden rounded-2xl border border-border bg-surface-elevated transition-colors duration-200 hover:border-accent-border">
+          <!-- Top rule wipes to accent on hover — same gesture as the proof strip. -->
+          <span class={`pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left bg-accent transition-transform duration-400 ease-out ${playable ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`} aria-hidden="true"></span>
           <div class="relative z-1 flex flex-col gap-3 p-8">
             <div class="flex items-start justify-between gap-4">
               <div class="flex items-center gap-2.5">
@@ -113,10 +104,10 @@ const projects = baseProjects.map((p) => {
             <p class="m-0 font-mono text-[0.82rem] font-medium text-accent">{tagline}</p>
             <p class="m-0 text-[0.9rem] leading-[1.7] text-fg-muted">{description}</p>
             {highlights && highlights.length > 0 && (
-              <ul class={`m-0 flex list-none flex-col gap-1.5 border-l-[1.5px] pl-3.5 ${accent === 'cyan' ? 'border-l-accent-secondary/30' : 'border-l-accent/40'}`}>
+              <ul class="m-0 flex list-none flex-col gap-1.5 border-l border-border pl-4">
                 {highlights.map((item) => (
                   <li class="flex items-baseline gap-2 text-[0.8rem] leading-[1.6] text-fg-muted">
-                    <span class={`font-mono text-[0.72rem] ${accent === 'indigo' ? 'text-accent' : 'text-accent-secondary'}`} aria-hidden="true">→</span>
+                    <span class="font-mono text-[0.72rem] text-accent" aria-hidden="true">→</span>
                     <span>{item}</span>
                   </li>
                 ))}

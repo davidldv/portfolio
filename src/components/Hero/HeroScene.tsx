@@ -432,7 +432,7 @@ export function HeroScene() {
   return (
     <div
       ref={canvasRef}
-      style={{ position: 'fixed', inset: 0, zIndex: 1, pointerEvents: 'none' }}
+      style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}
     >
       <Canvas
         frameloop="always"

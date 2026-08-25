@@ -40,6 +40,7 @@
   --accent-glow:          rgba(124 58 237 / 0.22);
   --accent-secondary:     #ff6b5b;
   --accent-secondary-sub: rgba(255 107 91 / 0.08);
+  --accent-glow-secondary: rgba(255 107 91 / 0.28);
   --accent-border-mix:    color-mix(in srgb, #7c3aed 40%, rgba(255 255 255 / 0.08));
   --border:               rgba(255 255 255 / 0.08);
   --radius:               16px;
@@ -62,6 +63,7 @@
   --accent-glow:          rgba(109 40 217 / 0.15);
   --accent-secondary:     #db4f3c;
   --accent-secondary-sub: rgba(219 79 60 / 0.08);
+  --accent-glow-secondary: rgba(219 79 60 / 0.22);
   --accent-border-mix:    color-mix(in srgb, #6d28d9 40%, rgba(0 0 0 / 0.08));
   --border:               rgba(0 0 0 / 0.08);
   color-scheme: light;
@@ -252,6 +254,16 @@ html[data-theme="light"] .logo-img {
   background: #ffffff;
   border-color: var(--accent);
   box-shadow: 0 2px 8px rgba(109 40 217 / 0.12);
+}
+
+/* Form fields — the focus ring is the affordance; a 1px border colour change
+   is too quiet to notice, especially on white-on-near-white in light mode. */
+.field:focus {
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+[data-theme="light"] .field {
+  border-color: rgba(0 0 0 / 0.14);
 }
 
 /* ─── Custom scrollbar ───────────────────────────────────── */

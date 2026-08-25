@@ -1,0 +1,22 @@
+---
+import Eyebrow from './Eyebrow.astro';
+
+interface Props {
+  /** Two-digit section index, e.g. "01". Omitted on standalone pages. */
+  index?: string;
+  label: string;
+  heading: string;
+  intro?: string;
+  class?: string;
+}
+
+const { index, label, heading, intro, class: cls } = Astro.props as Props;
+---
+
+<div class:list={['reveal', cls]}>
+  <Eyebrow index={index} label={label} />
+
+  <h2 class="mt-5 text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{heading}</h2>
+
+  {intro && <p class="mt-5 max-w-2xl text-[1.02rem] leading-[1.75] text-fg-muted">{intro}</p>}
+</div>

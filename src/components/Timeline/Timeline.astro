@@ -1,7 +1,7 @@
 ---
 import { ui, type Lang } from '../../i18n/ui';
 import { TimelineInteractive } from './TimelineInteractive';
-import Eyebrow from '../ui/Eyebrow.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
 
 interface Props {
   lang?: Lang;
@@ -34,10 +34,9 @@ const experiences = [
 ];
 ---
 
-<section id="timeline" class="relative z-2 pt-24">
-  <div class="reveal mx-auto mb-4 max-w-7xl px-6 pl-10">
-    <Eyebrow index="01" label={t.eyebrow} class="mb-3" />
-    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.04em] text-fg">{t.heading}</h2>
+<section id="timeline" class="relative z-2 pt-20">
+  <div class="mx-auto mb-8 max-w-7xl px-6">
+    <SectionHeader index="01" label={t.eyebrow} heading={t.heading} />
   </div>
 
   <TimelineInteractive client:visible experiences={experiences} currentLabel={t.current} visitLabel={t.visit} />

@@ -9,7 +9,6 @@ import {
 } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '../../lib/utils';
-import { ShimmerCard } from '../ui/ShimmerCard';
 
 export interface Experience {
   id: string;
@@ -65,11 +64,11 @@ function getTagVariant(tag: string): TagVariant {
 
 const TAG_CLASSES: Record<TagVariant, string> = {
   backend:
-    'text-accent-secondary border-[rgba(0,212,255,0.3)] bg-[rgba(0,212,255,0.06)] hover:border-[rgba(0,212,255,0.6)] hover:bg-[rgba(0,212,255,0.1)] hover:shadow-[0_0_10px_rgba(0,212,255,0.2)]',
+    'text-accent-secondary border-accent-secondary/30 bg-accent-sub hover:border-accent-secondary/60 hover:bg-accent-secondary/10 hover:shadow-[0_0_10px_var(--accent-glow-secondary)]',
   infra:
-    'text-accent border-accent-border bg-accent-sub hover:border-[rgba(94,106,210,0.5)] hover:bg-[rgba(94,106,210,0.1)] hover:shadow-[0_0_10px_var(--accent-glow)]',
+    'text-accent border-accent-border bg-accent-sub hover:border-accent/50 hover:bg-accent/10 hover:shadow-[0_0_10px_var(--accent-glow)]',
   default:
-    'text-fg-muted border-border bg-surface hover:border-[rgba(255,255,255,0.18)] hover:text-fg',
+    'text-fg-muted border-border bg-surface hover:border-fg-muted/40 hover:text-fg',
 };
 
 const DOT_CLASSES: Record<TagVariant, string> = {
@@ -92,13 +91,22 @@ function ExperienceCard({
   const { company, role, dateRange, description, tags, current, href } = experience;
 
   return (
-    <ShimmerCard
+    <div
       className={cn(
-        'rounded-2xl border overflow-hidden transition-all duration-500',
+        'group relative rounded-2xl border overflow-hidden transition-colors duration-500',
         'bg-surface-elevated',
-        active ? 'border-accent-border' : 'border-fg-dim',
+        active ? 'border-accent-border' : 'border-border',
       )}
     >
+      {/* Top rule fills once the entry is reached — same gesture as the cards below. */}
+      <span
+        aria-hidden="true"
+        className={cn(
+          'pointer-events-none absolute inset-x-0 top-0 h-[2px] origin-left bg-accent',
+          'transition-transform duration-700 ease-out',
+          active ? 'scale-x-100' : 'scale-x-0',
+        )}
+      />
       <div className={cn(
         'relative z-10 p-7 flex flex-col gap-4 transition-opacity duration-500',
         active ? 'opacity-100' : 'opacity-60',
@@ -153,7 +161,7 @@ function ExperienceCard({
           </div>
         )}
       </div>
-    </ShimmerCard>
+    </div>
   );
 }
 
@@ -265,7 +273,7 @@ export function TimelineInteractive({
                       className={cn(
                         'absolute -inset-1 rounded-full border transition-all duration-700',
                         reached
-                          ? 'border-accent-secondary/50 shadow-[0_0_8px_rgba(0,212,255,0.3)]'
+                          ? 'border-accent-secondary/50 shadow-[0_0_8px_var(--accent-glow-secondary)]'
                           : 'border-border/30',
                       )}
                     />
@@ -327,7 +335,7 @@ export function TimelineInteractive({
             className="absolute inset-x-0 w-0.5"
             style={{
               height: 50,
-              background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%)',
+              background: 'linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--foreground) 50%, transparent) 50%, transparent 100%)',
               filter: 'blur(0.5px)',
             }}
             animate={{ y: [-50, lineHeight + 50] }}
@@ -359,7 +367,7 @@ export function TimelineInteractive({
                   top: `${parallelBounds.top}px`,
                   height: `${parallelBounds.height}px`,
                   width: '1.5px',
-                  background: 'linear-gradient(to bottom, transparent 0%, rgba(0,212,255,0.18) 4%, rgba(0,212,255,0.18) 96%, transparent 100%)',
+                  background: 'linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--accent-secondary) 18%, transparent) 4%, color-mix(in srgb, var(--accent-secondary) 18%, transparent) 96%, transparent 100%)',
                   maskImage: 'linear-gradient(to bottom, transparent 0%, black 4%, black 96%, transparent 100%)',
                   WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 4%, black 96%, transparent 100%)',
                 }}
@@ -369,14 +377,14 @@ export function TimelineInteractive({
                     position: 'absolute', left: 0, top: 0, width: '1.5px',
                     height: parallelFill,
                     opacity: parallelFillOp,
-                    background: 'linear-gradient(to bottom, rgba(0,212,255,0.9), rgba(0,212,255,0.5), transparent)',
+                    background: 'linear-gradient(to bottom, color-mix(in srgb, var(--accent-secondary) 90%, transparent), color-mix(in srgb, var(--accent-secondary) 50%, transparent), transparent)',
                   }}
                 />
 
                 <motion.div
                   style={{
                     position: 'absolute', left: 0, width: '1.5px', height: 55,
-                    background: 'linear-gradient(to top, transparent 0%, rgba(0,212,255,0.95) 50%, transparent 100%)',
+                    background: 'linear-gradient(to top, transparent 0%, color-mix(in srgb, var(--accent-secondary) 95%, transparent) 50%, transparent 100%)',
                     filter: 'blur(0.5px)',
                   }}
                   animate={{ y: [parallelBounds.height + 55, -55] }}
@@ -386,7 +394,7 @@ export function TimelineInteractive({
                 <motion.div
                   style={{
                     position: 'absolute', left: 0, width: '1.5px', height: 35,
-                    background: 'linear-gradient(to top, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%)',
+                    background: 'linear-gradient(to top, transparent 0%, color-mix(in srgb, var(--foreground) 60%, transparent) 50%, transparent 100%)',
                     filter: 'blur(0.5px)', opacity: 0.8,
                   }}
                   animate={{ y: [parallelBounds.height + 35, -35] }}
@@ -396,7 +404,7 @@ export function TimelineInteractive({
                 <motion.div
                   style={{
                     position: 'absolute', left: 0, width: '1.5px', height: 40,
-                    background: 'linear-gradient(to bottom, transparent 0%, rgba(0,212,255,0.7) 50%, transparent 100%)',
+                    background: 'linear-gradient(to bottom, transparent 0%, color-mix(in srgb, var(--accent-secondary) 70%, transparent) 50%, transparent 100%)',
                     filter: 'blur(0.5px)', opacity: 0.6,
                   }}
                   animate={{ y: [-40, parallelBounds.height + 40] }}
@@ -409,8 +417,8 @@ export function TimelineInteractive({
                   style={{
                     width: '14px', height: '1.5px',
                     background: originLit
-                      ? 'linear-gradient(to right, rgba(0,212,255,0.6), rgba(0,212,255,0.9))'
-                      : 'linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.2))',
+                      ? 'linear-gradient(to right, color-mix(in srgb, var(--accent-secondary) 60%, transparent), color-mix(in srgb, var(--accent-secondary) 90%, transparent))'
+                      : 'linear-gradient(to right, color-mix(in srgb, var(--foreground) 10%, transparent), color-mix(in srgb, var(--foreground) 20%, transparent))',
                     transition: 'background 500ms ease',
                   }}
                 />
@@ -418,7 +426,7 @@ export function TimelineInteractive({
                   className={cn(
                     'w-3 h-3 rounded-full border shrink-0 transition-all duration-500',
                     originLit
-                      ? 'border-accent-secondary bg-accent-sub shadow-[0_0_10px_rgba(0,212,255,0.65)]'
+                      ? 'border-accent-secondary bg-accent-sub shadow-[0_0_10px_var(--accent-glow-secondary)]'
                       : 'border-border/40 bg-surface',
                   )}
                   style={{ marginLeft: '-2px' }}
@@ -430,8 +438,8 @@ export function TimelineInteractive({
                   style={{
                     width: '14px', height: '1.5px',
                     background: endLit
-                      ? 'linear-gradient(to right, rgba(0,212,255,0.6), rgba(0,212,255,0.9))'
-                      : 'linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.2))',
+                      ? 'linear-gradient(to right, color-mix(in srgb, var(--accent-secondary) 60%, transparent), color-mix(in srgb, var(--accent-secondary) 90%, transparent))'
+                      : 'linear-gradient(to right, color-mix(in srgb, var(--foreground) 10%, transparent), color-mix(in srgb, var(--foreground) 20%, transparent))',
                     transition: 'background 500ms ease',
                   }}
                 />
@@ -439,7 +447,7 @@ export function TimelineInteractive({
                   className={cn(
                     'w-3 h-3 rounded-full border shrink-0 transition-all duration-500',
                     endLit
-                      ? 'border-accent-secondary bg-accent-sub shadow-[0_0_10px_rgba(0,212,255,0.65)]'
+                      ? 'border-accent-secondary bg-accent-sub shadow-[0_0_10px_var(--accent-glow-secondary)]'
                       : 'border-border/40 bg-surface',
                   )}
                   style={{ marginLeft: '-2px' }}

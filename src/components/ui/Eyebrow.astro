@@ -11,9 +11,12 @@ const { index, label, class: cls } = Astro.props as Props;
 
 <p class:list={['flex items-center gap-2.5', cls]}>
   {index ? (
-    <span class="font-mono text-[0.82rem] font-medium tabular-nums text-accent-secondary">{index}</span>
+    <span class="font-mono text-[0.8rem] font-medium tabular-nums text-accent-secondary">{index}</span>
   ) : (
     <span class="inline-block h-[2px] w-6 shrink-0 bg-accent-secondary" aria-hidden="true"></span>
   )}
-  <span class="text-[0.92rem] font-medium tracking-[-0.005em] text-fg-muted">{label}</span>
+  <span class="shrink-0 text-[0.9rem] font-medium tracking-[-0.005em] text-fg-muted">{label}</span>
+  <!-- Trailing rule: anchors the header across the full container instead of
+       leaving the right half of every section empty. -->
+  <span class="ml-1.5 h-px min-w-8 flex-1 bg-border" aria-hidden="true"></span>
 </p>
