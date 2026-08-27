@@ -85,6 +85,7 @@ That step is exactly what phase 3 exists to do, and phase 3 is the part that nev
 
 ## References
 
+- [The authzscan landing page](/authzscan)
 - [authzscan on GitHub](https://github.com/davidldv/authzscan)
 - [authzscan on npm](https://www.npmjs.com/package/authzscan)
 - [Building authzscan, the previous writeup](/writeups/authzscan-agentic-idor-scanner/)

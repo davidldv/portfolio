@@ -78,3 +78,4 @@ Honest status: the committed report is the oracle sanity run, and it passes. Liv
 - [SARIF support for code scanning (GitHub docs)](https://docs.github.com/en/code-security/code-scanning/integrating-with-code-scanning/sarif-support-for-code-scanning)
 - [Building jwt-scan, prior writeup](/writeups/jwt-scan-cli/)
 - [The live eval and the first real repository, follow-up writeup](/writeups/authzscan-first-real-repository/)
+- [The authzscan landing page](/authzscan)
