@@ -1,0 +1,113 @@
+% Track A, Application Security. Shares _preamble.tex with David-Londono-Backend.tex.
+\input{_preamble.tex}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Large \scshape David Londoño} \\[2mm]
+    \vspace{-1pt}
+    \footnotesize
+    \underline{+57 317 2939347} ~$|$~
+    \underline{dlondon.dev@gmail.com} ~$|$~
+    \href{https://www.linkedin.com/in/davidldv/}{\underline{linkedin.com/in/davidldv}} ~$|$~
+    \href{https://github.com/davidldv}{\underline{github.com/davidldv}} ~$|$~
+    \href{https://davidlondon.dev/}{\underline{davidlondon.dev}}
+    \vspace{-4pt}
+\end{center}
+%---------PROFESSIONAL DESC--------
+\vspace{-1pt}
+\small{
+Software Engineer, Application Security. I ship production systems in TypeScript, Next.js and PostgreSQL, and I write the tools that attack them. \textbf{authzscan} is an IDOR/BOLA scanner for Next.js App Router repos, scored against a benchmark of \textbf{16} seeded bugs with its false-positive rate published. Two more labs cover JWT internals and LLM/MCP attack surfaces. English C1, Spanish native, German B1. Remote (LATAM/EU/US) or open to relocation.
+}
+\vspace{-6pt}
+%-----------PROJECTS-----------
+\section{Security Engineering Projects}
+    \vspace{-2pt}
+    \resumeSubHeadingListStart
+    \vspace{-4pt}
+ \resumeProjectHeading
+            {\textbf{{authzscan}} $|$ \emph{\href{https://github.com/davidldv/authzscan}{Source Code}} $|$ \emph{\href{https://davidlondon.dev/authzscan}{Overview}}}{TypeScript $|$ ts-morph $|$ SARIF}{Autonomous IDOR/BOLA review for Next.js App Router codebases, driven by Claude agents.}
+            \\[5mm]
+            \vspace{-12pt}
+          \resumeItemListStart
+            \resumeItem{Four phases: a deterministic \textbf{ts-morph} inventory of route handlers, Server Actions and auth-library usage; a trace agent that follows each client-controlled identifier to the query it reaches; and a verify agent that knocks down what trace found. Reports come out as \textbf{SARIF}, Markdown or JSON, with exit codes CI can gate on.}
+            \resumeItem{The accuracy is a number, not a feeling: \textbf{16} seeded IDOR/BOLA bugs plus \textbf{6} correctly authorized twins that exist to catch false positives, gated on recall and precision. An oracle runner checks the harness scores right no matter how good the model is.}
+            \resumeItem{It fails loudly. An endpoint it could not analyze is reported as \emph{not analyzed}, never as clean.}
+          \resumeItemListEnd
+ \vspace{-13pt}
+ \resumeProjectHeading
+            {\textbf{{JWT Security Lab}} \& \textbf{{jwt-scan}} $|$ \emph{\href{https://github.com/davidldv/jwtsecuritylab}{Source Code}}}{TypeScript $|$ Node.js $|$ Docker}{Offense-and-defense JWT lab, shipped as an npm CLI scanner.}
+            \\[5mm]
+            \vspace{-12pt}
+          \resumeItemListStart
+            \resumeItem{Wrote JWT signing and verification from scratch in TypeScript, no libraries, to reproduce five flaws that reach production: \textbf{alg=none} bypass, \textbf{HS256/RS256 key confusion}, weak-secret offline brute force, \textbf{kid} header path traversal, and missing \textbf{iss/aud/exp} validation. Every payload runs against both APIs and is checked each way.}
+            \resumeItem{Shipped the checks as \textbf{jwt-scan}, an npm CLI with token and live-endpoint modes and CI-friendly exit codes. The hardened mirror removes whole classes of bug at once: one allowed algorithm (RS256), a fixed \textbf{kid} registry with rotation, generic errors so nothing leaks through an oracle, scrypt for passwords.}
+          \resumeItemListEnd
+ \vspace{-13pt}
+ \resumeProjectHeading
+            {\textbf{{LLM/RAG Security Lab}} $|$ \emph{\href{https://github.com/davidldv/llmseclab}{Source Code}}}{Python $|$ FastAPI $|$ MCP $|$ Docker}{Five OWASP LLM Top 10 attacks as a pytest suite against a vulnerable/hardened FastAPI pair.}
+            \\[5mm]
+            \vspace{-12pt}
+          \resumeItemListStart
+            \resumeItem{Reproduced and fixed five LLM-specific classes on one RAG surface: \textbf{cross-tenant retrieval} (confused deputy), \textbf{indirect prompt injection} through retrieved documents, vector-store \textbf{poisoning} via forged ingest metadata, \textbf{excessive agency} over a live \textbf{MCP} tool server, and stored \textbf{XSS} straight out of the model.}
+            \resumeItem{Stopped excessive agency with a deny-by-default authorization hook on the host side, so every MCP tool call is authorized before dispatch. A deterministic mock LLM turns ``every attack fails against the secure API'' into something CI can rely on.}
+          \resumeItemListEnd
+ \vspace{-13pt}
+ \resumeProjectHeading
+            {\textbf{{Materiales La Bodega}} $|$ \emph{\href{https://materialeslabodega.com.co}{Live Site}}}{Next.js $|$ PostgreSQL $|$ Mercado Pago}{Solo-built e-commerce platform, live in production for a hardware retailer.}
+            \\[5mm]
+            \vspace{-12pt}
+          \resumeItemListStart
+            \resumeItem{The only engineer on a live storefront that moves about \textbf{\$1.5M COP/day}: requirements, architecture, the real-time inventory catalog, deployment, and the maintenance it still gets.}
+            \resumeItem{Built the authentication, session security and \textbf{RBAC} that keep the staff side separate from the customer side. Hardened against the \textbf{OWASP Top 10} with parameterized queries, server-side validation, CSRF protection on state-changing routes, and least-privilege database roles.}
+          \resumeItemListEnd
+ \vspace{-4pt}
+\resumeSubHeadingListEnd
+\vspace{-11pt}
+%-----------Experience---------------
+\section{Work Experience}
+\vspace{1pt}
+    \resumeSubHeadingListStart
+        \resumeSubheading{Tambora}{Jul 2025 -- Sep 2025}{Frontend Developer (Contract)}{Remote}
+            \resumeItemListStart
+                \resumeItem{Migrated business-critical legacy modules from jQuery to \textbf{React} and cut bundle size by \textbf{40\%} on the rebuilt surfaces, dropping the ad-hoc DOM string injection along with it.}
+                \resumeItem{Consolidated the rebuilt UI into a modular \textbf{Atomic Design} component library, so input handling and escaping sit in one reviewable layer instead of scattered per page.}
+                \resumeItem{Replaced manual SSH deploys with \textbf{Azure CI/CD} pipelines and took deployment time from over \textbf{two hours to under fifteen minutes}. The automated test gates are where SAST and dependency scanning hook in.}
+            \resumeItemListEnd
+    \resumeSubHeadingListEnd
+    \vspace{-12pt}
+ %-----------CERTIFICATIONS-----------
+\section{Certifications \& Security Training}
+\vspace{-2pt}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Completed}{: Google Professional Cybersecurity Certificate, PortSwigger Web Security Academy (all free labs).} \\[0.4mm]
+     \textbf{In progress}{: Burp Suite Certified Practitioner (BSCP), CompTIA Security+. \textbf{Practice}: HackTheBox (@davidldv), TryHackMe (dlondon.dev), CTF challenges.} \\[0.4mm]
+    }}
+ \end{itemize}
+ \vspace{-11pt}
+  %-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+\vspace{-2pt}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Security}{: OWASP Top 10 (Web + LLM), IDOR/BOLA \& broken access control, vulnerability research, penetration testing, OAuth 2.0 / OIDC, JWT cryptography, RBAC, CSRF, XSS and SQL injection (SQLi) defense, secure session handling, secrets management, threat modeling (STRIDE), secure code review, prompt-injection defense.} \\[0.4mm]
+     \textbf{Tooling}{: Burp Suite, Semgrep, Trivy, nmap, Wireshark, SARIF / GitHub code scanning, Docker, Linux, Git.} \\[0.4mm]
+     \textbf{Languages}{: TypeScript, JavaScript, Python, C, SQL, Bash.} \\[0.4mm]
+     \textbf{Frameworks \& Data}{: Next.js, React, Node.js, FastAPI, Prisma, PostgreSQL, MongoDB, REST, WebSockets, Jest, Zod.} \\[0.4mm]
+     \textbf{Cloud \& DevOps}{: AWS, Azure, CI/CD (Azure Pipelines, GitHub Actions), containerization.} \\[0.4mm]
+    }}
+ \end{itemize}
+ \vspace{-11pt}
+ %-----------EDUCATION-----------
+\section{Education}
+\vspace{-2pt}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Universidad Tecnológica de Pereira}{, Pereira, Colombia. Systems \& Computing Engineering, in progress (Feb 2022 to present).} \\[0.4mm]
+     \textbf{EliteStack Bootcamp}{, Pereira, Colombia. Full-Stack Development (Jun 2024 to Jul 2024).} \\[0.4mm]
+    }}
+ \end{itemize}
+
+\end{document}

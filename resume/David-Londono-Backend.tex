@@ -1,0 +1,113 @@
+% Track B, Backend / Full-Stack. Shares _preamble.tex with David-Londono-Security.tex.
+\input{_preamble.tex}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Large \scshape David Londoño} \\[2mm]
+    \vspace{-1pt}
+    \footnotesize
+    \underline{+57 317 2939347} ~$|$~
+    \underline{dlondon.dev@gmail.com} ~$|$~
+    \href{https://www.linkedin.com/in/davidldv/}{\underline{linkedin.com/in/davidldv}} ~$|$~
+    \href{https://github.com/davidldv}{\underline{github.com/davidldv}} ~$|$~
+    \href{https://davidlondon.dev/}{\underline{davidlondon.dev}}
+    \vspace{-4pt}
+\end{center}
+%---------PROFESSIONAL DESC--------
+\vspace{-1pt}
+\small{
+Backend and Full-Stack Engineer. I ship production systems in TypeScript, Node.js, Next.js and PostgreSQL: a live e-commerce platform moving about \textbf{\$1.5M COP/day}, an auth stack I wrote instead of importing, and a custom WebSocket server that checks RBAC on the server. I think about how things break while I build them, and that is what I bring on top of shipping features. English C1, Spanish native, German B1. Remote (LATAM/EU/US) or open to relocation.
+}
+\vspace{-6pt}
+%-----------PROJECTS-----------
+\section{Projects}
+    \vspace{-2pt}
+    \resumeSubHeadingListStart
+    \vspace{-4pt}
+ \resumeProjectHeading
+            {\textbf{{PairCode}} $|$ \emph{\href{https://paircode-lime.vercel.app/}{Live Demo}}}{Node.js $|$ Express $|$ PostgreSQL $|$ WebSockets}{Real-time collaborative workspace with an identity layer and realtime transport I wrote myself.}
+            \\[5mm]
+            \vspace{-12pt}
+          \resumeItemListStart
+            \resumeItem{Built the auth stack in-house rather than importing one: \textbf{EdDSA}-signed JWTs, rotating refresh tokens that detect reuse, \textbf{Argon2id} password hashing, and CSRF protection on state-changing routes.}
+            \resumeItem{Wrote a custom \textbf{WebSocket server}. The handshake consumes a single-use ticket, every event is authorized on its own, and \textbf{RBAC} is checked server-side, so no client can promote itself by editing a payload.}
+            \resumeItem{Shipped the collaboration surface on top: presence, typing indicators, shared threaded context, and room history that survives a reconnect.}
+          \resumeItemListEnd
+ \vspace{-13pt}
+ \resumeProjectHeading
+            {\textbf{{Materiales La Bodega}} $|$ \emph{\href{https://materialeslabodega.com.co}{Live Site}}}{Next.js $|$ PostgreSQL $|$ Mercado Pago}{Solo-built e-commerce platform, live in production for a hardware retailer.}
+            \\[5mm]
+            \vspace{-12pt}
+          \resumeItemListStart
+            \resumeItem{The only engineer on a live storefront that moves about \textbf{\$1.5M COP/day}: requirements, architecture, the real-time inventory catalog, deployment, and the maintenance it still gets.}
+            \resumeItem{Built the authentication, session security and \textbf{RBAC} that keep the staff side separate from the customer side, and wired up \textbf{Mercado Pago} for live transactions.}
+            \resumeItem{Hardened the app layer against the \textbf{OWASP Top 10}: parameterized queries, input validated on the server, CSRF protection on anything that changes state, and database roles with the least privilege that still works.}
+          \resumeItemListEnd
+ \vspace{-13pt}
+ \resumeProjectHeading
+            {\textbf{{authzscan}} $|$ \emph{\href{https://github.com/davidldv/authzscan}{Source Code}} $|$ \emph{\href{https://davidlondon.dev/authzscan}{Overview}}}{TypeScript $|$ ts-morph $|$ SARIF}{Autonomous IDOR/BOLA review for Next.js App Router codebases, driven by Claude agents.}
+            \\[5mm]
+            \vspace{-12pt}
+          \resumeItemListStart
+            \resumeItem{A deterministic \textbf{ts-morph} inventory of route handlers, Server Actions and auth-library usage, with trace and verify agents layered over it. Reports come out as \textbf{SARIF}, Markdown or JSON, with exit codes CI can gate on.}
+            \resumeItem{The accuracy is a number, not a feeling: \textbf{16} seeded IDOR/BOLA bugs plus \textbf{6} correctly authorized twins that exist to catch false positives, gated on recall and precision in CI.}
+          \resumeItemListEnd
+ \vspace{-13pt}
+ \resumeProjectHeading
+            {\textbf{{JWT Security Lab}} \& \textbf{{jwt-scan}} $|$ \emph{\href{https://github.com/davidldv/jwtsecuritylab}{Source Code}}}{TypeScript $|$ Node.js $|$ Docker}{Offense-and-defense JWT lab, shipped as an npm CLI scanner.}
+            \\[5mm]
+            \vspace{-12pt}
+          \resumeItemListStart
+            \resumeItem{Wrote JWT signing and verification from scratch in TypeScript, no libraries, to reproduce five flaws that reach production: \textbf{alg=none}, \textbf{HS256/RS256 key confusion}, weak-secret brute force, \textbf{kid} header path traversal, and missing \textbf{iss/aud/exp} validation. The fixes ship as \textbf{jwt-scan}, an npm CLI with CI-friendly exit codes.}
+          \resumeItemListEnd
+ \vspace{-4pt}
+\resumeSubHeadingListEnd
+\vspace{-11pt}
+%-----------Experience---------------
+\section{Work Experience}
+\vspace{1pt}
+    \resumeSubHeadingListStart
+        \resumeSubheading{Tambora}{Jul 2025 -- Sep 2025}{Frontend Developer (Contract)}{Remote}
+            \resumeItemListStart
+                \resumeItem{Migrated business-critical legacy modules from jQuery to \textbf{React} and cut bundle size by \textbf{40\%} on the rebuilt surfaces.}
+                \resumeItem{Consolidated the migrated UI into a modular \textbf{Atomic Design} component library, replacing duplicated per-page markup with a shared component set the team could test.}
+                \resumeItem{Replaced manual SSH deploys with \textbf{CI/CD} pipelines on \textbf{Azure} and took deployment time from over \textbf{two hours to under fifteen minutes}, with automated test gates in front of every release.}
+            \resumeItemListEnd
+    \resumeSubHeadingListEnd
+    \vspace{-12pt}
+  %-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+\vspace{-2pt}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: TypeScript, JavaScript, Python, C, SQL, Bash, HTML/CSS.} \\[0.4mm]
+     \textbf{Backend}{: Node.js, Express, Next.js (App Router, RSC, Server Actions), FastAPI, REST APIs, WebSockets, Prisma, PostgreSQL, MongoDB, Redis.} \\[0.4mm]
+     \textbf{Frontend}{: React, Next.js, Astro, Tailwind CSS, Zod, Jest, Atomic Design.} \\[0.4mm]
+     \textbf{Cloud \& DevOps}{: AWS, Azure, Docker, CI/CD (Azure Pipelines, GitHub Actions), Linux, Git, Jira.} \\[0.4mm]
+     \textbf{Security}{: OWASP Top 10, IDOR/BOLA \& broken access control, authorization design, OAuth 2.0 / OIDC, JWT cryptography, RBAC, CSRF, XSS and SQL injection (SQLi) defense, secure session handling, threat modeling (STRIDE), secure code review, vulnerability testing, Burp Suite, Semgrep, Trivy.} \\[0.4mm]
+    }}
+ \end{itemize}
+ \vspace{-11pt}
+ %-----------CERTIFICATIONS-----------
+\section{Certifications}
+\vspace{-2pt}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Completed}{: Google Professional Cybersecurity Certificate, PortSwigger Web Security Academy.} \\[0.4mm]
+     \textbf{In progress}{: Burp Suite Certified Practitioner (BSCP), CompTIA Security+.} \\[0.4mm]
+    }}
+ \end{itemize}
+ \vspace{-11pt}
+ %-----------EDUCATION-----------
+\section{Education}
+\vspace{-2pt}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Universidad Tecnológica de Pereira}{, Pereira, Colombia. Systems \& Computing Engineering, in progress (Feb 2022 to present).} \\[0.4mm]
+     \textbf{EliteStack Bootcamp}{, Pereira, Colombia. Full-Stack Development (Jun 2024 to Jul 2024).} \\[0.4mm]
+    }}
+ \end{itemize}
+
+\end{document}

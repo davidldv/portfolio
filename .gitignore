@@ -30,9 +30,13 @@ David_Londono_CV_en.pdf
 *.xlsx
 *.tex
 
-# ...but the resumes the site links to must ship
+# ...but the resumes the site links to must ship, and so must the LaTeX they
+# are built from, since losing resume/ would mean rewriting both from scratch
 !public/David-Londono-Security.pdf
 !public/David-Londono-Backend.pdf
+!resume/_preamble.tex
+!resume/David-Londono-Security.tex
+!resume/David-Londono-Backend.tex
 monetization-plan.md
 resume/interview-prep.md
 roadmap.html

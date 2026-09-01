@@ -1,0 +1,118 @@
+\documentclass[letterpaper,10.5pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+% T1 makes accented chars single glyphs. Under the OT1 default, "Londoño"
+% renders as an accent stacked on "n" and ATS parsers extract "London~o".
+\usepackage[T1]{fontenc}
+% Latin Modern is the scalable Type1 build of Computer Modern. Without it the
+% document ships bitmap Type3 fonts, which some ATS parsers cannot read at all.
+\usepackage{lmodern}
+% No f-ligatures: at 10.5pt the visual difference is invisible, and it
+% guarantees "verification"/"specific" survive an ATS keyword search.
+% expansion/protrusion off; we want microtype only for the ligature control.
+\usepackage[expansion=false, protrusion=false]{microtype}
+\DisableLigatures[f]{encoding = T1}
+\usepackage{tabularx}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+% ATS parsers read the PDF text layer, so every glyph needs a Unicode mapping.
+% glyphtounicode.tex misses these, which is why "Londoño" used to extract as
+% "London?o" and "verification" came out as "verication".
+\pdfglyphtounicode{ntilde}{00F1}
+\pdfglyphtounicode{oacute}{00F3}
+\pdfglyphtounicode{aacute}{00E1}
+\pdfglyphtounicode{eacute}{00E9}
+\pdfglyphtounicode{iacute}{00ED}
+\pdfglyphtounicode{uacute}{00FA}
+% f-ligatures extract as nothing at all, silently deleting the letters from
+% keyword searches. Disabled below via microtype; mapped here as a belt-and-braces.
+\pdfglyphtounicode{fi}{0066 0069}
+\pdfglyphtounicode{fl}{0066 006C}
+\pdfglyphtounicode{ff}{0066 0066}
+\pdfglyphtounicode{ffi}{0066 0066 0069}
+\pdfglyphtounicode{ffl}{0066 0066 006C}
+\usepackage[margin=1.1cm]{geometry}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.15in}
+ \addtolength{\textwidth}{0.3in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{0pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[3]{
+    \item
+    \begin{tabular*}{1.001\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2} \\
+      \textit{\small #3}
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}\vspace{0pt}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
