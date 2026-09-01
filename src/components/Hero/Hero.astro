@@ -42,8 +42,8 @@ const badgeParts = t.badge.split('·').map((part) => part.trim()).filter(Boolean
     </p>
 
     <div class="hero-actions flex flex-wrap items-center justify-center gap-4 opacity-0 animate-[fade-up_0.6s_ease_forwards_0.65s]">
-      <a href="#about" class="hero-cta inline-flex items-center gap-2 rounded-(--radius) bg-accent px-8 py-3.5 text-[0.95rem] font-semibold text-white no-underline shadow-[0_0_40px_var(--accent-glow)] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-[0.88] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent">
-        {t.ctaPrimary}
+      <a href="/David-Londono-Security.pdf" class="hero-cta inline-flex items-center gap-2 rounded-(--radius) bg-accent px-8 py-3.5 text-[0.95rem] font-semibold text-white no-underline shadow-[0_0_40px_var(--accent-glow)] transition-all duration-200 hover:-translate-y-0.5 hover:opacity-[0.88] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent">
+        {t.ctaResume}
         <svg
           width="16"
           height="16"
@@ -53,7 +53,7 @@ const badgeParts = t.badge.split('·').map((part) => part.trim()).filter(Boolean
           stroke-width="2.5"
           aria-hidden="true"
         >
-          <path d="M12 5v14M5 12l7 7 7-7" />
+          <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
         </svg>
       </a>
 
@@ -73,7 +73,14 @@ const badgeParts = t.badge.split('·').map((part) => part.trim()).filter(Boolean
       </a>
     </div>
 
-    <div class="scroll-indicator mt-16 flex justify-center opacity-0 animate-[fade-up_0.6s_ease_forwards_1s]" aria-hidden="true">
+    <a
+      href={`mailto:${t.ctaEmail}`}
+      class="hero-email mt-6 font-mono text-[0.86rem] text-fg-muted underline decoration-fg-muted/30 underline-offset-4 opacity-0 transition-colors duration-150 animate-[fade-up_0.6s_ease_forwards_0.8s] hover:text-fg hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent"
+    >
+      {t.ctaEmail}
+    </a>
+
+    <div class="scroll-indicator mt-12 flex justify-center opacity-0 animate-[fade-up_0.6s_ease_forwards_1s]" aria-hidden="true">
       <span class="scroll-line block h-12 w-px [background:linear-gradient(to_bottom,var(--accent),transparent)] animate-[scroll-pulse_2s_ease-in-out_infinite]"></span>
     </div>
   </div>

@@ -42,7 +42,8 @@ type UI = {
     title2: string;
     subtitle1: string;
     subtitle2: string;
-    ctaPrimary: string;
+    ctaResume: string;
+    ctaEmail: string;
     github: string;
   };
   proof: {
@@ -136,7 +137,8 @@ export const ui: Record<Lang, UI> = {
       title2: 'Builds & Breaks',
       subtitle1: 'Full-Stack Engineer: React, Next.js, Node, TypeScript, PostgreSQL.',
       subtitle2: 'I build web systems and think about how they break while I build them.',
-      ctaPrimary: 'Explore my journey',
+      ctaResume: 'Resume (PDF)',
+      ctaEmail: 'dlondon.dev@gmail.com',
       github: 'GitHub',
     },
     proof: {
@@ -332,7 +334,8 @@ export const ui: Record<Lang, UI> = {
       title2: 'Construye y Rompe',
       subtitle1: 'Ingeniero Full-Stack: React, Next.js, Node, TypeScript, PostgreSQL.',
       subtitle2: 'Construyo sistemas web y pienso en cómo se rompen mientras los construyo.',
-      ctaPrimary: 'Conoce mi recorrido',
+      ctaResume: 'Hoja de vida (PDF)',
+      ctaEmail: 'dlondon.dev@gmail.com',
       github: 'GitHub',
     },
     proof: {

@@ -29,6 +29,10 @@ David_Londono_CV_en.pdf
 *.pdf
 *.xlsx
 *.tex
+
+# ...but the resumes the site links to must ship
+!public/David-Londono-Security.pdf
+!public/David-Londono-Backend.pdf
 monetization-plan.md
 resume/interview-prep.md
 roadmap.html
